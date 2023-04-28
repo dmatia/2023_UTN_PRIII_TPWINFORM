@@ -7,6 +7,7 @@ namespace Presentacion
 		public Main()
 		{
 			InitializeComponent();
+			// comentario prueba
 		}
 	}
 }
