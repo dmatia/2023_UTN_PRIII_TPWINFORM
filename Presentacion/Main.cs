@@ -8,6 +8,7 @@ namespace Presentacion
 		{
 			InitializeComponent();
 			// comentario prueba
+			//Otra prueba
 		}
 	}
 }
