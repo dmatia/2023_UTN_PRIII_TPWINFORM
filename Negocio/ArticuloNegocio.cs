@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -63,12 +64,71 @@ namespace Negocio
             {
                 datos.closeConnection();
             }
-
-
         }
-     
 
+		//AGREGAR PRODUCTOS
+		public bool agregar(Articulo articulo)
+		{
+			AccesoDB datoSQL = new AccesoDB();
 
+			try
+			{
+				datoSQL.setQuery
+				 (
+					$"INSERT INTO ARTICULOS " +
+					$"(Codigo, Nombre, Descripcion, IdMarca, IdCategoria, ImagenUrl, Precio) " +
+					$"VALUES('{articulo.Codigo}', '{articulo.Nombre}', '{articulo.Descripcion}', {articulo.Marca.Id}, {articulo.Categoria.Id}, {articulo.Precio.ToString(new CultureInfo("en-US"))})"
+				);
 
-    }
+				if (datoSQL.executeNonQuery())
+				{
+					datoSQL.closeConnection();
+					return true;
+				}
+			}
+			catch (Exception ex)
+			{
+
+				throw ex;
+			}
+			finally
+			{
+				datoSQL.closeConnection();
+			}
+
+			return false;
+		}
+
+		//MODIFICAR PRODUCTOS
+		public bool modificar(Articulo articulo)
+		{
+			AccesoDB datoSQL = new AccesoDB();
+			try
+			{
+				datoSQL.setQuery(
+				"UPDATE ARTICULOS " +
+				$"SET Codigo = '{articulo.Codigo}', Nombre = '{articulo.Nombre}', Descripcion = '{articulo.Descripcion}', " +
+				$"Precio = {articulo.Precio.ToString(new CultureInfo("en-US"))}, IdMarca = {articulo.Marca.Id}, IdCategoria = {articulo.Categoria.Id} " +
+				$"WHERE Id = {articulo.Id}"
+				);
+				if (datoSQL.executeNonQuery())
+				{
+					datoSQL.closeConnection();
+					return true;
+				}
+			}
+			catch (Exception ex)
+			{
+				throw ex;
+			}
+			finally
+			{
+				datoSQL.closeConnection();
+			}
+			return false;
+		}
+
+		//TODO: ELIMINAR PRODUCTO
+
+	}
 }
