@@ -182,6 +182,7 @@
 			this.btnModificar.TabIndex = 20;
 			this.btnModificar.Text = "Modificar";
 			this.btnModificar.UseVisualStyleBackColor = true;
+			this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
 			// 
 			// btnCancelar
 			// 
@@ -191,6 +192,7 @@
 			this.btnCancelar.TabIndex = 20;
 			this.btnCancelar.Text = "Cancelar";
 			this.btnCancelar.UseVisualStyleBackColor = true;
+			this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
 			// 
 			// btnEliminar
 			// 

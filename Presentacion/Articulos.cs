@@ -19,7 +19,10 @@ namespace Presentacion
 		//Banderas de vistas
 		private bool esModificar;
 		private bool esAgregar;
-		
+
+		//Bandera de cambios en la ventana para cargar lista en el form principal
+		private bool hayCambios;
+
 		//Constructor para los casos de vista y modificación de artículo
 		public Articulos(Articulo articulo, bool esModificar = false)
 		{
@@ -146,5 +149,123 @@ namespace Presentacion
 			}
 		}
 
+		//Evento de modificación y creacion de artículo
+		private void btnModificar_Click(object sender, EventArgs e)
+		{
+			//Inicia negocio de artiuclos
+			ArticuloNegocio articuloNegocio = new ArticuloNegocio();
+			
+			//Si el modo es agregar, instancia producto vacío
+			if (this.esAgregar)
+			{
+				articulo = new Articulo();
+			}
+
+			//cargamos los datos del formulario al objeto
+			cargarDatosDeFormulario(articulo);
+
+			if(this.esAgregar) //Agregar Articulo a la base de datos
+			{
+				if(btnModificar.Text == "Guardar")
+				{
+					// Guardar articulo
+					if (articuloNegocio.agregar(articulo))
+					{
+						MessageBox.Show("Se Guardó correctamente");
+
+						// Validar si guardó y pasar a modo vista
+						this.hayCambios = true;
+						this.esAgregar = false;
+						//this.esModificar = false;
+						//ModoModificar(this.esAgregar);
+					}
+				}
+			}
+			else //Modificar Articulo en la base de datos
+			{
+				if (btnModificar.Text == "Guardar")
+				{
+					// Validaciones
+
+					//Verificar si se quiere cancelar
+					DialogResult result = MessageBox.Show("¿Está seguro que quiere modificar el detalle", "Cancelar", MessageBoxButtons.OKCancel);
+
+					if (result == DialogResult.OK)
+					{
+						//Modificar producto
+						if (articuloNegocio.modificar(articulo))
+						{
+							MessageBox.Show("Se modificó correctamente");
+
+							// Si se guardan correctamente se cierra la ventana
+							this.hayCambios = true;
+							
+							// Validar si guardó y pasar a modo vista
+							this.hayCambios = true;
+							this.esAgregar = false;
+							//this.esModificar = false;
+							//ModoModificar(this.esAgregar);
+						}
+						else
+						{
+							MessageBox.Show("Error al modificar");
+						}
+					}
+				}
+			}
+
+			this.esModificar = !this.esModificar;
+			ModoModificar(this.esModificar);
+		}
+
+		private void cargarDatosDeFormulario(Articulo articulo)
+		{
+			//TODO: Validaciones de los campos
+			
+			//Ariticulo
+			string precio = txtPrecio.Text.Trim();
+			string codigo = txtCodigo.Text.Trim();
+			string nombre = txtArticulo.Text.Trim();
+			string descripcion = txtDescripcion.Text.Trim();
+
+			// Marca
+			Marca marca = new Marca();
+			marca.Descripcion = cbMarca.Text;
+			marca.Id = (int)cbMarca.SelectedValue;
+
+			//Categoria
+			Categoria categoria = new Categoria();
+			categoria.Descripcion = cbCategoria.Text;
+			categoria.Id = (int)cbCategoria.SelectedValue;
+
+			//Guardar datos de la ventana en el articulo
+			articulo.Codigo = codigo;
+			articulo.Precio = Convert.ToDouble(precio.Replace(".", ","));
+			articulo.Nombre = nombre;
+			articulo.Descripcion = descripcion;
+			articulo.Marca = marca;
+			articulo.Categoria = categoria;
+		}
+
+		private void btnCancelar_Click(object sender, EventArgs e)
+		{
+			if (this.esModificar)
+			{
+				//En Modo Modificar verificamos que se quiera cancelar
+				DialogResult result = MessageBox.Show("¿Está seguro que quiere cancelar", "Cancelar", MessageBoxButtons.OKCancel);
+
+				//Si se cancela, vuelve a Modo Vista
+				if (result == DialogResult.OK)
+				{
+					this.esModificar = false;
+					ModoModificar(this.esModificar);
+				}
+			}
+			else
+			{
+				// En Modo Agregar, cerrar la ventana si se cancela
+				this.Close();
+			}
+		}
 	}
 }
