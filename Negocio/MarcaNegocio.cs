@@ -15,19 +15,19 @@ namespace Negocio
         public List<Marca> listar()
         {
             List<Marca> lista = new List<Marca>();
-            AccesoDatos datos = new AccesoDatos();
+            AccesoDB datos = new AccesoDB();
 
             try
             {
-                datos.setConsulta("SELECT Id, Descripcion FROM Marcas");
-                datos.ejecutarLectura();
+                datos.setQuery("SELECT Id, Descripcion FROM Marcas");
+                datos.executeReader();
 
-                while (datos.Lector.Read())
+                while (datos.Reader.Read())
                 {
                     Marca aux = new Marca();
-                    aux.Id = (Int32)datos.Lector["Id"];
-                    if (datos.Lector["Descripcion"] != null)
-                        aux.Descripcion = (string)datos.Lector["Descripcion"];
+                    aux.Id = (Int32)datos.Reader["Id"];
+                    if (datos.Reader["Descripcion"] != null)
+                        aux.Descripcion = (string)datos.Reader["Descripcion"];
                     else
                         aux.Descripcion = "...";
 
@@ -42,7 +42,7 @@ namespace Negocio
             }
             finally
             {
-                datos.cerrarConexion();
+                datos.closeConnection();
             }
         }
 

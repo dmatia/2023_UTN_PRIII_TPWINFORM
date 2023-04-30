@@ -1,5 +1,4 @@
-﻿using Dominio;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,19 +14,19 @@ namespace Negocio
         public List<Categoria> listar()
         {
             List<Categoria> lista = new List<Categoria>();
-            AccesoDatos datos = new AccesoDatos();
+            AccesoDB datos = new AccesoDB();
 
             try
             {
-                datos.setConsulta("SELECT Id, Descripcion FROM Categorias");
-                datos.ejecutarLectura();
+                datos.setQuery("SELECT Id, Descripcion FROM Categorias");
+                datos.executeReader();
 
-                while (datos.Lector.Read())
+                while (datos.Reader.Read())
                 {
                     Categoria aux = new Categoria();
-                    aux.Id = (Int32)datos.Lector["Id"];
-                    if (datos.Lector["Descripcion"] != null)
-                        aux.Descripcion = (string)datos.Lector["Descripcion"];
+                    aux.Id = (Int32)datos.Reader["Id"];
+                    if (datos.Reader["Descripcion"] != null)
+                        aux.Descripcion = (string)datos.Reader["Descripcion"];
                     else
                         aux.Descripcion = "...";
 
@@ -42,7 +41,7 @@ namespace Negocio
             }
             finally
             {
-                datos.cerrarConexion();
+                datos.closeConnection();
             }
         }
 
