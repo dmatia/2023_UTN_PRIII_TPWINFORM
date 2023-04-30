@@ -59,7 +59,14 @@ namespace Presentacion
 
 		private void btnAgregar_Click(object sender, EventArgs e)
 		{
-
+			Articulos Screen = new Articulos();
+			Screen.ShowDialog();
+		}
+		
+		private void btnDetalle_Click(object sender, EventArgs e)
+		{
+			Articulos Screen = new Articulos((Articulo)dgvListaArticulos.CurrentRow.DataBoundItem);
+			Screen.ShowDialog();
 		}
 	}
 }
