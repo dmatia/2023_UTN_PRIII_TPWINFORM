@@ -24,6 +24,7 @@ namespace Presentacion
 
 		}
 
+		//Metodos necesarios al momento de cargar la ventana
 		private void cargarVentana()
 		{
 			ListarArticulos();
@@ -57,16 +58,30 @@ namespace Presentacion
 			}
 		}
 
+		// Evento para agregar un articulo nuevo
 		private void btnAgregar_Click(object sender, EventArgs e)
 		{
 			Articulos Screen = new Articulos();
 			Screen.ShowDialog();
+			
+			//Si se realizaron cambios, cargar la lista de vuelta
+			if(Screen.hayCambios)
+			{
+				cargarVentana();
+			}
 		}
 		
+		// Evento para ver detalle o modificar un articulo nuevo
 		private void btnDetalle_Click(object sender, EventArgs e)
 		{
 			Articulos Screen = new Articulos((Articulo)dgvListaArticulos.CurrentRow.DataBoundItem);
 			Screen.ShowDialog();
+			
+			//Si se realizaron cambios, cargar la lista de vuelta
+			if (Screen.hayCambios)
+			{
+				cargarVentana();
+			}
 		}
 	}
 }

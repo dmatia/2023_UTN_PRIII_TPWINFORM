@@ -21,7 +21,7 @@ namespace Presentacion
 		private bool esAgregar;
 
 		//Bandera de cambios en la ventana para cargar lista en el form principal
-		private bool hayCambios;
+		public bool hayCambios;
 
 		//Constructor para los casos de vista y modificación de artículo
 		public Articulos(Articulo articulo, bool esModificar = false)
