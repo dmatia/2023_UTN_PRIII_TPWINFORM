@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Negocio
 {
-    internal class Class1
+    internal class AccesoDB
     {
     }
 }
