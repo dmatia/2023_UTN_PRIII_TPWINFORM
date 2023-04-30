@@ -76,7 +76,7 @@ namespace Negocio
 				datoSQL.setQuery
 				 (
 					$"INSERT INTO ARTICULOS " +
-					$"(Codigo, Nombre, Descripcion, IdMarca, IdCategoria, ImagenUrl, Precio) " +
+					$"(Codigo, Nombre, Descripcion, IdMarca, IdCategoria, Precio) " +
 					$"VALUES('{articulo.Codigo}', '{articulo.Nombre}', '{articulo.Descripcion}', {articulo.Marca.Id}, {articulo.Categoria.Id}, {articulo.Precio.ToString(new CultureInfo("en-US"))})"
 				);
 
