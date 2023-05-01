@@ -45,9 +45,16 @@ namespace Presentacion
                 if (item.GetType() == typeof(Articulos))
                     return;
             }
+            
             Articulos articulos = new Articulos();
             articulos.MdiParent = this;
             articulos.Show();
+        }
+
+        // Oculta las ventanas de fondo
+        private void ocultarVentanas()
+        {
+            
         }
     }
 }

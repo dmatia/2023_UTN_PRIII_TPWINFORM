@@ -60,5 +60,19 @@ namespace Presentacion
 
             listarCategorias();
         }
+
+        // impide ingresar enter
+        private void txtbxNuevaCategoria_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == 32)
+                e.Handled = true;
+        }
+
+        // Se borra el texto default cuando se hace doble click
+        private void txtbxNuevaCategoria_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (txtbxNuevaCategoria.Text != "")
+                txtbxNuevaCategoria.Text = "";
+        }
     }
 }

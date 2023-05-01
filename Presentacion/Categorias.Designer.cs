@@ -136,15 +136,19 @@
             this.txtbxNuevaCategoria.Size = new System.Drawing.Size(506, 22);
             this.txtbxNuevaCategoria.TabIndex = 7;
             this.txtbxNuevaCategoria.Text = "Ingrese su nueva categoria";
+            this.txtbxNuevaCategoria.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtbxNuevaCategoria_KeyPress);
+            this.txtbxNuevaCategoria.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.txtbxNuevaCategoria_MouseDoubleClick);
             // 
             // gbFiltrar
             // 
+            this.gbFiltrar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.gbFiltrar.Controls.Add(this.btnFiltrar);
             this.gbFiltrar.Controls.Add(this.txbxFiltrar);
             this.gbFiltrar.Controls.Add(this.btnLimpiar);
-            this.gbFiltrar.Location = new System.Drawing.Point(28, 29);
+            this.gbFiltrar.Location = new System.Drawing.Point(28, 12);
             this.gbFiltrar.Name = "gbFiltrar";
-            this.gbFiltrar.Size = new System.Drawing.Size(863, 103);
+            this.gbFiltrar.Size = new System.Drawing.Size(864, 103);
             this.gbFiltrar.TabIndex = 8;
             this.gbFiltrar.TabStop = false;
             this.gbFiltrar.Text = "FILTRAR";
@@ -181,7 +185,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(927, 738);
+            this.ClientSize = new System.Drawing.Size(930, 722);
             this.ControlBox = false;
             this.Controls.Add(this.gbFiltrar);
             this.Controls.Add(this.gbNuevaCategoria);
@@ -189,7 +193,8 @@
             this.Controls.Add(this.btnClose);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Categorias";
-            this.Text = "Categorias";
+            this.Text = " ";
+            this.TopMost = true;
             this.Load += new System.EventHandler(this.Categorias_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvCategorias)).EndInit();
             this.gbLista.ResumeLayout(false);
