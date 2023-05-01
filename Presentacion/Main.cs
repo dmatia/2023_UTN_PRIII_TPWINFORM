@@ -83,5 +83,18 @@ namespace Presentacion
 				cargarVentana();
 			}
 		}
-	}
+
+        private void categoriasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+			// verifica si ya hay una ventana de este tipo abierta para no abrir otra
+            foreach (var item in Application.OpenForms)
+            {
+                if (item.GetType() == typeof(Categorias))
+                    return;
+            }
+            Categorias categorias = new Categorias();
+			categorias.MdiParent = this;
+			categorias.Show();
+        }
+    }
 }
