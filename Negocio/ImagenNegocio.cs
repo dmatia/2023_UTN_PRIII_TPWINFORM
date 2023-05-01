@@ -26,7 +26,7 @@ namespace Negocio
                     Imagen aux = new Imagen();
                     aux.Id = (Int32)datos.Reader["Id"];
                     aux.IdArticulo = (int)datos.Reader["IdArticulo"];
-
+                    aux.UrlImagen = (string)datos.Reader["ImagenUrl"];
                     lista.Add(aux);
                 }
                 return lista;
