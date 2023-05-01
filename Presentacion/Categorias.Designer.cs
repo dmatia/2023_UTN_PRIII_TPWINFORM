@@ -84,6 +84,7 @@
             this.btnEliminar.TabIndex = 3;
             this.btnEliminar.Text = "ELIMINAR SELECCIONADO";
             this.btnEliminar.UseVisualStyleBackColor = true;
+            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
             // 
             // gbLista
             // 
@@ -115,6 +116,7 @@
             this.btnCancelar.TabIndex = 6;
             this.btnCancelar.Text = "CANCELAR";
             this.btnCancelar.UseVisualStyleBackColor = true;
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
             // gbNuevaCategoria
             // 
@@ -138,6 +140,7 @@
             this.txtbxNuevaCategoria.Text = "Ingrese su nueva categoria";
             this.txtbxNuevaCategoria.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtbxNuevaCategoria_KeyPress);
             this.txtbxNuevaCategoria.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.txtbxNuevaCategoria_MouseDoubleClick);
+            this.txtbxNuevaCategoria.MouseLeave += new System.EventHandler(this.txtbxNuevaCategoria_MouseLeave);
             // 
             // gbFiltrar
             // 

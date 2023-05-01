@@ -67,5 +67,30 @@ namespace Negocio
             }
             return false;
         }
+
+        // METODO ELIMINAR CATEGORIA
+
+        public bool eliminar(String id)
+        {
+            AccesoDB datos = new AccesoDB();
+
+            try
+            {
+                datos.setQuery("DELETE CATEGORIAS WHERE Id = " + id);
+                if (datos.executeNonQuery())
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.closeConnection();
+            }
+            return false;
+        }
+
+
     }
 }
