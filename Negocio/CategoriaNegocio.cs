@@ -77,6 +77,7 @@ namespace Negocio
             {
                 datos.setQuery("Update CATEGORIAS set Descripcion = @desc WHERE Id = @id");
                 datos.setParameter("@id", modificar.Id);
+                datos.setParameter("@desc", modificar.Descripcion);
 
                 if (datos.executeNonQuery())
                     return true;

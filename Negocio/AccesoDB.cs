@@ -10,8 +10,8 @@ namespace Negocio
 		private SqlDataReader reader;
 
 		// Datos de la Base
-		string serverName = "localhost\\SQLEXPRESS";
-		//string serverName = "localhost\\SQLLAB";
+		//string serverName = "localhost\\SQLEXPRESS";
+		string serverName = "localhost\\SQLLAB";
 		string dataBase = "CATALOGO_P3_DB";
 
 		public AccesoDB()

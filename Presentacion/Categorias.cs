@@ -43,6 +43,15 @@ namespace Presentacion
             listarCategorias();
         }
 
+        // MODIFICAR SELECCIONADO DEL GRID
+        private void btnModificar_Click(object sender, EventArgs e)
+        {
+            ModificarCategoria modificarCategoria = new ModificarCategoria();
+            modificarCategoria.setIdCategoria ((int)dgvCategorias.CurrentRow.Cells[0].Value);
+            modificarCategoria.setDescripcionCategoria((string)dgvCategorias.CurrentRow.Cells[1].Value);
+            modificarCategoria.Show();
+            listarCategorias();
+        }
 
 
         // ELIMINAR SELECCIONADO DEL GRID
@@ -117,5 +126,6 @@ namespace Presentacion
         {
             Close();
         }
+
     }
 }
