@@ -38,9 +38,9 @@
             this.gbNuevaCategoria = new System.Windows.Forms.GroupBox();
             this.txtbxNuevaCategoria = new System.Windows.Forms.TextBox();
             this.gbFiltrar = new System.Windows.Forms.GroupBox();
-            this.btnLimpiar = new System.Windows.Forms.Button();
-            this.txbxFiltrar = new System.Windows.Forms.TextBox();
             this.btnFiltrar = new System.Windows.Forms.Button();
+            this.txbxFiltrar = new System.Windows.Forms.TextBox();
+            this.btnLimpiar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCategorias)).BeginInit();
             this.gbLista.SuspendLayout();
             this.gbNuevaCategoria.SuspendLayout();
@@ -149,15 +149,14 @@
             this.gbFiltrar.TabStop = false;
             this.gbFiltrar.Text = "FILTRAR";
             // 
-            // btnLimpiar
+            // btnFiltrar
             // 
-            this.btnLimpiar.Location = new System.Drawing.Point(705, 21);
-            this.btnLimpiar.Name = "btnLimpiar";
-            this.btnLimpiar.Size = new System.Drawing.Size(146, 58);
-            this.btnLimpiar.TabIndex = 7;
-            this.btnLimpiar.Text = "RESET";
-            this.btnLimpiar.UseVisualStyleBackColor = true;
-            this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
+            this.btnFiltrar.Location = new System.Drawing.Point(553, 21);
+            this.btnFiltrar.Name = "btnFiltrar";
+            this.btnFiltrar.Size = new System.Drawing.Size(146, 58);
+            this.btnFiltrar.TabIndex = 9;
+            this.btnFiltrar.Text = "FILTRAR";
+            this.btnFiltrar.UseVisualStyleBackColor = true;
             // 
             // txbxFiltrar
             // 
@@ -168,24 +167,27 @@
             this.txbxFiltrar.TabIndex = 8;
             this.txbxFiltrar.Text = "Ingrese búsqueda";
             // 
-            // btnFiltrar
+            // btnLimpiar
             // 
-            this.btnFiltrar.Location = new System.Drawing.Point(553, 21);
-            this.btnFiltrar.Name = "btnFiltrar";
-            this.btnFiltrar.Size = new System.Drawing.Size(146, 58);
-            this.btnFiltrar.TabIndex = 9;
-            this.btnFiltrar.Text = "FILTRAR";
-            this.btnFiltrar.UseVisualStyleBackColor = true;
+            this.btnLimpiar.Location = new System.Drawing.Point(705, 21);
+            this.btnLimpiar.Name = "btnLimpiar";
+            this.btnLimpiar.Size = new System.Drawing.Size(146, 58);
+            this.btnLimpiar.TabIndex = 7;
+            this.btnLimpiar.Text = "RESET";
+            this.btnLimpiar.UseVisualStyleBackColor = true;
+            this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
             // 
             // Categorias
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(927, 738);
+            this.ControlBox = false;
             this.Controls.Add(this.gbFiltrar);
             this.Controls.Add(this.gbNuevaCategoria);
             this.Controls.Add(this.gbLista);
             this.Controls.Add(this.btnClose);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Categorias";
             this.Text = "Categorias";
             this.Load += new System.EventHandler(this.Categorias_Load);
