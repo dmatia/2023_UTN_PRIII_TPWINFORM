@@ -45,5 +45,27 @@ namespace Negocio
             }
         }
 
+
+        //  METODO AGREGAR NUEVA CATEGORIA
+        public bool agregar(Categoria nueva)
+        {
+            AccesoDB datos = new AccesoDB();
+
+            try
+            {
+                datos.setQuery("Insert into CATEGORIAS (Descripcion) values ('" + nueva.Descripcion + "')");
+                if (datos.executeNonQuery())
+                    return true;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.closeConnection();
+            }
+            return false;
+        }
     }
 }

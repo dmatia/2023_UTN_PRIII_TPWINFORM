@@ -1,4 +1,5 @@
-﻿using Negocio;
+﻿using Dominio;
+using Negocio;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -38,6 +39,26 @@ namespace Presentacion
         private void btnClose_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void btnLimpiar_Click(object sender, EventArgs e)
+        {
+            txbxFiltrar.Text = "Ingrese búsqueda";
+            listarCategorias();
+        }
+
+        private void btnGuardar_Click(object sender, EventArgs e)
+        {
+            Categoria categoria = new Categoria();
+            categoria.Descripcion = txtbxNuevaCategoria.Text;
+
+            CategoriaNegocio categoriaNegocio = new CategoriaNegocio();
+            if (categoriaNegocio.agregar(categoria))
+                MessageBox.Show("CATEGORIA AGREGADA CORRECTAMENTE");
+            else
+                MessageBox.Show("ERROR AL GUARDAR CATEGORIA");
+
+            listarCategorias();
         }
     }
 }

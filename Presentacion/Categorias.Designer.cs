@@ -39,7 +39,7 @@
             this.txtbxNuevaCategoria = new System.Windows.Forms.TextBox();
             this.gbFiltrar = new System.Windows.Forms.GroupBox();
             this.btnLimpiar = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txbxFiltrar = new System.Windows.Forms.TextBox();
             this.btnFiltrar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCategorias)).BeginInit();
             this.gbLista.SuspendLayout();
@@ -59,7 +59,7 @@
             // 
             // btnClose
             // 
-            this.btnClose.Location = new System.Drawing.Point(733, 644);
+            this.btnClose.Location = new System.Drawing.Point(746, 639);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(146, 58);
             this.btnClose.TabIndex = 1;
@@ -105,6 +105,7 @@
             this.btnGuardar.TabIndex = 5;
             this.btnGuardar.Text = "GUARDAR";
             this.btnGuardar.UseVisualStyleBackColor = true;
+            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
             // 
             // btnCancelar
             // 
@@ -139,7 +140,7 @@
             // gbFiltrar
             // 
             this.gbFiltrar.Controls.Add(this.btnFiltrar);
-            this.gbFiltrar.Controls.Add(this.textBox1);
+            this.gbFiltrar.Controls.Add(this.txbxFiltrar);
             this.gbFiltrar.Controls.Add(this.btnLimpiar);
             this.gbFiltrar.Location = new System.Drawing.Point(28, 29);
             this.gbFiltrar.Name = "gbFiltrar";
@@ -156,15 +157,16 @@
             this.btnLimpiar.TabIndex = 7;
             this.btnLimpiar.Text = "RESET";
             this.btnLimpiar.UseVisualStyleBackColor = true;
+            this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
             // 
-            // textBox1
+            // txbxFiltrar
             // 
-            this.textBox1.Location = new System.Drawing.Point(24, 39);
-            this.textBox1.MaxLength = 50;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(506, 22);
-            this.textBox1.TabIndex = 8;
-            this.textBox1.Text = "Ingrese su nueva categoria";
+            this.txbxFiltrar.Location = new System.Drawing.Point(24, 39);
+            this.txbxFiltrar.MaxLength = 50;
+            this.txbxFiltrar.Name = "txbxFiltrar";
+            this.txbxFiltrar.Size = new System.Drawing.Size(506, 22);
+            this.txbxFiltrar.TabIndex = 8;
+            this.txbxFiltrar.Text = "Ingrese búsqueda";
             // 
             // btnFiltrar
             // 
@@ -210,7 +212,7 @@
         private System.Windows.Forms.TextBox txtbxNuevaCategoria;
         private System.Windows.Forms.GroupBox gbFiltrar;
         private System.Windows.Forms.Button btnFiltrar;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txbxFiltrar;
         private System.Windows.Forms.Button btnLimpiar;
     }
 }

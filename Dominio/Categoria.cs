@@ -14,5 +14,11 @@ namespace Dominio
         {
             return Descripcion;
         }
+
+        public Categoria()
+        {
+            this.Id = -1;
+            this.Descripcion = string.Empty;
+        }
     }
 }
