@@ -46,7 +46,7 @@ namespace Negocio
         }
 
 
-        //  METODO AGREGAR NUEVA CATEGORIA
+        //  METODO AGREGAR CATEGORIA
         public bool agregar(Categoria nueva)
         {
             AccesoDB datos = new AccesoDB();
@@ -67,6 +67,32 @@ namespace Negocio
             }
             return false;
         }
+
+        // METODO MODIFICAR CATEGORIA
+        public bool modificar(Categoria modificar)
+        {
+            AccesoDB datos = new AccesoDB();
+
+            try
+            {
+                datos.setQuery("Update CATEGORIAS set Descripcion = @desc WHERE Id = @id");
+                datos.setParameter("@id", modificar.Id);
+
+                if (datos.executeNonQuery())
+                    return true;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.closeConnection();
+            }
+            return false;
+
+        }
+
 
         // METODO ELIMINAR CATEGORIA
 

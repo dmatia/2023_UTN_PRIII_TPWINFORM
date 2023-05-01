@@ -99,7 +99,7 @@ namespace Presentacion
                     MessageBox.Show("CATEGORIA AGREGADA CORRECTAMENTE");
                 else
                     MessageBox.Show("ERROR AL GUARDAR CATEGORIA");
-
+                agregarTextoDefault();
                 listarCategorias();
             }
             else
