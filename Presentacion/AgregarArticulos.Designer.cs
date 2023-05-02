@@ -44,6 +44,9 @@
 			this.btnModificar = new System.Windows.Forms.Button();
 			this.btnCancelar = new System.Windows.Forms.Button();
 			this.btnEliminar = new System.Windows.Forms.Button();
+			this.btnAnteriorImagen = new System.Windows.Forms.Button();
+			this.btnSiguienteImagen = new System.Windows.Forms.Button();
+			this.btnImagenBorrarActual = new System.Windows.Forms.Button();
 			((System.ComponentModel.ISupportInitialize)(this.pbImagenArticulo)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -203,11 +206,42 @@
 			this.btnEliminar.Text = "Eliminar";
 			this.btnEliminar.UseVisualStyleBackColor = true;
 			// 
-			// Articulos
+			// btnAnteriorImagen
+			// 
+			this.btnAnteriorImagen.Location = new System.Drawing.Point(424, 194);
+			this.btnAnteriorImagen.Name = "btnAnteriorImagen";
+			this.btnAnteriorImagen.Size = new System.Drawing.Size(75, 23);
+			this.btnAnteriorImagen.TabIndex = 21;
+			this.btnAnteriorImagen.Text = "Anterior";
+			this.btnAnteriorImagen.UseVisualStyleBackColor = true;
+			// 
+			// btnSiguienteImagen
+			// 
+			this.btnSiguienteImagen.Location = new System.Drawing.Point(593, 195);
+			this.btnSiguienteImagen.Name = "btnSiguienteImagen";
+			this.btnSiguienteImagen.Size = new System.Drawing.Size(75, 23);
+			this.btnSiguienteImagen.TabIndex = 21;
+			this.btnSiguienteImagen.Text = "Siguiente";
+			this.btnSiguienteImagen.UseVisualStyleBackColor = true;
+			// 
+			// btnImagenBorrarActual
+			// 
+			this.btnImagenBorrarActual.Location = new System.Drawing.Point(490, 326);
+			this.btnImagenBorrarActual.Name = "btnImagenBorrarActual";
+			this.btnImagenBorrarActual.Size = new System.Drawing.Size(118, 23);
+			this.btnImagenBorrarActual.TabIndex = 21;
+			this.btnImagenBorrarActual.Text = "Borrar Actual";
+			this.btnImagenBorrarActual.UseVisualStyleBackColor = true;
+			this.btnImagenBorrarActual.Click += new System.EventHandler(this.btnImagenBorrarActual_Click);
+			// 
+			// AgregarArticulos
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(800, 450);
+			this.Controls.Add(this.btnImagenBorrarActual);
+			this.Controls.Add(this.btnSiguienteImagen);
+			this.Controls.Add(this.btnAnteriorImagen);
 			this.Controls.Add(this.btnEliminar);
 			this.Controls.Add(this.btnCancelar);
 			this.Controls.Add(this.btnModificar);
@@ -224,7 +258,7 @@
 			this.Controls.Add(this.lbDescripcion);
 			this.Controls.Add(this.lbArticulo);
 			this.Controls.Add(this.lbCodigo);
-			this.Name = "Articulos";
+			this.Name = "AgregarArticulos";
 			this.Text = "Articulos";
 			this.Load += new System.EventHandler(this.Articulos_Load);
 			((System.ComponentModel.ISupportInitialize)(this.pbImagenArticulo)).EndInit();
@@ -251,5 +285,8 @@
 		private System.Windows.Forms.Button btnModificar;
 		private System.Windows.Forms.Button btnCancelar;
 		private System.Windows.Forms.Button btnEliminar;
+		private System.Windows.Forms.Button btnAnteriorImagen;
+		private System.Windows.Forms.Button btnSiguienteImagen;
+		private System.Windows.Forms.Button btnImagenBorrarActual;
 	}
 }
