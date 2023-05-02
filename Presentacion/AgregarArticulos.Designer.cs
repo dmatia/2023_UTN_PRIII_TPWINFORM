@@ -47,7 +47,12 @@
 			this.btnAnteriorImagen = new System.Windows.Forms.Button();
 			this.btnSiguienteImagen = new System.Windows.Forms.Button();
 			this.btnImagenBorrarActual = new System.Windows.Forms.Button();
+			this.gbGuardarImagenes = new System.Windows.Forms.GroupBox();
+			this.rbUrl = new System.Windows.Forms.RadioButton();
+			this.rbArchivo = new System.Windows.Forms.RadioButton();
+			this.lbImagen = new System.Windows.Forms.Label();
 			((System.ComponentModel.ISupportInitialize)(this.pbImagenArticulo)).BeginInit();
+			this.gbGuardarImagenes.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// cbCategoria
@@ -179,7 +184,7 @@
 			// 
 			// btnModificar
 			// 
-			this.btnModificar.Location = new System.Drawing.Point(148, 297);
+			this.btnModificar.Location = new System.Drawing.Point(144, 359);
 			this.btnModificar.Name = "btnModificar";
 			this.btnModificar.Size = new System.Drawing.Size(75, 23);
 			this.btnModificar.TabIndex = 20;
@@ -189,7 +194,7 @@
 			// 
 			// btnCancelar
 			// 
-			this.btnCancelar.Location = new System.Drawing.Point(229, 297);
+			this.btnCancelar.Location = new System.Drawing.Point(225, 359);
 			this.btnCancelar.Name = "btnCancelar";
 			this.btnCancelar.Size = new System.Drawing.Size(75, 23);
 			this.btnCancelar.TabIndex = 20;
@@ -199,7 +204,7 @@
 			// 
 			// btnEliminar
 			// 
-			this.btnEliminar.Location = new System.Drawing.Point(310, 297);
+			this.btnEliminar.Location = new System.Drawing.Point(306, 359);
 			this.btnEliminar.Name = "btnEliminar";
 			this.btnEliminar.Size = new System.Drawing.Size(75, 23);
 			this.btnEliminar.TabIndex = 20;
@@ -234,11 +239,58 @@
 			this.btnImagenBorrarActual.UseVisualStyleBackColor = true;
 			this.btnImagenBorrarActual.Click += new System.EventHandler(this.btnImagenBorrarActual_Click);
 			// 
+			// gbGuardarImagenes
+			// 
+			this.gbGuardarImagenes.Controls.Add(this.rbArchivo);
+			this.gbGuardarImagenes.Controls.Add(this.rbUrl);
+			this.gbGuardarImagenes.Location = new System.Drawing.Point(160, 286);
+			this.gbGuardarImagenes.Name = "gbGuardarImagenes";
+			this.gbGuardarImagenes.Size = new System.Drawing.Size(200, 67);
+			this.gbGuardarImagenes.TabIndex = 22;
+			this.gbGuardarImagenes.TabStop = false;
+			this.gbGuardarImagenes.Text = "Guardar";
+			// 
+			// rbUrl
+			// 
+			this.rbUrl.AutoSize = true;
+			this.rbUrl.Location = new System.Drawing.Point(29, 29);
+			this.rbUrl.Name = "rbUrl";
+			this.rbUrl.Size = new System.Drawing.Size(45, 17);
+			this.rbUrl.TabIndex = 0;
+			this.rbUrl.TabStop = true;
+			this.rbUrl.Text = "Link";
+			this.rbUrl.UseVisualStyleBackColor = true;
+			// 
+			// rbArchivo
+			// 
+			this.rbArchivo.AutoSize = true;
+			this.rbArchivo.Location = new System.Drawing.Point(101, 29);
+			this.rbArchivo.Name = "rbArchivo";
+			this.rbArchivo.Size = new System.Drawing.Size(61, 17);
+			this.rbArchivo.TabIndex = 1;
+			this.rbArchivo.TabStop = true;
+			this.rbArchivo.Text = "Archivo";
+			this.rbArchivo.UseVisualStyleBackColor = true;
+			// 
+			// lbImagen
+			// 
+			this.lbImagen.AutoSize = true;
+			this.lbImagen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.lbImagen.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.lbImagen.ForeColor = System.Drawing.Color.Black;
+			this.lbImagen.Location = new System.Drawing.Point(88, 316);
+			this.lbImagen.Name = "lbImagen";
+			this.lbImagen.Size = new System.Drawing.Size(57, 16);
+			this.lbImagen.TabIndex = 23;
+			this.lbImagen.Text = "Imaegen";
+			// 
 			// AgregarArticulos
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(800, 450);
+			this.Controls.Add(this.lbImagen);
+			this.Controls.Add(this.gbGuardarImagenes);
 			this.Controls.Add(this.btnImagenBorrarActual);
 			this.Controls.Add(this.btnSiguienteImagen);
 			this.Controls.Add(this.btnAnteriorImagen);
@@ -262,6 +314,8 @@
 			this.Text = "Articulos";
 			this.Load += new System.EventHandler(this.Articulos_Load);
 			((System.ComponentModel.ISupportInitialize)(this.pbImagenArticulo)).EndInit();
+			this.gbGuardarImagenes.ResumeLayout(false);
+			this.gbGuardarImagenes.PerformLayout();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -288,5 +342,9 @@
 		private System.Windows.Forms.Button btnAnteriorImagen;
 		private System.Windows.Forms.Button btnSiguienteImagen;
 		private System.Windows.Forms.Button btnImagenBorrarActual;
+		private System.Windows.Forms.GroupBox gbGuardarImagenes;
+		private System.Windows.Forms.RadioButton rbArchivo;
+		private System.Windows.Forms.RadioButton rbUrl;
+		private System.Windows.Forms.Label lbImagen;
 	}
 }
