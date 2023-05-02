@@ -17,11 +17,11 @@ namespace Negocio
 
             /// Seteo consulta de todos los elementos de la tabla integrada
 
-            try// manejo de excepciones al intentar acceder a DB
+            try
             {
                 datos.setQuery("Select A.Id,Codigo,Nombre,Precio,A.Descripcion, M.Id as 'MarcasId', M.Descripcion as 'MarcasDescripcion', C.Descripcion as 'CategoriasDescripcion', C.Id as 'CategoriasId' from Articulos A left join Marcas M on M.Id=A.IdMarca left join Categorias C on C.Id =A.IdCategoria");
                 datos.executeReader();
-                // la query esta en Lector
+                
                 while ((datos.Reader.Read())) // Devuelve valor booleano y va cambiando el cursor
                 {
                     Articulo aux = new Articulo(); // Crea una instancia de variable Articulo
@@ -33,7 +33,7 @@ namespace Negocio
                     aux.Marca = new Marca();
                     aux.Marca.Id = (int)datos.Reader["MarcasId"];
                     aux.Marca.Descripcion = (string)datos.Reader["MarcasDescripcion"];
-                    /// POR QUE EL OVERRIDE DE TOSTRING PRODUCE ESTO?
+                    
                     aux.Categoria = new Categoria();
                     if (!(datos.Reader["CategoriasDescripcion"] is DBNull))
                     {
@@ -48,12 +48,14 @@ namespace Negocio
                         aux.Categoria.Id = (int)datos.Reader["Categoriasid"];
                     }
 
-					//Cargar Imágenes
+					//Cargar Imágenes al artículo
+					ImagenNegocio imageNegocio = new ImagenNegocio();
+					aux.Imagenes = imageNegocio.listar(aux.Id.ToString()); ;
 
-                    lista.Add(aux);// Agrega cada variable a la lista
+					lista.Add(aux);
                 }
 
-                return lista;// devuelve la lista
+                return lista;
             }
             catch (Exception ex)
             {
