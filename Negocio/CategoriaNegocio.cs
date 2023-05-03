@@ -97,13 +97,12 @@ namespace Negocio
 
         // METODO ELIMINAR CATEGORIA
 
-        public bool eliminar(String id)
-        {
+        public bool eliminar(Categoria registro) { 
             AccesoDB datos = new AccesoDB();
 
             try
             {
-                datos.setQuery("DELETE CATEGORIAS WHERE Id = " + id);
+                datos.setQuery("DELETE CATEGORIAS WHERE Id = " + registro.Id);
                 if (datos.executeNonQuery())
                 return true;
             }

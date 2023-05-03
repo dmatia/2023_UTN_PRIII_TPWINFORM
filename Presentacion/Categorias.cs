@@ -46,11 +46,19 @@ namespace Presentacion
         // MODIFICAR SELECCIONADO DEL GRID
         private void btnModificar_Click(object sender, EventArgs e)
         {
-            ModificarCategoria modificarCategoria = new ModificarCategoria();
-            modificarCategoria.setIdCategoria((int)dgvCategorias.CurrentRow.Cells[0].Value);
-            modificarCategoria.setDescripcionCategoria((string)dgvCategorias.CurrentRow.Cells[1].Value);
-            modificarCategoria.Show();
-            listarCategorias();
+            
+            if (dgvCategorias == null || dgvCategorias.Rows.Count == 0)
+            {
+                MessageBox.Show("SIN REGISTROS");
+            }
+            else
+            {
+                ModificarCategoria modificarCategoria = new ModificarCategoria();
+                modificarCategoria.setIdCategoria((int)dgvCategorias.CurrentRow.Cells[0].Value);
+                modificarCategoria.setDescripcionCategoria((string)dgvCategorias.CurrentRow.Cells[1].Value);
+                modificarCategoria.Show();
+                listarCategorias();
+            }
         }
 
 
@@ -58,13 +66,39 @@ namespace Presentacion
 
         private void btnEliminar_Click(object sender, EventArgs e)
         {
+
+            Categoria eliminar = new Categoria();
+
+
             MessageBoxDefaultButton DefaultButton = MessageBoxDefaultButton.Button1;
-            if (MessageBox.Show("¿SEGURO QUE DESEA ELIMINAR EL REGISTRO?", "¡ATENCIÓN!", MessageBoxButtons.YesNo, MessageBoxIcon.Question, DefaultButton) == DialogResult.Yes)
-            {
-                CategoriaNegocio RegistroEliminar = new CategoriaNegocio();
-                RegistroEliminar.eliminar(dgvCategorias.CurrentRow.Cells[0].Value.ToString());
-                listarCategorias();
+             {
+                CategoriaNegocio registroEliminar = new CategoriaNegocio();
+           
+                if (dgvCategorias == null || dgvCategorias.Rows.Count == 0)
+                    {
+                    MessageBox.Show("SIN REGISTROS");
+                    }
+                else
+                {
+                    try
+                    {
+                        if (MessageBox.Show("¿SEGURO QUE DESEA ELIMINAR EL REGISTRO?", "¡ATENCIÓN!", MessageBoxButtons.YesNo, MessageBoxIcon.Question, DefaultButton) == DialogResult.Yes)
+                        registroEliminar.eliminar(eliminar);
+                        listarCategorias();
+
+                    }
+                    catch (Exception)
+                    {
+
+                        MessageBox.Show("SIN REGISTROS");
+                    }
+                }
+            
+
+                
+               
             }
+            
         }
 
 
@@ -160,7 +194,7 @@ namespace Presentacion
 
         private void txbxFiltrar_MouseLeave(object sender, EventArgs e)
         {
-            if ((txbxFiltrar.Text == ""))
+            if ((txbxFiltrar.Text == "") || (txbxFiltrar.Text == "Ingrese búsqueda"))
             {
                 txbxFiltrar.Text = "Ingrese búsqueda";
             }

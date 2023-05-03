@@ -282,7 +282,10 @@ namespace Negocio
 
         //TODO: ELIMINAR PRODUCTO
 
+        /*public bool eliminar(Articulo articulo)
+        {
 
+        }*/
 
     }
 
