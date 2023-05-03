@@ -31,9 +31,44 @@ namespace Presentacion
         //Metodos necesarios al momento de cargar la ventana
         private void cargarVentana()
         {
+            //listar Categorias y marcas
+            Cargarcombobox();
             ListarArticulos();
             CargarGridView();
         }
+
+        public void Cargarcombobox()
+        {
+                        
+            CategoriaNegocio CategoriaNegocio = new CategoriaNegocio();
+            List<Categoria> Listacategorias = new List<Categoria>();
+            Listacategorias = CategoriaNegocio.listar();
+            foreach (Categoria aux in Listacategorias){
+
+                CbxCategoria.Items.Add(aux.Descripcion);
+            
+                }
+            CbxCategoria.Text = "Categorias"; // Ver como hacer para que esto lo haga el framework
+    
+            MarcaNegocio MarcaNegocio = new MarcaNegocio();
+            List<Marca> Listamarcas = new List<Marca>();
+            Listamarcas = MarcaNegocio.listar();
+            foreach (Marca aux in Listamarcas)
+            {
+
+                CbxMarca.Items.Add(aux.Descripcion);
+            }
+            CbxMarca.Text = "Marcas"; // Ver como hacer para que esto lo haga el framework
+
+            CbxFiltroprimario.Items.Add("Codigo");
+            CbxFiltroprimario.Items.Add("Nombre");
+            CbxFiltroprimario.Items.Add("Descripcion");
+            CbxFiltroprimario.Items.Add("Precio mayor a");
+            CbxFiltroprimario.Items.Add("Precio menor a");
+            CbxFiltroprimario.Text = "Filtros disponibles";
+        }
+
+        
 
         // Método para cargar el data grid view con los datos de los artículos
         public void CargarGridView()
@@ -46,7 +81,7 @@ namespace Presentacion
             dgvListaArticulos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
             //No mostrar columnas
-            dgvListaArticulos.Columns["Id"].Visible = false;
+            ///dgvListaArticulos.Columns["Id"].Visible = false;
         }
 
         private void ListarArticulos()
@@ -90,6 +125,46 @@ namespace Presentacion
             }
         }
 
-        
+        private void TxtBuqueda_Click(object sender, EventArgs e)
+        {
+            TxtBuqueda.Clear();
+        }
+
+        private void BtnBusqueda_Click(object sender, EventArgs e)
+        {
+            try
+            {
+               
+                List<Articulo> listaFiltrada = new List<Articulo>();
+                ArticuloNegocio articulosNegocio = new ArticuloNegocio();
+               listaFiltrada = articulosNegocio.Filtrar(TxtBuqueda.Text, CbxFiltroprimario.Text, CbxCategoria.Text, CbxMarca.Text);
+                dgvListaArticulos.DataSource = listaFiltrada;
+                
+                
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Error al cargar listado de articulos");
+            }
+        }
+
+        private void BtnReset_Click(object sender, EventArgs e)
+        {
+            TxtBuqueda.Clear();
+            CbxFiltroprimario.Text = "Filtros disponibles";
+            CbxCategoria.Text = "Categorias"; 
+            CbxMarca.Text = "Marcas";
+            dgvListaArticulos.DataSource = listaArticulos;
+        }
+
+        private void CbxCategoria_SelectedIndexChanged(object sender, EventArgs e)
+        {
+           
+        }
+
+        private void CbxCategoria_Click(object sender, EventArgs e)
+        {
+           
+        }
     }
 }

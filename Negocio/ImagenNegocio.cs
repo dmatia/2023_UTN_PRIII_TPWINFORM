@@ -42,5 +42,72 @@ namespace Negocio
             }
         }
 
-    }
+
+		//AGREGAR IMAGEN
+		public bool agregar(Imagen imagen)
+		{
+			AccesoDB datoSQL = new AccesoDB();
+
+			try
+			{
+				datoSQL.setQuery
+				 (
+					$"INSERT INTO IMAGENES " +
+					$"(IdArticulo,ImagenUrl) " +
+					$"VALUES('{imagen.IdArticulo}', '{imagen.UrlImagen}')"
+				);
+
+				if (datoSQL.executeNonQuery())
+				{
+					datoSQL.closeConnection();
+					return true;
+				}
+			}
+			catch (Exception ex)
+			{
+
+				throw ex;
+			}
+			finally
+			{
+				datoSQL.closeConnection();
+			}
+
+			return false;
+		}
+
+
+		//ELIMINAR IMAGEN
+		public bool borrar(int id)
+		{
+			AccesoDB datoSQL = new AccesoDB();
+
+			try
+			{
+				datoSQL.setQuery
+				 (
+					$"DELETE FROM IMAGENES " +
+					$"WHERE Id = '{id}'"
+				);
+
+				if (datoSQL.executeNonQuery())
+				{
+					datoSQL.closeConnection();
+					return true;
+				}
+			}
+			catch (Exception ex)
+			{
+
+				throw ex;
+			}
+			finally
+			{
+				datoSQL.closeConnection();
+			}
+
+			return false;
+		}
+
+	}
 }

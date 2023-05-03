@@ -25,7 +25,7 @@ namespace Negocio
                 {
                     Categoria aux = new Categoria();
                     aux.Id = (Int32)datos.Reader["Id"];
-                    if (datos.Reader["Descripcion"] != null)
+                    if (!(datos.Reader["Descripcion"] is DBNull))
                         aux.Descripcion = (string)datos.Reader["Descripcion"];
                     else
                         aux.Descripcion = "...";
@@ -77,6 +77,7 @@ namespace Negocio
             {
                 datos.setQuery("Update CATEGORIAS set Descripcion = @desc WHERE Id = @id");
                 datos.setParameter("@id", modificar.Id);
+                datos.setParameter("@desc", modificar.Descripcion);
 
                 if (datos.executeNonQuery())
                     return true;

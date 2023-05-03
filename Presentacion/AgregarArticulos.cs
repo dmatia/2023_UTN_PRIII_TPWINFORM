@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,9 +13,19 @@ using Negocio;
 
 namespace Presentacion
 {
+	//TODO: Carrusel de imagenes
+	//TODO: Validaciones
+	//TODO: Guardar imagen nueva por Archivo y url. Validar cual es cual.
+	//TODO: Al guardar imagen, copiar en una nueva carpeta para guardar ruta en base de datos
+	//TODO: Si no hay imagenes, sacar boton de eliminar actual y los del carrusel
+	//TODO: Estilos de la ventana
+	//TODO: Eliminar Articulo
+
 	public partial class AgregarArticulos : Form
 	{
 		private Articulo articulo = null;
+		private int imagenActual;
+		private string rutaImagen = Path.GetDirectoryName(Directory.GetCurrentDirectory().Replace(@"\bin", "")) ;
 
 		//Banderas de vistas
 		private bool esModificar;
@@ -97,8 +108,39 @@ namespace Presentacion
 			cbCategoria.SelectedValue = articulo.Categoria.Id;
 			cbMarca.SelectedValue = articulo.Marca.Id;
 
-			//TODO: Cargar Imagenes
+			//Si contiene imagenes, cargarlas
+			CargarImagenes();
+		}
 
+		//Metodo para cargar las imagenes
+		private void CargarImagenes()
+		{
+			if(articulo.Imagenes.Count > 0)
+			{
+				CargarPictureBox(pbImagenArticulo, articulo.Imagenes[0].UrlImagen);
+				
+				//Guardamos id de la imagen actual por si necesita ser eliminada
+				imagenActual = articulo.Imagenes[0].Id;
+			}
+			else
+			{
+				//Si no hay imagenes carga una imagen placeholder
+				CargarPictureBox(pbImagenArticulo, rutaImagen + "/img/placeholder.png");
+			}
+		}
+
+		//Método para cargar el pictureBox
+		private void CargarPictureBox(PictureBox pb, string url)
+		{
+			try
+			{
+				pb.Load(url);
+			}
+			catch(Exception ex)
+			{
+				//Si hay un error carga una imagen placeholder
+				pb.Load(rutaImagen + "/img/placeholder.png");
+			}
 		}
 
 		private void CargarComboBox()
@@ -266,6 +308,27 @@ namespace Presentacion
 				// En Modo Agregar, cerrar la ventana si se cancela
 				this.Close();
 			}
+		}
+
+		private void btnImagenBorrarActual_Click(object sender, EventArgs e)
+		{
+			ImagenNegocio imagenNegocio = new ImagenNegocio();
+
+			//Verificar si se quiere cancelar
+			DialogResult result = MessageBox.Show("¿Está seguro que quiere borrar la imagen actual?", "Cancelar", MessageBoxButtons.OKCancel);
+
+			if (result == DialogResult.OK)
+				if (imagenNegocio.borrar(imagenActual))
+				{
+					//Remover imagen borrada del objeto
+					articulo.Imagenes = articulo.Imagenes.FindAll(x => x.Id != imagenActual);
+					
+					//Cargamos imagenes
+					CargarImagenes();
+
+					//Ponemos los cambios en true para que la ventana de listado se actualice
+					this.hayCambios = true;
+				}
 		}
 	}
 }

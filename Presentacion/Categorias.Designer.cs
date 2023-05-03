@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.dgvCategorias = new System.Windows.Forms.DataGridView();
-            this.btnClose = new System.Windows.Forms.Button();
             this.btnModificar = new System.Windows.Forms.Button();
             this.btnEliminar = new System.Windows.Forms.Button();
             this.gbLista = new System.Windows.Forms.GroupBox();
@@ -49,38 +48,36 @@
             // 
             // dgvCategorias
             // 
+            this.dgvCategorias.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvCategorias.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvCategorias.Location = new System.Drawing.Point(14, 41);
+            this.dgvCategorias.Location = new System.Drawing.Point(10, 33);
+            this.dgvCategorias.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.dgvCategorias.Name = "dgvCategorias";
             this.dgvCategorias.RowHeadersWidth = 51;
             this.dgvCategorias.RowTemplate.Height = 24;
-            this.dgvCategorias.Size = new System.Drawing.Size(837, 255);
+            this.dgvCategorias.Size = new System.Drawing.Size(628, 207);
             this.dgvCategorias.TabIndex = 0;
-            // 
-            // btnClose
-            // 
-            this.btnClose.Location = new System.Drawing.Point(746, 639);
-            this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(146, 58);
-            this.btnClose.TabIndex = 1;
-            this.btnClose.Text = "CERRAR";
-            this.btnClose.UseVisualStyleBackColor = true;
-            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
             // btnModificar
             // 
-            this.btnModificar.Location = new System.Drawing.Point(553, 302);
+            this.btnModificar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnModificar.Location = new System.Drawing.Point(415, 245);
+            this.btnModificar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnModificar.Name = "btnModificar";
-            this.btnModificar.Size = new System.Drawing.Size(146, 58);
+            this.btnModificar.Size = new System.Drawing.Size(110, 47);
             this.btnModificar.TabIndex = 2;
             this.btnModificar.Text = "MODIFICAR SELECCIONADO";
             this.btnModificar.UseVisualStyleBackColor = true;
+            this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
             // 
             // btnEliminar
             // 
-            this.btnEliminar.Location = new System.Drawing.Point(705, 302);
+            this.btnEliminar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnEliminar.Location = new System.Drawing.Point(529, 245);
+            this.btnEliminar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnEliminar.Name = "btnEliminar";
-            this.btnEliminar.Size = new System.Drawing.Size(146, 58);
+            this.btnEliminar.Size = new System.Drawing.Size(110, 47);
             this.btnEliminar.TabIndex = 3;
             this.btnEliminar.Text = "ELIMINAR SELECCIONADO";
             this.btnEliminar.UseVisualStyleBackColor = true;
@@ -88,21 +85,27 @@
             // 
             // gbLista
             // 
+            this.gbLista.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.gbLista.Controls.Add(this.btnEliminar);
             this.gbLista.Controls.Add(this.btnModificar);
             this.gbLista.Controls.Add(this.dgvCategorias);
-            this.gbLista.Location = new System.Drawing.Point(28, 138);
+            this.gbLista.Location = new System.Drawing.Point(21, 112);
+            this.gbLista.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.gbLista.Name = "gbLista";
-            this.gbLista.Size = new System.Drawing.Size(864, 380);
+            this.gbLista.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gbLista.Size = new System.Drawing.Size(648, 309);
             this.gbLista.TabIndex = 4;
             this.gbLista.TabStop = false;
             this.gbLista.Text = "LISTADO";
             // 
             // btnGuardar
             // 
-            this.btnGuardar.Location = new System.Drawing.Point(553, 18);
+            this.btnGuardar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnGuardar.Location = new System.Drawing.Point(415, 15);
+            this.btnGuardar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnGuardar.Name = "btnGuardar";
-            this.btnGuardar.Size = new System.Drawing.Size(146, 58);
+            this.btnGuardar.Size = new System.Drawing.Size(110, 47);
             this.btnGuardar.TabIndex = 5;
             this.btnGuardar.Text = "GUARDAR";
             this.btnGuardar.UseVisualStyleBackColor = true;
@@ -110,9 +113,11 @@
             // 
             // btnCancelar
             // 
-            this.btnCancelar.Location = new System.Drawing.Point(705, 18);
+            this.btnCancelar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCancelar.Location = new System.Drawing.Point(529, 15);
+            this.btnCancelar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(146, 58);
+            this.btnCancelar.Size = new System.Drawing.Size(110, 47);
             this.btnCancelar.TabIndex = 6;
             this.btnCancelar.Text = "CANCELAR";
             this.btnCancelar.UseVisualStyleBackColor = true;
@@ -120,22 +125,29 @@
             // 
             // gbNuevaCategoria
             // 
+            this.gbNuevaCategoria.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.gbNuevaCategoria.Controls.Add(this.txtbxNuevaCategoria);
             this.gbNuevaCategoria.Controls.Add(this.btnCancelar);
             this.gbNuevaCategoria.Controls.Add(this.btnGuardar);
-            this.gbNuevaCategoria.Location = new System.Drawing.Point(28, 529);
+            this.gbNuevaCategoria.Location = new System.Drawing.Point(21, 430);
+            this.gbNuevaCategoria.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.gbNuevaCategoria.Name = "gbNuevaCategoria";
-            this.gbNuevaCategoria.Size = new System.Drawing.Size(864, 92);
+            this.gbNuevaCategoria.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gbNuevaCategoria.Size = new System.Drawing.Size(648, 75);
             this.gbNuevaCategoria.TabIndex = 7;
             this.gbNuevaCategoria.TabStop = false;
             this.gbNuevaCategoria.Text = "NUEVA CATEGORIA";
             // 
             // txtbxNuevaCategoria
             // 
-            this.txtbxNuevaCategoria.Location = new System.Drawing.Point(14, 36);
+            this.txtbxNuevaCategoria.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtbxNuevaCategoria.Location = new System.Drawing.Point(10, 29);
+            this.txtbxNuevaCategoria.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtbxNuevaCategoria.MaxLength = 50;
             this.txtbxNuevaCategoria.Name = "txtbxNuevaCategoria";
-            this.txtbxNuevaCategoria.Size = new System.Drawing.Size(506, 22);
+            this.txtbxNuevaCategoria.Size = new System.Drawing.Size(380, 20);
             this.txtbxNuevaCategoria.TabIndex = 7;
             this.txtbxNuevaCategoria.Text = "Ingrese su nueva categoria";
             this.txtbxNuevaCategoria.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtbxNuevaCategoria_KeyPress);
@@ -149,36 +161,45 @@
             this.gbFiltrar.Controls.Add(this.btnFiltrar);
             this.gbFiltrar.Controls.Add(this.txbxFiltrar);
             this.gbFiltrar.Controls.Add(this.btnLimpiar);
-            this.gbFiltrar.Location = new System.Drawing.Point(28, 12);
+            this.gbFiltrar.Location = new System.Drawing.Point(21, 10);
+            this.gbFiltrar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.gbFiltrar.Name = "gbFiltrar";
-            this.gbFiltrar.Size = new System.Drawing.Size(864, 103);
+            this.gbFiltrar.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gbFiltrar.Size = new System.Drawing.Size(648, 84);
             this.gbFiltrar.TabIndex = 8;
             this.gbFiltrar.TabStop = false;
             this.gbFiltrar.Text = "FILTRAR";
             // 
             // btnFiltrar
             // 
-            this.btnFiltrar.Location = new System.Drawing.Point(553, 21);
+            this.btnFiltrar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnFiltrar.Location = new System.Drawing.Point(415, 17);
+            this.btnFiltrar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnFiltrar.Name = "btnFiltrar";
-            this.btnFiltrar.Size = new System.Drawing.Size(146, 58);
+            this.btnFiltrar.Size = new System.Drawing.Size(110, 47);
             this.btnFiltrar.TabIndex = 9;
             this.btnFiltrar.Text = "FILTRAR";
             this.btnFiltrar.UseVisualStyleBackColor = true;
             // 
             // txbxFiltrar
             // 
-            this.txbxFiltrar.Location = new System.Drawing.Point(24, 39);
+            this.txbxFiltrar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txbxFiltrar.Location = new System.Drawing.Point(18, 32);
+            this.txbxFiltrar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txbxFiltrar.MaxLength = 50;
             this.txbxFiltrar.Name = "txbxFiltrar";
-            this.txbxFiltrar.Size = new System.Drawing.Size(506, 22);
+            this.txbxFiltrar.Size = new System.Drawing.Size(380, 20);
             this.txbxFiltrar.TabIndex = 8;
             this.txbxFiltrar.Text = "Ingrese búsqueda";
             // 
             // btnLimpiar
             // 
-            this.btnLimpiar.Location = new System.Drawing.Point(705, 21);
+            this.btnLimpiar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnLimpiar.Location = new System.Drawing.Point(529, 17);
+            this.btnLimpiar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnLimpiar.Name = "btnLimpiar";
-            this.btnLimpiar.Size = new System.Drawing.Size(146, 58);
+            this.btnLimpiar.Size = new System.Drawing.Size(110, 47);
             this.btnLimpiar.TabIndex = 7;
             this.btnLimpiar.Text = "RESET";
             this.btnLimpiar.UseVisualStyleBackColor = true;
@@ -186,17 +207,17 @@
             // 
             // Categorias
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(930, 722);
+            this.ClientSize = new System.Drawing.Size(698, 528);
             this.ControlBox = false;
             this.Controls.Add(this.gbFiltrar);
             this.Controls.Add(this.gbNuevaCategoria);
             this.Controls.Add(this.gbLista);
-            this.Controls.Add(this.btnClose);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "Categorias";
-            this.Text = " ";
+            this.Text = " Categorias";
             this.TopMost = true;
             this.Load += new System.EventHandler(this.Categorias_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvCategorias)).EndInit();
@@ -212,7 +233,6 @@
         #endregion
 
         private System.Windows.Forms.DataGridView dgvCategorias;
-        private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.Button btnModificar;
         private System.Windows.Forms.Button btnEliminar;
         private System.Windows.Forms.GroupBox gbLista;
