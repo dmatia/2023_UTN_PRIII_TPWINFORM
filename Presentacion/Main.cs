@@ -22,9 +22,11 @@ namespace Presentacion
                 if (item.GetType() == typeof(Categorias))
                     return;
             }
+            ocultarVentanas();
             Categorias categorias = new Categorias();
 			categorias.MdiParent = this;
 			categorias.Show();
+            categorias.WindowState = FormWindowState.Maximized;
         }
 
         private void artículosToolStripMenuItem_Click(object sender, EventArgs e)
@@ -45,15 +47,23 @@ namespace Presentacion
                 if (item.GetType() == typeof(Articulos))
                     return;
             }
-            
+            ocultarVentanas();
             Articulos articulos = new Articulos();
             articulos.MdiParent = this;
             articulos.Show();
+            articulos.WindowState = FormWindowState.Maximized;
         }
 
         // Oculta las ventanas de fondo
         private void ocultarVentanas()
         {
+            foreach(Form frm in this.MdiChildren)
+            {
+                if(!frm.Focused)
+                {
+                    frm.Close();
+                }
+            }
             
         }
     }

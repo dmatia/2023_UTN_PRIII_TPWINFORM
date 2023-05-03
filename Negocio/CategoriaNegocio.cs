@@ -25,7 +25,7 @@ namespace Negocio
                 {
                     Categoria aux = new Categoria();
                     aux.Id = (Int32)datos.Reader["Id"];
-                    if (datos.Reader["Descripcion"] != null)
+                    if (!(datos.Reader["Descripcion"] is DBNull))
                         aux.Descripcion = (string)datos.Reader["Descripcion"];
                     else
                         aux.Descripcion = "...";
