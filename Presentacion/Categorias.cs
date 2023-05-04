@@ -82,7 +82,8 @@ namespace Presentacion
                 {
                     try
                     {
-                        if (MessageBox.Show("¿SEGURO QUE DESEA ELIMINAR EL REGISTRO?", "¡ATENCIÓN!", MessageBoxButtons.YesNo, MessageBoxIcon.Question, DefaultButton) == DialogResult.Yes)
+                        if (MessageBox.Show("¿ELIMINAR REGISTRO?", "¡ATENCIÓN!", MessageBoxButtons.YesNo, MessageBoxIcon.Question, DefaultButton) == DialogResult.Yes)
+                            eliminar = (Categoria)dgvCategorias.CurrentRow.DataBoundItem;
                         registroEliminar.eliminar(eliminar);
                         listarCategorias();
 

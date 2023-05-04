@@ -40,17 +40,18 @@ namespace Presentacion
 
         public void Cargarcombobox()
         {
-                        
+
             CategoriaNegocio CategoriaNegocio = new CategoriaNegocio();
             List<Categoria> Listacategorias = new List<Categoria>();
             Listacategorias = CategoriaNegocio.listar();
-            foreach (Categoria aux in Listacategorias){
+            foreach (Categoria aux in Listacategorias)
+            {
 
                 CbxCategoria.Items.Add(aux.Descripcion);
-            
-                }
+
+            }
             CbxCategoria.Text = "Categorias"; // Ver como hacer para que esto lo haga el framework
-    
+
             MarcaNegocio MarcaNegocio = new MarcaNegocio();
             List<Marca> Listamarcas = new List<Marca>();
             Listamarcas = MarcaNegocio.listar();
@@ -69,7 +70,7 @@ namespace Presentacion
             CbxFiltroprimario.Text = "Filtros disponibles";
         }
 
-        
+
 
         // Método para cargar el data grid view con los datos de los artículos
         public void CargarGridView()
@@ -135,13 +136,13 @@ namespace Presentacion
         {
             try
             {
-               
-               List<Articulo> listaFiltrada = new List<Articulo>();
-               ArticuloNegocio articulosNegocio = new ArticuloNegocio();
-               listaFiltrada = articulosNegocio.Filtrar(TxtBuqueda.Text, CbxFiltroprimario.Text, CbxCategoria.Text, CbxMarca.Text);
-               dgvListaArticulos.DataSource = listaFiltrada;
-                
-                
+
+                List<Articulo> listaFiltrada = new List<Articulo>();
+                ArticuloNegocio articulosNegocio = new ArticuloNegocio();
+                listaFiltrada = articulosNegocio.Filtrar(TxtBuqueda.Text, CbxFiltroprimario.Text, CbxCategoria.Text, CbxMarca.Text);
+                dgvListaArticulos.DataSource = listaFiltrada;
+
+
             }
             catch (Exception)
             {
@@ -154,19 +155,86 @@ namespace Presentacion
         {
             TxtBuqueda.Clear();
             CbxFiltroprimario.Text = "Filtros disponibles";
-            CbxCategoria.Text = "Categorias"; 
+            CbxCategoria.Text = "Categorias";
             CbxMarca.Text = "Marcas";
             dgvListaArticulos.DataSource = listaArticulos;
         }
 
         private void CbxCategoria_SelectedIndexChanged(object sender, EventArgs e)
         {
-           
+
         }
 
         private void CbxCategoria_Click(object sender, EventArgs e)
         {
-           
+
+        }
+
+        // ELIMINAR ARTICULOS
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            ArticuloNegocio eliminarRegistro = new ArticuloNegocio();
+            Articulo seleccionado = new Articulo();
+
+            MessageBoxDefaultButton DefaultButton = MessageBoxDefaultButton.Button1;
+
+            if (dgvListaArticulos == null || dgvListaArticulos .Rows.Count == 0)
+            {
+                MessageBox.Show("SIN REGISTROS");
+            }
+            else
+            {
+                try
+                {
+                    DialogResult respuesta = MessageBox.Show("¿ELIMINAR REGISTRO?", "¡ATENCIÓN!", MessageBoxButtons.YesNo, MessageBoxIcon.Question, DefaultButton);
+                    if (respuesta == DialogResult.Yes)
+                    {
+                        seleccionado = (Articulo)dgvListaArticulos.CurrentRow.DataBoundItem;
+                        eliminarRegistro.eliminar(seleccionado.Id);
+                        cargarVentana();
+                    }
+
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
+            }
+
+            /*  Articulo eliminar = new Articulo();
+
+
+            MessageBoxDefaultButton DefaultButton = MessageBoxDefaultButton.Button1;
+            {
+
+
+               ArticuloNegocio registroEliminar = new ArticuloNegocio();
+
+                if (dgvListaArticulos == null || dgvListaArticulos.Rows.Count == 0)
+                {
+                    MessageBox.Show("SIN REGISTROS");
+                }
+                else
+                {
+                    try
+                    {
+                        if (MessageBox.Show("¿SEGURO QUE DESEA ELIMINAR EL REGISTRO?", "¡ATENCIÓN!", MessageBoxButtons.YesNo, MessageBoxIcon.Question, DefaultButton) == DialogResult.Yes)
+                        {
+                            eliminar = (Articulo)dgvListaArticulos.CurrentRow.DataBoundItem;
+                            registroEliminar.eliminar(eliminar);
+                        }
+                        ListarArticulos();
+
+                    }
+                    catch (Exception)
+                    {
+
+                        MessageBox.Show("SIN REGISTROS");
+                    }
+                }
+               */
+
         }
 
         private void TxtBuqueda_TextChanged(object sender, EventArgs e)

@@ -173,7 +173,7 @@
             // btnFiltrar
             // 
             this.btnFiltrar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnFiltrar.Location = new System.Drawing.Point(553, 21);
+            this.btnFiltrar.Location = new System.Drawing.Point(217, 21);
             this.btnFiltrar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnFiltrar.Name = "btnFiltrar";
             this.btnFiltrar.Size = new System.Drawing.Size(147, 58);
@@ -190,7 +190,7 @@
             this.txbxFiltrar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txbxFiltrar.MaxLength = 50;
             this.txbxFiltrar.Name = "txbxFiltrar";
-            this.txbxFiltrar.Size = new System.Drawing.Size(505, 22);
+            this.txbxFiltrar.Size = new System.Drawing.Size(169, 22);
             this.txbxFiltrar.TabIndex = 8;
             this.txbxFiltrar.Text = "Ingrese búsqueda";
             this.txbxFiltrar.TextChanged += new System.EventHandler(this.txbxFiltrar_TextChanged);
@@ -200,7 +200,7 @@
             // btnLimpiar
             // 
             this.btnLimpiar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnLimpiar.Location = new System.Drawing.Point(705, 21);
+            this.btnLimpiar.Location = new System.Drawing.Point(369, 21);
             this.btnLimpiar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnLimpiar.Name = "btnLimpiar";
             this.btnLimpiar.Size = new System.Drawing.Size(147, 58);
