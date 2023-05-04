@@ -281,11 +281,28 @@ namespace Negocio
         }
 
         //TODO: ELIMINAR PRODUCTO
-
-        /*public bool eliminar(Articulo articulo)
+        public bool eliminar(int Id)
         {
+            AccesoDB datos = new AccesoDB(); 
+            try
+            {
+               
+                datos.setQuery("DELETE FROM ARTICULOS WHERE Id = @id");
+                datos.setParameter("@id", Id);
 
-        }*/
+                if (datos.executeNonQuery())
+                    return true;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.closeConnection();
+            }
+            return false;
+        }
 
     }
 
