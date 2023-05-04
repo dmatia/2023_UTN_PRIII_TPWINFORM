@@ -195,7 +195,7 @@ namespace Presentacion
 
         private void txbxFiltrar_MouseLeave(object sender, EventArgs e)
         {
-            if ((txbxFiltrar.Text == "") || (txbxFiltrar.Text == "Ingrese búsqueda"))
+            if ((txbxFiltrar.Text == "") || !(txbxFiltrar.Text != "Ingrese búsqueda"))
             {
                 txbxFiltrar.Text = "Ingrese búsqueda";
             }
