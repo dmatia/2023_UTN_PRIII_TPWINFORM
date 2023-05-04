@@ -52,9 +52,12 @@ namespace Negocio
                     {
                         aux.Categoria.Id = 0;
                     }
-                    //Cargar Imágenes
 
-                    lista.Add(aux);// Agrega cada variable a la lista
+					//Cargar Imágenes
+					ImagenNegocio imagenNegocio = new ImagenNegocio();
+					aux.Imagenes = imagenNegocio.listar(aux.Id.ToString());
+
+					lista.Add(aux);// Agrega cada variable a la lista
                 }
 
                 return lista;// devuelve la lista
@@ -305,7 +308,10 @@ namespace Negocio
 
         //TODO: ELIMINAR PRODUCTO
 
+        /*public bool eliminar(Articulo articulo)
+        {
 
+        }*/
 
     }
 

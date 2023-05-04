@@ -14,43 +14,51 @@ namespace Presentacion
 {
     public partial class Categorias : Form
     {
+        private List<Categoria> listaCategorias;
         public Categorias()
         {
             InitializeComponent();
         }
-
         private void Categorias_Load(object sender, EventArgs e)
         {
-          listarCategorias();
+            listarCategorias();
         }
+
 
         // Lista completa de categorias 
         private void listarCategorias()
         {
             CategoriaNegocio categoriaNegocio = new CategoriaNegocio();
+            listaCategorias = categoriaNegocio.listar();
             dgvCategorias.DataSource = categoriaNegocio.listar();
             //Estilos del data grid view
             dgvCategorias.EnableHeadersVisualStyles = false;
             dgvCategorias.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
         }
-
- 
-
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
             txbxFiltrar.Text = "Ingrese búsqueda";
             listarCategorias();
         }
 
+
         // MODIFICAR SELECCIONADO DEL GRID
         private void btnModificar_Click(object sender, EventArgs e)
         {
-            ModificarCategoria modificarCategoria = new ModificarCategoria();
-            modificarCategoria.setIdCategoria ((int)dgvCategorias.CurrentRow.Cells[0].Value);
-            modificarCategoria.setDescripcionCategoria((string)dgvCategorias.CurrentRow.Cells[1].Value);
-            modificarCategoria.Show();
-            listarCategorias();
+            
+            if (dgvCategorias == null || dgvCategorias.Rows.Count == 0)
+            {
+                MessageBox.Show("SIN REGISTROS");
+            }
+            else
+            {
+                ModificarCategoria modificarCategoria = new ModificarCategoria();
+                modificarCategoria.setIdCategoria((int)dgvCategorias.CurrentRow.Cells[0].Value);
+                modificarCategoria.setDescripcionCategoria((string)dgvCategorias.CurrentRow.Cells[1].Value);
+                modificarCategoria.Show();
+                listarCategorias();
+            }
         }
 
 
@@ -58,16 +66,40 @@ namespace Presentacion
 
         private void btnEliminar_Click(object sender, EventArgs e)
         {
+
+            Categoria eliminar = new Categoria();
+
+
             MessageBoxDefaultButton DefaultButton = MessageBoxDefaultButton.Button1;
-            if (MessageBox.Show("¿SEGURO QUE DESEA ELIMINAR EL REGISTRO?", "¡ATENCIÓN!", MessageBoxButtons.YesNo, MessageBoxIcon.Question, DefaultButton) == DialogResult.Yes)
-            {
-                CategoriaNegocio RegistroEliminar = new CategoriaNegocio();
-                RegistroEliminar.eliminar(dgvCategorias.CurrentRow.Cells[0].Value.ToString());
-                listarCategorias();
+             {
+                CategoriaNegocio registroEliminar = new CategoriaNegocio();
+           
+                if (dgvCategorias == null || dgvCategorias.Rows.Count == 0)
+                    {
+                    MessageBox.Show("SIN REGISTROS");
+                    }
+                else
+                {
+                    try
+                    {
+                        if (MessageBox.Show("¿SEGURO QUE DESEA ELIMINAR EL REGISTRO?", "¡ATENCIÓN!", MessageBoxButtons.YesNo, MessageBoxIcon.Question, DefaultButton) == DialogResult.Yes)
+                        registroEliminar.eliminar(eliminar);
+                        listarCategorias();
+
+                    }
+                    catch (Exception)
+                    {
+
+                        MessageBox.Show("SIN REGISTROS");
+                    }
+                }
+            
+
+                
+               
             }
+            
         }
-
-
 
 
         // AGREGAR NUEVA CATEGORIA
@@ -89,13 +121,12 @@ namespace Presentacion
         }
         private void txtbxNuevaCategoria_MouseLeave(object sender, EventArgs e)
         {
-            if(txtbxNuevaCategoria.Text == "")
+            if (txtbxNuevaCategoria.Text == "")
             {
-               agregarTextoDefault();
+                agregarTextoDefault();
             }
         }
-
-            // verificar textxbox, guardar categoria
+        // verificar textxbox, guardar categoria
         private void btnGuardar_Click(object sender, EventArgs e)
         {
             if (!(txtbxNuevaCategoria.Text == "" || txtbxNuevaCategoria.Text == "Ingrese su nueva categoria"))
@@ -114,7 +145,7 @@ namespace Presentacion
             else
                 MessageBox.Show("Ingrese un valor");
         }
-            // cancelar nueva categoria, resetear textbox
+        // cancelar nueva categoria, resetear textbox
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             agregarTextoDefault();
@@ -127,5 +158,47 @@ namespace Presentacion
             Close();
         }
 
+
+        // FILTRO
+        private void btnFiltrar_Click(object sender, EventArgs e)
+        {
+            filtrar();
+        }
+
+        private void filtrar()
+        {
+            List<Categoria> listaFiltrada;
+            string filtro = txbxFiltrar.Text;
+            if (!(filtro == "") && !(filtro == "Ingrese búsqueda"))
+            {
+                listaFiltrada = listaCategorias.FindAll(categoriaBuscada => categoriaBuscada.Descripcion.ToLower().Contains(filtro.ToLower())
+                                                                         || categoriaBuscada.Id.ToString().ToLower() == filtro.ToLower());
+                dgvCategorias.DataSource = null;
+                dgvCategorias.DataSource = listaFiltrada;
+            }
+        }
+
+        private void txbxFiltrar_TextChanged(object sender, EventArgs e)
+        {
+            filtrar();
+        }
+
+        private void txbxFiltrar_DoubleClick(object sender, EventArgs e)
+        {
+            if (!(txbxFiltrar.Text == "") || !(txbxFiltrar.Text == "Ingrese búsqueda"))
+            {
+                txbxFiltrar.Text = "";
+                listarCategorias();
+            }
+        }
+
+        private void txbxFiltrar_MouseLeave(object sender, EventArgs e)
+        {
+            if ((txbxFiltrar.Text == "") || (txbxFiltrar.Text == "Ingrese búsqueda"))
+            {
+                txbxFiltrar.Text = "Ingrese búsqueda";
+            }
+            listarCategorias();
+        }
     }
 }

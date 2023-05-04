@@ -13,18 +13,20 @@ using Negocio;
 
 namespace Presentacion
 {
-	//TODO: Carrusel de imagenes
 	//TODO: Validaciones
 	//TODO: Guardar imagen nueva por Archivo y url. Validar cual es cual.
 	//TODO: Al guardar imagen, copiar en una nueva carpeta para guardar ruta en base de datos
-	//TODO: Si no hay imagenes, sacar boton de eliminar actual y los del carrusel
 	//TODO: Estilos de la ventana
 	//TODO: Eliminar Articulo
 
 	public partial class AgregarArticulos : Form
 	{
 		private Articulo articulo = null;
+
+		//Control de Imagenes
+		private OpenFileDialog file = null;
 		private int imagenActual;
+		private int imagenActualCarrusel = 0;
 		private string rutaImagen = Path.GetDirectoryName(Directory.GetCurrentDirectory().Replace(@"\bin", "")) ;
 
 		//Banderas de vistas
@@ -69,6 +71,9 @@ namespace Presentacion
 		{
 			//Carga los combo box de categorías y marcas
 			CargarComboBox();
+
+			//Control de guardado de imagen
+			ControlGuardarImagen();
 		}
 
 		private void ModoModificar(bool esModificar)
@@ -110,12 +115,15 @@ namespace Presentacion
 
 			//Si contiene imagenes, cargarlas
 			CargarImagenes();
+
+			//Seteamos controles de las imagenes
+			ImagenControl();
 		}
 
 		//Metodo para cargar las imagenes
 		private void CargarImagenes()
 		{
-			if(articulo.Imagenes.Count > 0)
+			if(articulo.Imagenes?.Count > 0)
 			{
 				CargarPictureBox(pbImagenArticulo, articulo.Imagenes[0].UrlImagen);
 				
@@ -141,6 +149,32 @@ namespace Presentacion
 				//Si hay un error carga una imagen placeholder
 				pb.Load(rutaImagen + "/img/placeholder.png");
 			}
+		}
+
+		private void ImagenControl()
+		{
+			//Si hay imagenes, habilita los botones de carrusel
+			if (articulo.Imagenes?.Count > 0)
+			{
+				btnImagenBorrarActual.Visible = true;
+
+				//Si hay mas de una imagen, habilita los botones de carrusel
+				if (articulo.Imagenes.Count > 1)
+				{
+					btnAnteriorImagen.Visible = true;
+					btnSiguienteImagen.Visible = true;
+
+					return;
+				}
+			}
+			else
+			{
+				//Si no hay imagenes, deshabilita los botones de carrusel
+				btnImagenBorrarActual.Visible = false;
+			}
+
+			btnAnteriorImagen.Visible = false;
+			btnSiguienteImagen.Visible = false;
 		}
 
 		private void CargarComboBox()
@@ -326,9 +360,145 @@ namespace Presentacion
 					//Cargamos imagenes
 					CargarImagenes();
 
+					//Seteamos controles de las imagenes
+					ImagenControl();
+
 					//Ponemos los cambios en true para que la ventana de listado se actualice
 					this.hayCambios = true;
 				}
+		}
+
+		private void btnAnteriorImagen_Click(object sender, EventArgs e)
+		{
+			if(imagenActualCarrusel > 0)
+			{
+				imagenActualCarrusel--;
+				imagenActual = articulo.Imagenes[imagenActualCarrusel].Id;
+				CargarPictureBox(pbImagenArticulo, articulo.Imagenes[imagenActualCarrusel].UrlImagen);
+			}
+		}
+
+		private void btnSiguienteImagen_Click(object sender, EventArgs e)
+		{
+			if (imagenActualCarrusel < articulo.Imagenes.Count - 1)
+			{
+				imagenActualCarrusel++;
+				imagenActual = articulo.Imagenes[imagenActualCarrusel].Id;
+				CargarPictureBox(pbImagenArticulo, articulo.Imagenes[imagenActualCarrusel].UrlImagen);
+			}
+		}
+
+		private void rbUrl_CheckedChanged(object sender, EventArgs e)
+		{
+			ControlGuardarImagen();
+		}
+
+		private void rbArchivo_CheckedChanged(object sender, EventArgs e)
+		{
+			ControlGuardarImagen();
+		}
+
+		private void ControlGuardarImagen()
+		{
+			int y = 359;
+			
+			if (rbUrl.Checked || rbArchivo.Checked)
+			{
+				y = 395;
+
+				txtImagenUrl.Visible = true;
+				btnGuardarImagen.Visible = true;
+
+				if(rbArchivo.Checked)
+				{
+					txtImagenUrl.Enabled = false;
+					btnGuardarImagen.Text = "Cargar";
+
+				}
+
+				if (rbUrl.Checked)
+				{
+					txtImagenUrl.Enabled = true;
+					btnGuardarImagen.Text = "Guardar";
+				}
+
+			}
+			else
+			{
+				txtImagenUrl.Visible = false;
+				btnGuardarImagen.Visible = false;
+			}
+
+			btnCancelar.Location = new Point(btnCancelar.Location.X, y);
+			btnEliminar.Location = new Point(btnEliminar.Location.X, y);
+			btnModificar.Location = new Point(btnModificar.Location.X, y);
+		}
+
+		private void btnGuardarImagen_Click(object sender, EventArgs e)
+		{
+			//Guardar imagen Desde archivo o link
+			if (btnGuardarImagen.Text == "Cargar")
+			{
+				file = new OpenFileDialog();
+				file.Filter = "All|*|Bitmap Image (.bmp)|*.bmp|Gif Image (.gif)|*.gif|JPEG Image (.jpeg)|*.jpeg|Png Image (.png)|*.png|Tiff Image (.tiff)|*.tiff|Wmf Image (.wmf)|*.wmf";
+
+				if (file.ShowDialog() == DialogResult.OK)
+				{
+					txtImagenUrl.Text = file.FileName;
+					try
+					{
+						CargarPictureBox(pbImagenArticulo, file.FileName);
+						btnGuardarImagen.Text = "Guardar";
+					}
+					catch (Exception)
+					{
+						MessageBox.Show("La iamgen no pudo ser cargada");
+					}
+				}
+			}
+			else // Guardar imagen
+			{
+				Imagen aux = new Imagen();
+				aux.IdArticulo = articulo.Id;
+				
+				
+				if (txtImagenUrl.Text.Contains("http")) //LINK
+				{
+					aux.UrlImagen = txtImagenUrl.Text;
+				}
+				else // ARCHIVO
+				{
+					aux.UrlImagen = file.FileName;
+				}
+
+				ImagenNegocio imagenNegocio = new ImagenNegocio();
+				
+				if (imagenNegocio.agregar(aux))
+				{
+					//Cargamos imagenes
+					articulo.Imagenes.Add(aux);
+					MessageBox.Show("La imagen se guardó exitosamente!");
+
+				}
+				else
+				{
+					MessageBox.Show("La imagen no pudo ser cargada");
+				}
+
+				//Regresamos checked a false y vaciamos textbox
+				rbArchivo.Checked = false;
+				rbUrl.Checked = false;
+				txtImagenUrl.Text = "";
+
+				//Reseteamos controles de la imagen
+				ControlGuardarImagen();
+
+				//Si contiene imagenes, cargarlas
+				CargarImagenes();
+
+				//Seteamos controles de las imagenes
+				ImagenControl();
+			}
 		}
 	}
 }

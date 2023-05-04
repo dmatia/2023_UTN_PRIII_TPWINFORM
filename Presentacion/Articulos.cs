@@ -135,12 +135,13 @@ namespace Presentacion
         {
             try
             {
-          
-                List<Articulo> listaFiltrada = new List<Articulo>();
-                ArticuloNegocio articulosNegocio = new ArticuloNegocio();
-                listaFiltrada = articulosNegocio.Filtrar(TxtBuqueda.Text, CbxFiltroprimario.Text, CbxCategoria.Text, CbxMarca.Text);
+               
+               List<Articulo> listaFiltrada = new List<Articulo>();
+               ArticuloNegocio articulosNegocio = new ArticuloNegocio();
+               listaFiltrada = articulosNegocio.Filtrar(TxtBuqueda.Text, CbxFiltroprimario.Text, CbxCategoria.Text, CbxMarca.Text);
                dgvListaArticulos.DataSource = listaFiltrada;
-      
+                
+                
             }
             catch (Exception)
             {
