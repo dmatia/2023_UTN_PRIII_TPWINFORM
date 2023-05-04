@@ -82,14 +82,79 @@ namespace Negocio
             /// Seteo consulta de todos los elementos de la tabla integrada
             try// manejo de excepciones al intentar acceder a DB
             {
-              
+
+                if ((Busqueda == "Ingrese busqueda..." || Busqueda == string.Empty) && Filtroprimario == "Filtros disponibles")
+                {
+                    if (Categoria == "Categorias" && Marca == "Marcas")
+                    {
+                        return listar();
+                    }
+                    else if(Categoria != "Categorias" && Marca == "Marcas")
+                    {
+                        Restriccion = "where C.Descripcion like '" + Categoria + "'";
+                     }
+                    
+                    else if(Categoria == "Categorias" && Marca != "Marcas")
+                    {
+                        Restriccion = "where M.Descripcion like '" + Marca + "'";
+                    }
+                    else
+                    {
+                        Restriccion = "where M.Descripcion like '"+Marca+"' and C.Descripcion like '" + Categoria + "'";
+
+                    }
+                    
+                }
+
+
                 if (Filtroprimario == "Nombre" || Filtroprimario == "Codigo" || Filtroprimario == "Descripcion")
-                {
-                    if (Filtroprimario == "Descripcion") // SI ES DESCRIPCION HAY QUE CAMBIAR LA QUERY
                     {
-                        Restriccion = "where A.Descripcion like '%" + Busqueda + "%'";
+                        if (Filtroprimario == "Descripcion") // SI ES DESCRIPCION HAY QUE CAMBIAR LA QUERY
+                        {
+                            Restriccion = "where A.Descripcion like '%" + Busqueda + "%'";
+                            // SI CATEGORIAS O MARCAS CAMBIO EL TEXTO AGREGA RESTRICCION        
+                            if (Categoria != "Categorias")
+                            {
 
-                        // SI CATEGORIAS O MARCAS CAMBIO EL TEXTO AGREGA RESTRICCION        
+                                Restriccion += " and C.Descripcion like '" + Categoria + "'";
+
+                            }
+                            if (Marca != "Marcas")
+                            {
+
+                                Restriccion += " and M.Descripcion like '" + Marca + "'";
+
+                            }
+
+                        }
+                        else // SI NO ES DESCRIPCION SE USA EL NOMBRE DEL FILTRO EN LA QUERY
+                        {
+
+                            Restriccion = "where " + Filtroprimario + " like '%" + Busqueda + "%'";
+
+                            // SI CATEGORIAS O MARCAS CAMBIO EL TEXTO AGREGA RESTRICCION
+                            if (Categoria != "Categorias")
+                            {
+
+                                Restriccion += " and C.Descripcion like '" + Categoria + "'";
+
+                            }
+                            if (Marca != "Marcas")
+                            {
+
+                                Restriccion += " and M.Descripcion like '" + Marca + "'";
+
+                            }
+
+                        }
+
+
+                    }
+                    else if (Filtroprimario == "Precio mayor a")
+                    {
+
+                        Restriccion += "where Precio > " + Busqueda;
+
                         if (Categoria != "Categorias")
                         {
 
@@ -102,14 +167,12 @@ namespace Negocio
                             Restriccion += " and M.Descripcion like '" + Marca + "'";
 
                         }
-                       
+
                     }
-                    else // SI NO ES DESCRIPCION SE USA EL NOMBRE DEL FILTRO EN LA QUERY
+                    else if (Filtroprimario == "Precio menor a")
                     {
 
-                        Restriccion = "where " + Filtroprimario + " like '%" + Busqueda + "%'";
-                        
-                        // SI CATEGORIAS O MARCAS CAMBIO EL TEXTO AGREGA RESTRICCION
+                        Restriccion += "where Precio < " + Busqueda;
                         if (Categoria != "Categorias")
                         {
 
@@ -122,85 +185,48 @@ namespace Negocio
                             Restriccion += " and M.Descripcion like '" + Marca + "'";
 
                         }
-                        
                     }
 
 
-                }
-                else if(Filtroprimario=="Precio mayor a")
-                {
-
-                    Restriccion += "where Precio > " + Busqueda;
-                   
-                    if (Categoria != "Categorias")
+                    datos.setQuery(select + Restriccion);
+                    datos.executeReader();
+                    while ((datos.Reader.Read())) // Devuelve valor booleano y va cambiando el cursor
                     {
+                        Articulo aux = new Articulo(); // Crea una instancia de variable Articulo
+                        aux.Id = (int)datos.Reader["Id"]; // Carga la Variable Articulo con los datos de la base de datos
+                        aux.Codigo = (string)datos.Reader["Codigo"];                 //aux.= lector.GetInt32();
+                        aux.Nombre = (string)datos.Reader["Nombre"];
+                        aux.Descripcion = (string)datos.Reader["Descripcion"]; // validaciones sobre descripcion y otros
+                        aux.Precio = (double)(decimal)datos.Reader["Precio"]; /// Ver tema del float y el casteo de money
+                        aux.Marca = new Marca();
+                        aux.Marca.Id = (int)datos.Reader["MarcasId"];
+                        aux.Marca.Descripcion = (string)datos.Reader["MarcasDescripcion"];
+                        /// POR QUE EL OVERRIDE DE TOSTRING PRODUCE ESTO?
+                        aux.Categoria = new Categoria();
+                        if (!(datos.Reader["CategoriasDescripcion"] is DBNull))
+                        {
+                            aux.Categoria.Descripcion = (string)datos.Reader["CategoriasDescripcion"];
+                        }
+                        else
+                        {
+                            aux.Categoria.Descripcion = string.Empty;
+                        }
+                        if (!(datos.Reader["CategoriasId"] is DBNull))
+                        {
+                            aux.Categoria.Id = (int)datos.Reader["Categoriasid"];
+                        }
+                        else
+                        {
+                            aux.Categoria.Id = 0;
+                        }
+                        //Cargar Imágenes
 
-                        Restriccion += " and C.Descripcion like '" + Categoria + "'";
-
+                        lista.Add(aux);// Agrega cada variable a la lista
                     }
-                    if (Marca != "Marcas")
-                    {
 
-                        Restriccion += " and M.Descripcion like '" + Marca + "'";
+                    return lista;// devuelve la lista
 
-                    }
-
-                }
-                else {
-
-                    Restriccion += "where Precio < " + Busqueda;
-                    if (Categoria != "Categorias")
-                    {
-
-                        Restriccion += " and C.Descripcion like '" + Categoria + "'";
-
-                    }
-                    if (Marca != "Marcas")
-                    {
-
-                        Restriccion += " and M.Descripcion like '" + Marca + "'";
-
-                    }
-                }
                 
-
-                datos.setQuery(select+Restriccion);
-                datos.executeReader();
-                while ((datos.Reader.Read())) // Devuelve valor booleano y va cambiando el cursor
-                {
-                    Articulo aux = new Articulo(); // Crea una instancia de variable Articulo
-                    aux.Id = (int)datos.Reader["Id"]; // Carga la Variable Articulo con los datos de la base de datos
-                    aux.Codigo = (string)datos.Reader["Codigo"];                 //aux.= lector.GetInt32();
-                    aux.Nombre = (string)datos.Reader["Nombre"];
-                    aux.Descripcion = (string)datos.Reader["Descripcion"]; // validaciones sobre descripcion y otros
-                    aux.Precio = (double)(decimal)datos.Reader["Precio"]; /// Ver tema del float y el casteo de money
-                    aux.Marca = new Marca();
-                    aux.Marca.Id = (int)datos.Reader["MarcasId"];
-                    aux.Marca.Descripcion = (string)datos.Reader["MarcasDescripcion"];
-                    /// POR QUE EL OVERRIDE DE TOSTRING PRODUCE ESTO?
-                    aux.Categoria = new Categoria();
-                    if (!(datos.Reader["CategoriasDescripcion"] is DBNull))
-                    {
-                        aux.Categoria.Descripcion = (string)datos.Reader["CategoriasDescripcion"];
-                    }
-                    else
-                    {
-                        aux.Categoria.Descripcion = string.Empty;
-                    }
-                    if (!(datos.Reader["CategoriasId"] is DBNull))
-                    {
-                        aux.Categoria.Id = (int)datos.Reader["Categoriasid"];
-                    }
-                    else
-                    {
-                        aux.Categoria.Id = 0;
-                    }
-                    //Cargar Imágenes
-
-                    lista.Add(aux);// Agrega cada variable a la lista
-                }
-
-                return lista;// devuelve la lista
             }
             catch (Exception ex)
             {

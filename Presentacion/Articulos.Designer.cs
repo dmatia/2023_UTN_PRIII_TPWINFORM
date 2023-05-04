@@ -88,6 +88,7 @@
             this.TxtBuqueda.TabIndex = 11;
             this.TxtBuqueda.Text = "Ingrese busqueda...";
             this.TxtBuqueda.Click += new System.EventHandler(this.TxtBuqueda_Click);
+            this.TxtBuqueda.TextChanged += new System.EventHandler(this.TxtBuqueda_TextChanged);
             // 
             // CbxFiltroprimario
             // 

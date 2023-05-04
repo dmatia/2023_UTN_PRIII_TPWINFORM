@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -134,16 +135,16 @@ namespace Presentacion
         {
             try
             {
-               
+          
                 List<Articulo> listaFiltrada = new List<Articulo>();
                 ArticuloNegocio articulosNegocio = new ArticuloNegocio();
-               listaFiltrada = articulosNegocio.Filtrar(TxtBuqueda.Text, CbxFiltroprimario.Text, CbxCategoria.Text, CbxMarca.Text);
-                dgvListaArticulos.DataSource = listaFiltrada;
-                
-                
+                listaFiltrada = articulosNegocio.Filtrar(TxtBuqueda.Text, CbxFiltroprimario.Text, CbxCategoria.Text, CbxMarca.Text);
+               dgvListaArticulos.DataSource = listaFiltrada;
+      
             }
             catch (Exception)
             {
+
                 MessageBox.Show("Error al cargar listado de articulos");
             }
         }
@@ -165,6 +166,11 @@ namespace Presentacion
         private void CbxCategoria_Click(object sender, EventArgs e)
         {
            
+        }
+
+        private void TxtBuqueda_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
