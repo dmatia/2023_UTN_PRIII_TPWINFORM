@@ -74,6 +74,9 @@ namespace Presentacion
 
 			//Control de guardado de imagen
 			ControlGuardarImagen();
+
+			//Cargar estilos de la ventana
+			CargarEstilos();
 		}
 
 		private void ModoModificar(bool esModificar)
@@ -129,6 +132,9 @@ namespace Presentacion
 				
 				//Guardamos id de la imagen actual por si necesita ser eliminada
 				imagenActual = articulo.Imagenes[0].Id;
+
+				//Guardamos el indice de la imagen para poder utilizarla en el carrusel
+				imagenActualCarrusel = 0;
 			}
 			else
 			{
@@ -151,6 +157,12 @@ namespace Presentacion
 			}
 		}
 
+		private void CargarEstilos()
+		{
+			CargarPictureBox(pbFlechaIzquierda, rutaImagen + "/img/flecha_izquierda.png");
+			CargarPictureBox(pbFlechaDerecha, rutaImagen + "/img/flecha_derecha.png");
+		}
+
 		private void ImagenControl()
 		{
 			//Si hay imagenes, habilita los botones de carrusel
@@ -161,8 +173,8 @@ namespace Presentacion
 				//Si hay mas de una imagen, habilita los botones de carrusel
 				if (articulo.Imagenes.Count > 1)
 				{
-					btnAnteriorImagen.Visible = true;
-					btnSiguienteImagen.Visible = true;
+					pbFlechaIzquierda.Visible = true;
+					pbFlechaDerecha.Visible = true;
 
 					return;
 				}
@@ -173,8 +185,8 @@ namespace Presentacion
 				btnImagenBorrarActual.Visible = false;
 			}
 
-			btnAnteriorImagen.Visible = false;
-			btnSiguienteImagen.Visible = false;
+			pbFlechaIzquierda.Visible = false;
+			pbFlechaDerecha.Visible = false;
 		}
 
 		private void CargarComboBox()
@@ -249,11 +261,16 @@ namespace Presentacion
 					{
 						MessageBox.Show("Se Guardó correctamente");
 
+						List<Articulo> listaAux = articuloNegocio.listar();
+						articulo.Id = listaAux.FindAll(x => x.Codigo == articulo.Codigo)[0].Id;
+
 						// Validar si guardó y pasar a modo vista
 						this.hayCambios = true;
 						this.esAgregar = false;
-						//this.esModificar = false;
-						//ModoModificar(this.esAgregar);
+						this.esModificar = false;
+						ModoModificar(this.esAgregar);
+
+						return;
 					}
 				}
 			}
@@ -279,8 +296,6 @@ namespace Presentacion
 							// Validar si guardó y pasar a modo vista
 							this.hayCambios = true;
 							this.esAgregar = false;
-							//this.esModificar = false;
-							//ModoModificar(this.esAgregar);
 						}
 						else
 						{
@@ -399,13 +414,9 @@ namespace Presentacion
 		}
 
 		private void ControlGuardarImagen()
-		{
-			int y = 359;
-			
+		{	
 			if (rbUrl.Checked || rbArchivo.Checked)
 			{
-				y = 395;
-
 				txtImagenUrl.Visible = true;
 				btnGuardarImagen.Visible = true;
 
@@ -421,17 +432,12 @@ namespace Presentacion
 					txtImagenUrl.Enabled = true;
 					btnGuardarImagen.Text = "Guardar";
 				}
-
 			}
 			else
 			{
 				txtImagenUrl.Visible = false;
 				btnGuardarImagen.Visible = false;
 			}
-
-			btnCancelar.Location = new Point(btnCancelar.Location.X, y);
-			btnEliminar.Location = new Point(btnEliminar.Location.X, y);
-			btnModificar.Location = new Point(btnModificar.Location.X, y);
 		}
 
 		private void btnGuardarImagen_Click(object sender, EventArgs e)
@@ -475,8 +481,18 @@ namespace Presentacion
 				
 				if (imagenNegocio.agregar(aux))
 				{
-					//Cargamos imagenes
-					articulo.Imagenes.Add(aux);
+					if(articulo.Imagenes == null)
+					{
+						//Buscamos la imagen y se la agregamos al arituclo
+						List<Imagen> auxImagen = imagenNegocio.listar(articulo.Id.ToString());
+						articulo.Imagenes = auxImagen;
+					}
+					else
+					{
+						//Cargamos imagenes
+						articulo.Imagenes.Add(aux);
+					}
+
 					MessageBox.Show("La imagen se guardó exitosamente!");
 
 				}
@@ -498,6 +514,35 @@ namespace Presentacion
 
 				//Seteamos controles de las imagenes
 				ImagenControl();
+			}
+		}
+
+		private void btnEliminar_Click(object sender, EventArgs e)
+		{
+			ArticuloNegocio articuloNegocio = new ArticuloNegocio();
+
+			//Verificar si se quiere cancelar
+			DialogResult result = MessageBox.Show("¿Está seguro que quiere Eliminar el artículo?", "Cancelar", MessageBoxButtons.OKCancel);
+
+			if (result == DialogResult.OK)
+				if (articuloNegocio.eliminar(articulo.Id))
+				{
+					//Borrar sus imágenes
+
+
+					//Ponemos los cambios en true para que la ventana de listado se actualice
+					this.hayCambios = true;
+
+					//Cerramos ventana
+					this.Close();
+				}
+		}
+
+		private void txtImagenUrl_TextChanged(object sender, EventArgs e)
+		{
+			if(txtImagenUrl.Text.Contains("http"))
+			{
+				CargarPictureBox(pbImagenArticulo, txtImagenUrl.Text);
 			}
 		}
 	}
