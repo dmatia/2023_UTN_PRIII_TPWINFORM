@@ -103,14 +103,21 @@ namespace Presentacion
         // Evento para ver detalle o modificar un articulo nuevo
         private void btnDetalle_Click(object sender, EventArgs e)
         {
-            AgregarArticulos Screen = new AgregarArticulos((Articulo)dgvListaArticulos.CurrentRow.DataBoundItem);
-            Screen.ShowDialog();
+                if (!(verificarGrid()))
+                {
+                    MessageBox.Show("SIN REGISTROS");
+                }
+            
+                else {
+                        AgregarArticulos Screen = new AgregarArticulos((Articulo)dgvListaArticulos.CurrentRow.DataBoundItem);
+                          Screen.ShowDialog();
 
-            //Si se realizaron cambios, cargar la lista de vuelta
-            if (Screen.hayCambios)
-            {
-                cargarVentana();
-            }
+                        //Si se realizaron cambios, cargar la lista de vuelta
+                        if (Screen.hayCambios)
+                        {
+                            cargarVentana();
+                        }
+                }
         }
 
 
@@ -178,7 +185,7 @@ namespace Presentacion
 
             MessageBoxDefaultButton DefaultButton = MessageBoxDefaultButton.Button1;
 
-            if (dgvListaArticulos == null || dgvListaArticulos .Rows.Count == 0)
+            if (!(verificarGrid()))
             {
                 MessageBox.Show("SIN REGISTROS");
             }
@@ -202,42 +209,17 @@ namespace Presentacion
                 }
             }
 
-            /*  Articulo eliminar = new Articulo();
-
-
-            MessageBoxDefaultButton DefaultButton = MessageBoxDefaultButton.Button1;
-            {
-
-
-               ArticuloNegocio registroEliminar = new ArticuloNegocio();
-
-                if (dgvListaArticulos == null || dgvListaArticulos.Rows.Count == 0)
-                {
-                    MessageBox.Show("SIN REGISTROS");
-                }
-                else
-                {
-                    try
-                    {
-                        if (MessageBox.Show("¿SEGURO QUE DESEA ELIMINAR EL REGISTRO?", "¡ATENCIÓN!", MessageBoxButtons.YesNo, MessageBoxIcon.Question, DefaultButton) == DialogResult.Yes)
-                        {
-                            eliminar = (Articulo)dgvListaArticulos.CurrentRow.DataBoundItem;
-                            registroEliminar.eliminar(eliminar);
-                        }
-                        ListarArticulos();
-
-                    }
-                    catch (Exception)
-                    {
-
-                        MessageBox.Show("SIN REGISTROS");
-                    }
-                }
-               */
 
         }
 
-        private void TxtBuqueda_TextChanged(object sender, EventArgs e)
+        bool verificarGrid()
+        {
+            if (!(dgvListaArticulos == null) && !(dgvListaArticulos.Rows.Count == 0))
+                return true;
+            else return false;
+        }
+
+            private void CbxFiltroprimario_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }

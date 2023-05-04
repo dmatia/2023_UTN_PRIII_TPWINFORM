@@ -28,6 +28,20 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
+			this.btnModificar = new System.Windows.Forms.Button();
+			this.btnCancelar = new System.Windows.Forms.Button();
+			this.btnEliminar = new System.Windows.Forms.Button();
+			this.gbGuardarImagenes = new System.Windows.Forms.GroupBox();
+			this.rbArchivo = new System.Windows.Forms.RadioButton();
+			this.rbUrl = new System.Windows.Forms.RadioButton();
+			this.lbImagen = new System.Windows.Forms.Label();
+			this.txtImagenUrl = new System.Windows.Forms.TextBox();
+			this.btnGuardarImagen = new System.Windows.Forms.Button();
+			this.gbArticulo = new System.Windows.Forms.GroupBox();
+			this.pbFlechaDerecha = new System.Windows.Forms.PictureBox();
+			this.pbFlechaIzquierda = new System.Windows.Forms.PictureBox();
+			this.btnImagenBorrarActual = new System.Windows.Forms.Button();
+			this.pbImagenArticulo = new System.Windows.Forms.PictureBox();
 			this.cbCategoria = new System.Windows.Forms.ComboBox();
 			this.cbMarca = new System.Windows.Forms.ComboBox();
 			this.txtPrecio = new System.Windows.Forms.TextBox();
@@ -40,155 +54,20 @@
 			this.lbDescripcion = new System.Windows.Forms.Label();
 			this.lbArticulo = new System.Windows.Forms.Label();
 			this.lbCodigo = new System.Windows.Forms.Label();
-			this.pbImagenArticulo = new System.Windows.Forms.PictureBox();
-			this.btnModificar = new System.Windows.Forms.Button();
-			this.btnCancelar = new System.Windows.Forms.Button();
-			this.btnEliminar = new System.Windows.Forms.Button();
-			this.btnAnteriorImagen = new System.Windows.Forms.Button();
-			this.btnSiguienteImagen = new System.Windows.Forms.Button();
-			this.btnImagenBorrarActual = new System.Windows.Forms.Button();
-			this.gbGuardarImagenes = new System.Windows.Forms.GroupBox();
-			this.rbArchivo = new System.Windows.Forms.RadioButton();
-			this.rbUrl = new System.Windows.Forms.RadioButton();
-			this.lbImagen = new System.Windows.Forms.Label();
-			this.txtImagenUrl = new System.Windows.Forms.TextBox();
-			this.btnGuardarImagen = new System.Windows.Forms.Button();
-			((System.ComponentModel.ISupportInitialize)(this.pbImagenArticulo)).BeginInit();
+			this.gbImagen = new System.Windows.Forms.GroupBox();
 			this.gbGuardarImagenes.SuspendLayout();
+			this.gbArticulo.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.pbFlechaDerecha)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.pbFlechaIzquierda)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.pbImagenArticulo)).BeginInit();
+			this.gbImagen.SuspendLayout();
 			this.SuspendLayout();
-			// 
-			// cbCategoria
-			// 
-			this.cbCategoria.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-			this.cbCategoria.FormattingEnabled = true;
-			this.cbCategoria.Location = new System.Drawing.Point(160, 256);
-			this.cbCategoria.Name = "cbCategoria";
-			this.cbCategoria.Size = new System.Drawing.Size(205, 21);
-			this.cbCategoria.TabIndex = 16;
-			// 
-			// cbMarca
-			// 
-			this.cbMarca.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-			this.cbMarca.FormattingEnabled = true;
-			this.cbMarca.Location = new System.Drawing.Point(160, 226);
-			this.cbMarca.Name = "cbMarca";
-			this.cbMarca.Size = new System.Drawing.Size(205, 21);
-			this.cbMarca.TabIndex = 15;
-			// 
-			// txtPrecio
-			// 
-			this.txtPrecio.Location = new System.Drawing.Point(160, 197);
-			this.txtPrecio.Name = "txtPrecio";
-			this.txtPrecio.Size = new System.Drawing.Size(205, 20);
-			this.txtPrecio.TabIndex = 13;
-			// 
-			// txtDescripcion
-			// 
-			this.txtDescripcion.Location = new System.Drawing.Point(160, 168);
-			this.txtDescripcion.Name = "txtDescripcion";
-			this.txtDescripcion.Size = new System.Drawing.Size(205, 20);
-			this.txtDescripcion.TabIndex = 11;
-			// 
-			// txtArticulo
-			// 
-			this.txtArticulo.Location = new System.Drawing.Point(160, 139);
-			this.txtArticulo.Name = "txtArticulo";
-			this.txtArticulo.Size = new System.Drawing.Size(205, 20);
-			this.txtArticulo.TabIndex = 9;
-			// 
-			// txtCodigo
-			// 
-			this.txtCodigo.Location = new System.Drawing.Point(160, 109);
-			this.txtCodigo.Name = "txtCodigo";
-			this.txtCodigo.Size = new System.Drawing.Size(205, 20);
-			this.txtCodigo.TabIndex = 7;
-			// 
-			// lbCategoria
-			// 
-			this.lbCategoria.AutoSize = true;
-			this.lbCategoria.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.lbCategoria.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.lbCategoria.ForeColor = System.Drawing.Color.Black;
-			this.lbCategoria.Location = new System.Drawing.Point(83, 257);
-			this.lbCategoria.Name = "lbCategoria";
-			this.lbCategoria.Size = new System.Drawing.Size(62, 16);
-			this.lbCategoria.TabIndex = 18;
-			this.lbCategoria.Text = "Categoria";
-			// 
-			// lbMarca
-			// 
-			this.lbMarca.AutoSize = true;
-			this.lbMarca.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.lbMarca.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.lbMarca.ForeColor = System.Drawing.Color.Black;
-			this.lbMarca.Location = new System.Drawing.Point(106, 227);
-			this.lbMarca.Name = "lbMarca";
-			this.lbMarca.Size = new System.Drawing.Size(42, 16);
-			this.lbMarca.TabIndex = 17;
-			this.lbMarca.Text = "Marca";
-			// 
-			// lbPrecio
-			// 
-			this.lbPrecio.AutoSize = true;
-			this.lbPrecio.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.lbPrecio.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.lbPrecio.ForeColor = System.Drawing.Color.Black;
-			this.lbPrecio.Location = new System.Drawing.Point(106, 198);
-			this.lbPrecio.Name = "lbPrecio";
-			this.lbPrecio.Size = new System.Drawing.Size(42, 16);
-			this.lbPrecio.TabIndex = 14;
-			this.lbPrecio.Text = "Precio";
-			// 
-			// lbDescripcion
-			// 
-			this.lbDescripcion.AutoSize = true;
-			this.lbDescripcion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.lbDescripcion.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.lbDescripcion.ForeColor = System.Drawing.Color.Black;
-			this.lbDescripcion.Location = new System.Drawing.Point(72, 169);
-			this.lbDescripcion.Name = "lbDescripcion";
-			this.lbDescripcion.Size = new System.Drawing.Size(72, 16);
-			this.lbDescripcion.TabIndex = 12;
-			this.lbDescripcion.Text = "Descripción";
-			// 
-			// lbArticulo
-			// 
-			this.lbArticulo.AutoSize = true;
-			this.lbArticulo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.lbArticulo.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.lbArticulo.ForeColor = System.Drawing.Color.Black;
-			this.lbArticulo.Location = new System.Drawing.Point(95, 140);
-			this.lbArticulo.Name = "lbArticulo";
-			this.lbArticulo.Size = new System.Drawing.Size(50, 16);
-			this.lbArticulo.TabIndex = 10;
-			this.lbArticulo.Text = "Articulo";
-			// 
-			// lbCodigo
-			// 
-			this.lbCodigo.AutoSize = true;
-			this.lbCodigo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.lbCodigo.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.lbCodigo.ForeColor = System.Drawing.Color.Black;
-			this.lbCodigo.Location = new System.Drawing.Point(103, 110);
-			this.lbCodigo.Name = "lbCodigo";
-			this.lbCodigo.Size = new System.Drawing.Size(46, 16);
-			this.lbCodigo.TabIndex = 8;
-			this.lbCodigo.Text = "Código";
-			// 
-			// pbImagenArticulo
-			// 
-			this.pbImagenArticulo.Location = new System.Drawing.Point(411, 76);
-			this.pbImagenArticulo.Name = "pbImagenArticulo";
-			this.pbImagenArticulo.Size = new System.Drawing.Size(271, 244);
-			this.pbImagenArticulo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-			this.pbImagenArticulo.TabIndex = 19;
-			this.pbImagenArticulo.TabStop = false;
 			// 
 			// btnModificar
 			// 
-			this.btnModificar.Location = new System.Drawing.Point(144, 359);
+			this.btnModificar.Location = new System.Drawing.Point(133, 245);
 			this.btnModificar.Name = "btnModificar";
-			this.btnModificar.Size = new System.Drawing.Size(75, 23);
+			this.btnModificar.Size = new System.Drawing.Size(75, 43);
 			this.btnModificar.TabIndex = 20;
 			this.btnModificar.Text = "Modificar";
 			this.btnModificar.UseVisualStyleBackColor = true;
@@ -196,9 +75,9 @@
 			// 
 			// btnCancelar
 			// 
-			this.btnCancelar.Location = new System.Drawing.Point(225, 359);
+			this.btnCancelar.Location = new System.Drawing.Point(214, 245);
 			this.btnCancelar.Name = "btnCancelar";
-			this.btnCancelar.Size = new System.Drawing.Size(75, 23);
+			this.btnCancelar.Size = new System.Drawing.Size(75, 43);
 			this.btnCancelar.TabIndex = 20;
 			this.btnCancelar.Text = "Cancelar";
 			this.btnCancelar.UseVisualStyleBackColor = true;
@@ -206,48 +85,19 @@
 			// 
 			// btnEliminar
 			// 
-			this.btnEliminar.Location = new System.Drawing.Point(306, 359);
+			this.btnEliminar.Location = new System.Drawing.Point(295, 245);
 			this.btnEliminar.Name = "btnEliminar";
-			this.btnEliminar.Size = new System.Drawing.Size(75, 23);
+			this.btnEliminar.Size = new System.Drawing.Size(75, 43);
 			this.btnEliminar.TabIndex = 20;
 			this.btnEliminar.Text = "Eliminar";
 			this.btnEliminar.UseVisualStyleBackColor = true;
-			// 
-			// btnAnteriorImagen
-			// 
-			this.btnAnteriorImagen.Location = new System.Drawing.Point(424, 194);
-			this.btnAnteriorImagen.Name = "btnAnteriorImagen";
-			this.btnAnteriorImagen.Size = new System.Drawing.Size(75, 23);
-			this.btnAnteriorImagen.TabIndex = 21;
-			this.btnAnteriorImagen.Text = "Anterior";
-			this.btnAnteriorImagen.UseVisualStyleBackColor = true;
-			this.btnAnteriorImagen.Click += new System.EventHandler(this.btnAnteriorImagen_Click);
-			// 
-			// btnSiguienteImagen
-			// 
-			this.btnSiguienteImagen.Location = new System.Drawing.Point(593, 195);
-			this.btnSiguienteImagen.Name = "btnSiguienteImagen";
-			this.btnSiguienteImagen.Size = new System.Drawing.Size(75, 23);
-			this.btnSiguienteImagen.TabIndex = 21;
-			this.btnSiguienteImagen.Text = "Siguiente";
-			this.btnSiguienteImagen.UseVisualStyleBackColor = true;
-			this.btnSiguienteImagen.Click += new System.EventHandler(this.btnSiguienteImagen_Click);
-			// 
-			// btnImagenBorrarActual
-			// 
-			this.btnImagenBorrarActual.Location = new System.Drawing.Point(490, 326);
-			this.btnImagenBorrarActual.Name = "btnImagenBorrarActual";
-			this.btnImagenBorrarActual.Size = new System.Drawing.Size(118, 23);
-			this.btnImagenBorrarActual.TabIndex = 21;
-			this.btnImagenBorrarActual.Text = "Borrar Actual";
-			this.btnImagenBorrarActual.UseVisualStyleBackColor = true;
-			this.btnImagenBorrarActual.Click += new System.EventHandler(this.btnImagenBorrarActual_Click);
+			this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
 			// 
 			// gbGuardarImagenes
 			// 
 			this.gbGuardarImagenes.Controls.Add(this.rbArchivo);
 			this.gbGuardarImagenes.Controls.Add(this.rbUrl);
-			this.gbGuardarImagenes.Location = new System.Drawing.Point(160, 286);
+			this.gbGuardarImagenes.Location = new System.Drawing.Point(126, 19);
 			this.gbGuardarImagenes.Name = "gbGuardarImagenes";
 			this.gbGuardarImagenes.Size = new System.Drawing.Size(200, 67);
 			this.gbGuardarImagenes.TabIndex = 22;
@@ -284,71 +134,273 @@
 			this.lbImagen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.lbImagen.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.lbImagen.ForeColor = System.Drawing.Color.Black;
-			this.lbImagen.Location = new System.Drawing.Point(88, 316);
+			this.lbImagen.Location = new System.Drawing.Point(53, 48);
 			this.lbImagen.Name = "lbImagen";
-			this.lbImagen.Size = new System.Drawing.Size(57, 16);
+			this.lbImagen.Size = new System.Drawing.Size(50, 16);
 			this.lbImagen.TabIndex = 23;
-			this.lbImagen.Text = "Imaegen";
+			this.lbImagen.Text = "Imagen";
 			// 
 			// txtImagenUrl
 			// 
-			this.txtImagenUrl.Location = new System.Drawing.Point(160, 360);
+			this.txtImagenUrl.Location = new System.Drawing.Point(347, 48);
 			this.txtImagenUrl.Name = "txtImagenUrl";
-			this.txtImagenUrl.Size = new System.Drawing.Size(200, 20);
+			this.txtImagenUrl.Size = new System.Drawing.Size(254, 20);
 			this.txtImagenUrl.TabIndex = 24;
+			this.txtImagenUrl.TextChanged += new System.EventHandler(this.txtImagenUrl_TextChanged);
 			// 
 			// btnGuardarImagen
 			// 
-			this.btnGuardarImagen.Location = new System.Drawing.Point(366, 360);
+			this.btnGuardarImagen.Location = new System.Drawing.Point(621, 36);
 			this.btnGuardarImagen.Name = "btnGuardarImagen";
-			this.btnGuardarImagen.Size = new System.Drawing.Size(75, 23);
+			this.btnGuardarImagen.Size = new System.Drawing.Size(75, 43);
 			this.btnGuardarImagen.TabIndex = 21;
 			this.btnGuardarImagen.Text = "Guardar";
 			this.btnGuardarImagen.UseVisualStyleBackColor = true;
 			this.btnGuardarImagen.Click += new System.EventHandler(this.btnGuardarImagen_Click);
+			// 
+			// gbArticulo
+			// 
+			this.gbArticulo.Controls.Add(this.pbFlechaDerecha);
+			this.gbArticulo.Controls.Add(this.pbFlechaIzquierda);
+			this.gbArticulo.Controls.Add(this.btnImagenBorrarActual);
+			this.gbArticulo.Controls.Add(this.pbImagenArticulo);
+			this.gbArticulo.Controls.Add(this.cbCategoria);
+			this.gbArticulo.Controls.Add(this.btnEliminar);
+			this.gbArticulo.Controls.Add(this.cbMarca);
+			this.gbArticulo.Controls.Add(this.btnCancelar);
+			this.gbArticulo.Controls.Add(this.txtPrecio);
+			this.gbArticulo.Controls.Add(this.btnModificar);
+			this.gbArticulo.Controls.Add(this.txtDescripcion);
+			this.gbArticulo.Controls.Add(this.txtArticulo);
+			this.gbArticulo.Controls.Add(this.txtCodigo);
+			this.gbArticulo.Controls.Add(this.lbCategoria);
+			this.gbArticulo.Controls.Add(this.lbMarca);
+			this.gbArticulo.Controls.Add(this.lbPrecio);
+			this.gbArticulo.Controls.Add(this.lbDescripcion);
+			this.gbArticulo.Controls.Add(this.lbArticulo);
+			this.gbArticulo.Controls.Add(this.lbCodigo);
+			this.gbArticulo.Location = new System.Drawing.Point(37, 12);
+			this.gbArticulo.Name = "gbArticulo";
+			this.gbArticulo.Size = new System.Drawing.Size(735, 307);
+			this.gbArticulo.TabIndex = 25;
+			this.gbArticulo.TabStop = false;
+			this.gbArticulo.Text = "ARTICULO";
+			// 
+			// pbFlechaDerecha
+			// 
+			this.pbFlechaDerecha.BackColor = System.Drawing.Color.Transparent;
+			this.pbFlechaDerecha.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+			this.pbFlechaDerecha.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.pbFlechaDerecha.Location = new System.Drawing.Point(681, 123);
+			this.pbFlechaDerecha.Name = "pbFlechaDerecha";
+			this.pbFlechaDerecha.Size = new System.Drawing.Size(25, 25);
+			this.pbFlechaDerecha.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+			this.pbFlechaDerecha.TabIndex = 35;
+			this.pbFlechaDerecha.TabStop = false;
+			this.pbFlechaDerecha.Click += new System.EventHandler(this.btnSiguienteImagen_Click);
+			// 
+			// pbFlechaIzquierda
+			// 
+			this.pbFlechaIzquierda.BackColor = System.Drawing.Color.Transparent;
+			this.pbFlechaIzquierda.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+			this.pbFlechaIzquierda.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.pbFlechaIzquierda.Location = new System.Drawing.Point(419, 123);
+			this.pbFlechaIzquierda.Name = "pbFlechaIzquierda";
+			this.pbFlechaIzquierda.Size = new System.Drawing.Size(25, 25);
+			this.pbFlechaIzquierda.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+			this.pbFlechaIzquierda.TabIndex = 35;
+			this.pbFlechaIzquierda.TabStop = false;
+			this.pbFlechaIzquierda.Click += new System.EventHandler(this.btnAnteriorImagen_Click);
+			// 
+			// btnImagenBorrarActual
+			// 
+			this.btnImagenBorrarActual.Location = new System.Drawing.Point(508, 245);
+			this.btnImagenBorrarActual.Name = "btnImagenBorrarActual";
+			this.btnImagenBorrarActual.Size = new System.Drawing.Size(118, 43);
+			this.btnImagenBorrarActual.TabIndex = 32;
+			this.btnImagenBorrarActual.Text = "Borrar Actual";
+			this.btnImagenBorrarActual.UseVisualStyleBackColor = true;
+			this.btnImagenBorrarActual.Click += new System.EventHandler(this.btnImagenBorrarActual_Click);
+			// 
+			// pbImagenArticulo
+			// 
+			this.pbImagenArticulo.Location = new System.Drawing.Point(445, 28);
+			this.pbImagenArticulo.Name = "pbImagenArticulo";
+			this.pbImagenArticulo.Size = new System.Drawing.Size(235, 211);
+			this.pbImagenArticulo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+			this.pbImagenArticulo.TabIndex = 31;
+			this.pbImagenArticulo.TabStop = false;
+			// 
+			// cbCategoria
+			// 
+			this.cbCategoria.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.cbCategoria.FormattingEnabled = true;
+			this.cbCategoria.Location = new System.Drawing.Point(149, 187);
+			this.cbCategoria.Name = "cbCategoria";
+			this.cbCategoria.Size = new System.Drawing.Size(205, 21);
+			this.cbCategoria.TabIndex = 28;
+			// 
+			// cbMarca
+			// 
+			this.cbMarca.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.cbMarca.FormattingEnabled = true;
+			this.cbMarca.Location = new System.Drawing.Point(149, 157);
+			this.cbMarca.Name = "cbMarca";
+			this.cbMarca.Size = new System.Drawing.Size(205, 21);
+			this.cbMarca.TabIndex = 27;
+			// 
+			// txtPrecio
+			// 
+			this.txtPrecio.Location = new System.Drawing.Point(149, 128);
+			this.txtPrecio.Name = "txtPrecio";
+			this.txtPrecio.Size = new System.Drawing.Size(205, 20);
+			this.txtPrecio.TabIndex = 25;
+			// 
+			// txtDescripcion
+			// 
+			this.txtDescripcion.Location = new System.Drawing.Point(149, 99);
+			this.txtDescripcion.Name = "txtDescripcion";
+			this.txtDescripcion.Size = new System.Drawing.Size(205, 20);
+			this.txtDescripcion.TabIndex = 23;
+			// 
+			// txtArticulo
+			// 
+			this.txtArticulo.Location = new System.Drawing.Point(149, 70);
+			this.txtArticulo.Name = "txtArticulo";
+			this.txtArticulo.Size = new System.Drawing.Size(205, 20);
+			this.txtArticulo.TabIndex = 21;
+			// 
+			// txtCodigo
+			// 
+			this.txtCodigo.Location = new System.Drawing.Point(149, 40);
+			this.txtCodigo.Name = "txtCodigo";
+			this.txtCodigo.Size = new System.Drawing.Size(205, 20);
+			this.txtCodigo.TabIndex = 19;
+			// 
+			// lbCategoria
+			// 
+			this.lbCategoria.AutoSize = true;
+			this.lbCategoria.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.lbCategoria.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.lbCategoria.ForeColor = System.Drawing.Color.Black;
+			this.lbCategoria.Location = new System.Drawing.Point(41, 192);
+			this.lbCategoria.Name = "lbCategoria";
+			this.lbCategoria.Size = new System.Drawing.Size(62, 16);
+			this.lbCategoria.TabIndex = 30;
+			this.lbCategoria.Text = "Categoria";
+			// 
+			// lbMarca
+			// 
+			this.lbMarca.AutoSize = true;
+			this.lbMarca.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.lbMarca.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.lbMarca.ForeColor = System.Drawing.Color.Black;
+			this.lbMarca.Location = new System.Drawing.Point(61, 162);
+			this.lbMarca.Name = "lbMarca";
+			this.lbMarca.Size = new System.Drawing.Size(42, 16);
+			this.lbMarca.TabIndex = 29;
+			this.lbMarca.Text = "Marca";
+			// 
+			// lbPrecio
+			// 
+			this.lbPrecio.AutoSize = true;
+			this.lbPrecio.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.lbPrecio.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.lbPrecio.ForeColor = System.Drawing.Color.Black;
+			this.lbPrecio.Location = new System.Drawing.Point(61, 132);
+			this.lbPrecio.Name = "lbPrecio";
+			this.lbPrecio.Size = new System.Drawing.Size(42, 16);
+			this.lbPrecio.TabIndex = 26;
+			this.lbPrecio.Text = "Precio";
+			// 
+			// lbDescripcion
+			// 
+			this.lbDescripcion.AutoSize = true;
+			this.lbDescripcion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.lbDescripcion.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.lbDescripcion.ForeColor = System.Drawing.Color.Black;
+			this.lbDescripcion.Location = new System.Drawing.Point(31, 103);
+			this.lbDescripcion.Name = "lbDescripcion";
+			this.lbDescripcion.Size = new System.Drawing.Size(72, 16);
+			this.lbDescripcion.TabIndex = 24;
+			this.lbDescripcion.Text = "Descripción";
+			// 
+			// lbArticulo
+			// 
+			this.lbArticulo.AutoSize = true;
+			this.lbArticulo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.lbArticulo.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.lbArticulo.ForeColor = System.Drawing.Color.Black;
+			this.lbArticulo.Location = new System.Drawing.Point(53, 74);
+			this.lbArticulo.Name = "lbArticulo";
+			this.lbArticulo.Size = new System.Drawing.Size(50, 16);
+			this.lbArticulo.TabIndex = 22;
+			this.lbArticulo.Text = "Articulo";
+			// 
+			// lbCodigo
+			// 
+			this.lbCodigo.AutoSize = true;
+			this.lbCodigo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.lbCodigo.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.lbCodigo.ForeColor = System.Drawing.Color.Black;
+			this.lbCodigo.Location = new System.Drawing.Point(57, 44);
+			this.lbCodigo.Name = "lbCodigo";
+			this.lbCodigo.Size = new System.Drawing.Size(46, 16);
+			this.lbCodigo.TabIndex = 20;
+			this.lbCodigo.Text = "Código";
+			// 
+			// gbImagen
+			// 
+			this.gbImagen.Controls.Add(this.lbImagen);
+			this.gbImagen.Controls.Add(this.gbGuardarImagenes);
+			this.gbImagen.Controls.Add(this.txtImagenUrl);
+			this.gbImagen.Controls.Add(this.btnGuardarImagen);
+			this.gbImagen.Location = new System.Drawing.Point(37, 325);
+			this.gbImagen.Name = "gbImagen";
+			this.gbImagen.Size = new System.Drawing.Size(735, 103);
+			this.gbImagen.TabIndex = 26;
+			this.gbImagen.TabStop = false;
+			this.gbImagen.Text = "IMAGEN";
 			// 
 			// AgregarArticulos
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(800, 450);
-			this.Controls.Add(this.txtImagenUrl);
-			this.Controls.Add(this.lbImagen);
-			this.Controls.Add(this.gbGuardarImagenes);
-			this.Controls.Add(this.btnImagenBorrarActual);
-			this.Controls.Add(this.btnSiguienteImagen);
-			this.Controls.Add(this.btnGuardarImagen);
-			this.Controls.Add(this.btnAnteriorImagen);
-			this.Controls.Add(this.btnEliminar);
-			this.Controls.Add(this.btnCancelar);
-			this.Controls.Add(this.btnModificar);
-			this.Controls.Add(this.pbImagenArticulo);
-			this.Controls.Add(this.cbCategoria);
-			this.Controls.Add(this.cbMarca);
-			this.Controls.Add(this.txtPrecio);
-			this.Controls.Add(this.txtDescripcion);
-			this.Controls.Add(this.txtArticulo);
-			this.Controls.Add(this.txtCodigo);
-			this.Controls.Add(this.lbCategoria);
-			this.Controls.Add(this.lbMarca);
-			this.Controls.Add(this.lbPrecio);
-			this.Controls.Add(this.lbDescripcion);
-			this.Controls.Add(this.lbArticulo);
-			this.Controls.Add(this.lbCodigo);
+			this.Controls.Add(this.gbImagen);
+			this.Controls.Add(this.gbArticulo);
+			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+			this.MaximizeBox = false;
+			this.MinimizeBox = false;
 			this.Name = "AgregarArticulos";
+			this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "Articulos";
 			this.Load += new System.EventHandler(this.Articulos_Load);
-			((System.ComponentModel.ISupportInitialize)(this.pbImagenArticulo)).EndInit();
 			this.gbGuardarImagenes.ResumeLayout(false);
 			this.gbGuardarImagenes.PerformLayout();
+			this.gbArticulo.ResumeLayout(false);
+			this.gbArticulo.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.pbFlechaDerecha)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.pbFlechaIzquierda)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.pbImagenArticulo)).EndInit();
+			this.gbImagen.ResumeLayout(false);
+			this.gbImagen.PerformLayout();
 			this.ResumeLayout(false);
-			this.PerformLayout();
 
 		}
 
 		#endregion
-
+		private System.Windows.Forms.Button btnModificar;
+		private System.Windows.Forms.Button btnCancelar;
+		private System.Windows.Forms.Button btnEliminar;
+		private System.Windows.Forms.GroupBox gbGuardarImagenes;
+		private System.Windows.Forms.RadioButton rbArchivo;
+		private System.Windows.Forms.RadioButton rbUrl;
+		private System.Windows.Forms.Label lbImagen;
+		private System.Windows.Forms.TextBox txtImagenUrl;
+		private System.Windows.Forms.Button btnGuardarImagen;
+		private System.Windows.Forms.GroupBox gbArticulo;
 		private System.Windows.Forms.ComboBox cbCategoria;
 		private System.Windows.Forms.ComboBox cbMarca;
 		private System.Windows.Forms.TextBox txtPrecio;
@@ -361,18 +413,10 @@
 		private System.Windows.Forms.Label lbDescripcion;
 		private System.Windows.Forms.Label lbArticulo;
 		private System.Windows.Forms.Label lbCodigo;
-		private System.Windows.Forms.PictureBox pbImagenArticulo;
-		private System.Windows.Forms.Button btnModificar;
-		private System.Windows.Forms.Button btnCancelar;
-		private System.Windows.Forms.Button btnEliminar;
-		private System.Windows.Forms.Button btnAnteriorImagen;
-		private System.Windows.Forms.Button btnSiguienteImagen;
 		private System.Windows.Forms.Button btnImagenBorrarActual;
-		private System.Windows.Forms.GroupBox gbGuardarImagenes;
-		private System.Windows.Forms.RadioButton rbArchivo;
-		private System.Windows.Forms.RadioButton rbUrl;
-		private System.Windows.Forms.Label lbImagen;
-		private System.Windows.Forms.TextBox txtImagenUrl;
-		private System.Windows.Forms.Button btnGuardarImagen;
+		private System.Windows.Forms.PictureBox pbImagenArticulo;
+		private System.Windows.Forms.GroupBox gbImagen;
+		private System.Windows.Forms.PictureBox pbFlechaDerecha;
+		private System.Windows.Forms.PictureBox pbFlechaIzquierda;
 	}
 }
