@@ -14,10 +14,7 @@ using Negocio;
 namespace Presentacion
 {
 	//TODO: Validaciones
-	//TODO: Guardar imagen nueva por Archivo y url. Validar cual es cual.
 	//TODO: Al guardar imagen, copiar en una nueva carpeta para guardar ruta en base de datos
-	//TODO: Estilos de la ventana
-	//TODO: Eliminar Articulo
 
 	public partial class AgregarArticulos : Form
 	{
@@ -209,7 +206,7 @@ namespace Presentacion
 			try
 			{
 				MarcaNegocio marcaNegocio = new MarcaNegocio();
-				List<Marca> listaMarca = marcaNegocio.listar();
+				List<IAtributos> listaMarca = marcaNegocio.listar();
 
 				combo.DataSource = listaMarca;
 				combo.SelectedIndex = 0;
@@ -226,7 +223,7 @@ namespace Presentacion
 			try
 			{
 				CategoriaNegocio categoriaNegocio = new CategoriaNegocio();
-				List<Categoria> listaCategoria = categoriaNegocio.listar();
+				List<IAtributos> listaCategoria = categoriaNegocio.listar();
 
 				combo.DataSource = listaCategoria;
 				combo.SelectedIndex = 0;

@@ -17,17 +17,32 @@ namespace Presentacion
         private void categoriasToolStripMenuItem_Click(object sender, EventArgs e)
         {
 			// verifica si ya hay una ventana de este tipo abierta para no abrir otra
-            foreach (var item in Application.OpenForms)
-            {
-                if (item.GetType() == typeof(Categorias))
-                    return;
-            }
+            //foreach (var item in Application.OpenForms)
+            //{
+            //    if (item.GetType() == typeof(Categorias))
+            //        return;
+            //}
             ocultarVentanas();
-            Categorias categorias = new Categorias();
+            Categorias categorias = new Categorias("Categoria");
 			categorias.MdiParent = this;
 			categorias.Show();
             categorias.WindowState = FormWindowState.Maximized;
         }
+		
+		private void marcasToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			// verifica si ya hay una ventana de este tipo abierta para no abrir otra
+			//foreach (var item in Application.OpenForms)
+			//{
+			//	if (item.GetType() == typeof(Categorias))
+			//		return;
+			//}
+			ocultarVentanas();
+			Categorias categorias = new Categorias("Marca");
+			categorias.MdiParent = this;
+			categorias.Show();
+			categorias.WindowState = FormWindowState.Maximized;
+		}
 
         private void artículosToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -66,5 +81,6 @@ namespace Presentacion
             }
             
         }
-    }
+
+	}
 }

@@ -14,23 +14,43 @@ namespace Presentacion
 {
     public partial class Categorias : Form
     {
-        private List<Categoria> listaCategorias;
-        public Categorias()
+        private List<IAtributos> listaCategorias;
+		
+		//Atributo
+		private string atributo;
+		private IAtributosNegocio iAtributosNegocio;
+		
+		public Categorias(string atributo)
         {
-            InitializeComponent();
+			InitializeComponent();
+			
+			//Determinar si es categoria o marca
+			this.atributo = atributo;
+			
         }
         private void Categorias_Load(object sender, EventArgs e)
         {
-            listarCategorias();
+			//Deterinar carga de negocio
+
+		    if(this.atributo == "Marca")
+            {
+				this.iAtributosNegocio = new MarcaNegocio();
+			}
+            else if (this.atributo == "Categoria")
+            {
+				this.iAtributosNegocio = new CategoriaNegocio();
+			}
+			
+				listarCategorias();
         }
 
 
         // Lista completa de categorias 
         private void listarCategorias()
         {
-            CategoriaNegocio categoriaNegocio = new CategoriaNegocio();
-            listaCategorias = categoriaNegocio.listar();
-            dgvCategorias.DataSource = categoriaNegocio.listar();
+            
+            listaCategorias = iAtributosNegocio.listar();
+            dgvCategorias.DataSource = iAtributosNegocio.listar();
             //Estilos del data grid view
             dgvCategorias.EnableHeadersVisualStyles = false;
             dgvCategorias.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
@@ -66,14 +86,19 @@ namespace Presentacion
 
         private void btnEliminar_Click(object sender, EventArgs e)
         {
+            IAtributos eliminar = null;
 
-            Categoria eliminar = new Categoria();
-
+			if (this.atributo == "Marca")
+			{
+				eliminar = new Marca();
+			}
+			else if (this.atributo == "Categoria")
+			{
+				eliminar = new Categoria();
+			}
 
             MessageBoxDefaultButton DefaultButton = MessageBoxDefaultButton.Button1;
-             {
-                CategoriaNegocio registroEliminar = new CategoriaNegocio();
-           
+             {          
                 if (dgvCategorias == null || dgvCategorias.Rows.Count == 0)
                     {
                     MessageBox.Show("SIN REGISTROS");
@@ -83,8 +108,8 @@ namespace Presentacion
                     try
                     {
                         if (MessageBox.Show("¿ELIMINAR REGISTRO?", "¡ATENCIÓN!", MessageBoxButtons.YesNo, MessageBoxIcon.Question, DefaultButton) == DialogResult.Yes)
-                            eliminar = (Categoria)dgvCategorias.CurrentRow.DataBoundItem;
-                        registroEliminar.eliminar(eliminar);
+                            eliminar = (IAtributos)dgvCategorias.CurrentRow.DataBoundItem;
+						iAtributosNegocio.eliminar(eliminar);
                         listarCategorias();
 
                     }
@@ -93,13 +118,8 @@ namespace Presentacion
 
                         MessageBox.Show("SIN REGISTROS");
                     }
-                }
-            
-
-                
-               
+                }               
             }
-            
         }
 
 
@@ -132,11 +152,21 @@ namespace Presentacion
         {
             if (!(txtbxNuevaCategoria.Text == "" || txtbxNuevaCategoria.Text == "Ingrese su nueva categoria"))
             {
-                Categoria categoria = new Categoria();
-                categoria.Descripcion = txtbxNuevaCategoria.Text;
+				IAtributos iatributo = null;
 
-                CategoriaNegocio categoriaNegocio = new CategoriaNegocio();
-                if (categoriaNegocio.agregar(categoria))
+				if (this.atributo == "Marca")
+				{
+					iatributo = new Marca();
+				}
+				else if (this.atributo == "Categoria")
+				{
+					iatributo = new Categoria();
+				}
+
+				iatributo.Descripcion = txtbxNuevaCategoria.Text;
+
+                
+                if (iAtributosNegocio.agregar(iatributo))
                     MessageBox.Show("CATEGORIA AGREGADA CORRECTAMENTE");
                 else
                     MessageBox.Show("ERROR AL GUARDAR CATEGORIA");
@@ -168,7 +198,7 @@ namespace Presentacion
 
         private void filtrar()
         {
-            List<Categoria> listaFiltrada;
+            List<IAtributos> listaFiltrada;
             string filtro = txbxFiltrar.Text;
             if (!(filtro == "") && !(filtro == "Ingrese búsqueda"))
             {

@@ -42,7 +42,7 @@ namespace Presentacion
         {
 
             CategoriaNegocio CategoriaNegocio = new CategoriaNegocio();
-            List<Categoria> Listacategorias = new List<Categoria>();
+            List<IAtributos> Listacategorias = new List<IAtributos>();
             Listacategorias = CategoriaNegocio.listar();
             foreach (Categoria aux in Listacategorias)
             {
@@ -53,7 +53,7 @@ namespace Presentacion
             CbxCategoria.Text = "Categorias"; // Ver como hacer para que esto lo haga el framework
 
             MarcaNegocio MarcaNegocio = new MarcaNegocio();
-            List<Marca> Listamarcas = new List<Marca>();
+            List<IAtributos> Listamarcas = new List<IAtributos>();
             Listamarcas = MarcaNegocio.listar();
             foreach (Marca aux in Listamarcas)
             {
