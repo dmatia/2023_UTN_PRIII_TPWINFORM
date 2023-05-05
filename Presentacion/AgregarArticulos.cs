@@ -68,12 +68,6 @@ namespace Presentacion
 		{
 			//Carga los combo box de categorías y marcas
 			CargarComboBox();
-
-			//Control de guardado de imagen
-			ControlGuardarImagen();
-
-			//Cargar estilos de la ventana
-			CargarEstilos();
 		}
 
 		private void ModoModificar(bool esModificar)
@@ -86,6 +80,15 @@ namespace Presentacion
 			cbCategoria.Enabled = esModificar;
 			cbMarca.Enabled = esModificar;
 			btnCancelar.Visible = esModificar;
+
+			//Control de guardado de imagen
+			ControlGuardarImagen();
+
+			//Cargar estilos de la ventana
+			CargarEstilos();
+
+			//Seteamos controles de las imagenes
+			ImagenControl();
 
 			//Cambiar texto al botón
 			if (esModificar)
@@ -101,6 +104,15 @@ namespace Presentacion
 				btnCancelar.Visible = true;
 				btnModificar.Text = "Guardar";
 			}
+
+			//Control de guardado de imagen
+			ControlGuardarImagen();
+
+			//Cargar estilos de la ventana
+			CargarEstilos();
+
+			//Seteamos controles de las imagenes
+			ImagenControl();
 		}
 
 		private void CargarArticulo()
@@ -115,9 +127,6 @@ namespace Presentacion
 
 			//Si contiene imagenes, cargarlas
 			CargarImagenes();
-
-			//Seteamos controles de las imagenes
-			ImagenControl();
 		}
 
 		//Metodo para cargar las imagenes
@@ -156,34 +165,55 @@ namespace Presentacion
 
 		private void CargarEstilos()
 		{
+			//Cargar imágenes
 			CargarPictureBox(pbFlechaIzquierda, rutaImagen + "/img/flecha_izquierda.png");
 			CargarPictureBox(pbFlechaDerecha, rutaImagen + "/img/flecha_derecha.png");
+
+			//Si no hay producto, no se carga el grupo imágenes
+			if (articulo == null)
+			{
+				gbImagen.Visible = false;
+			}
+			else
+			{
+				gbImagen.Visible = true;
+			}
 		}
 
 		private void ImagenControl()
 		{
-			//Si hay imagenes, habilita los botones de carrusel
-			if (articulo.Imagenes?.Count > 0)
+
+			if(articulo == null)
 			{
-				btnImagenBorrarActual.Visible = true;
+				pbFlechaIzquierda.Visible = false;
+				pbFlechaDerecha.Visible = false;
+				btnImagenBorrarActual.Visible = false;
 
-				//Si hay mas de una imagen, habilita los botones de carrusel
-				if (articulo.Imagenes.Count > 1)
+				return;
+			}
+
+
+			if(articulo.Imagenes != null)
+			{
+				//Si hay imagen
+				if (articulo.Imagenes.Count > 0)
 				{
-					pbFlechaIzquierda.Visible = true;
-					pbFlechaDerecha.Visible = true;
+					//... habilitar boton de borrar si hay al menos una imagen
+					btnImagenBorrarActual.Visible = true;
 
-					return;
+					//Si hay mas de una imagen, habilita los botones de carrusel
+					if (articulo.Imagenes.Count > 1)
+					{
+						pbFlechaIzquierda.Visible = true;
+						pbFlechaDerecha.Visible = true;
+					}
+					else
+					{
+						pbFlechaIzquierda.Visible = false;
+						pbFlechaDerecha.Visible = false;
+					}
 				}
 			}
-			else
-			{
-				//Si no hay imagenes, deshabilita los botones de carrusel
-				btnImagenBorrarActual.Visible = false;
-			}
-
-			pbFlechaIzquierda.Visible = false;
-			pbFlechaDerecha.Visible = false;
 		}
 
 		private void CargarComboBox()
@@ -258,15 +288,18 @@ namespace Presentacion
 					{
 						MessageBox.Show("Se Guardó correctamente");
 
+						//Buscamos articulo guardado y lo ponemos en la ventana
 						List<Articulo> listaAux = articuloNegocio.listar();
-						articulo.Id = listaAux.FindAll(x => x.Codigo == articulo.Codigo)[0].Id;
+						articulo = listaAux.FindAll(x => x.Codigo == articulo.Codigo)[0];
 
 						// Validar si guardó y pasar a modo vista
 						this.hayCambios = true;
 						this.esAgregar = false;
 						this.esModificar = false;
+						
+						//Pasar a modo vista
 						ModoModificar(this.esAgregar);
-
+						
 						return;
 					}
 				}
