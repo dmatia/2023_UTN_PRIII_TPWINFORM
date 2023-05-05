@@ -73,9 +73,23 @@ namespace Presentacion
             }
             else
             {
-                ModificarCategoria modificarCategoria = new ModificarCategoria();
-                modificarCategoria.setIdCategoria((int)dgvCategorias.CurrentRow.Cells[0].Value);
-                modificarCategoria.setDescripcionCategoria((string)dgvCategorias.CurrentRow.Cells[1].Value);
+                IAtributos iAtributos = null;
+				
+				if (this.atributo == "Marca")
+				{
+					iAtributos = new Marca();
+				}
+				else if (this.atributo == "Categoria")
+				{
+					iAtributos = new Categoria();
+				}
+				
+                iAtributos.Id = (int)dgvCategorias.CurrentRow.Cells[0].Value;
+                iAtributos.Descripcion = (string)dgvCategorias.CurrentRow.Cells[1].Value;
+
+				ModificarCategoria modificarCategoria = new ModificarCategoria(iAtributos, iAtributosNegocio);
+                //modificarCategoria.setIdCategoria((int)dgvCategorias.CurrentRow.Cells[0].Value);
+                //modificarCategoria.setDescripcionCategoria((string)dgvCategorias.CurrentRow.Cells[1].Value);
                 modificarCategoria.Show();
                 listarCategorias();
             }
