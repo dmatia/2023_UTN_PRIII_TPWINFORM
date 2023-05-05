@@ -12,9 +12,9 @@ using Negocio;
 
 namespace Presentacion
 {
-    public partial class ModificarCategoria : Form
+    public partial class ModificarAtributos : Form
     {
-        private IAtributos iAtributo;
+        private IAtributo iAtributo;
 		private IAtributosNegocio iAtributoNegocio;
 
 		//public void setIdCategoria(int id)
@@ -26,7 +26,7 @@ namespace Presentacion
 		//    categoriaModificar.Descripcion = descripcion;
 		//}
 
-		public ModificarCategoria(IAtributos iAtributo, IAtributosNegocio iAtributoNegocio)
+		public ModificarAtributos(IAtributo iAtributo, IAtributosNegocio iAtributoNegocio)
         {
             InitializeComponent();
             this.iAtributo = iAtributo;

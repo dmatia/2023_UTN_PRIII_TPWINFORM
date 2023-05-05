@@ -11,9 +11,9 @@ namespace Negocio
     {
 
         // METODO LISTAR TODAS LAS CATEGORIAS EN DB
-        public List<IAtributos> listar()
+        public List<IAtributo> listar()
         {
-            List<IAtributos> lista = new List<IAtributos>();
+            List<IAtributo> lista = new List<IAtributo>();
             AccesoDB datos = new AccesoDB();
 
             try
@@ -46,7 +46,7 @@ namespace Negocio
         }
 
         //  METODO AGREGAR CATEGORIA
-        public bool agregar(IAtributos nueva)
+        public bool agregar(IAtributo nueva)
         {
             AccesoDB datos = new AccesoDB();
 
@@ -68,7 +68,7 @@ namespace Negocio
         }
 
         // METODO MODIFICAR CATEGORIA
-        public bool modificar(IAtributos modificar)
+        public bool modificar(IAtributo modificar)
         {
             AccesoDB datos = new AccesoDB();
 
@@ -94,7 +94,7 @@ namespace Negocio
         }
 
         // METODO ELIMINAR CATEGORIA
-        public bool eliminar(IAtributos registro) { 
+        public bool eliminar(IAtributo registro) { 
             AccesoDB datos = new AccesoDB();
 
             try

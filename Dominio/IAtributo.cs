@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Dominio
 {
-	public interface IAtributos
+	public interface IAtributo
 	{
 		int Id { get; set; }
 		string Descripcion { get; set; }

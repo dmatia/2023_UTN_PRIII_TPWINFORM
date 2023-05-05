@@ -12,15 +12,15 @@ using System.Windows.Forms;
 
 namespace Presentacion
 {
-    public partial class Categorias : Form
+    public partial class IAtributos : Form
     {
-        private List<IAtributos> listaCategorias;
+        private List<IAtributo> listaCategorias;
 		
 		//Atributo
 		private string atributo;
 		private IAtributosNegocio iAtributosNegocio;
 		
-		public Categorias(string atributo)
+		public IAtributos(string atributo)
         {
 			InitializeComponent();
 			
@@ -50,15 +50,15 @@ namespace Presentacion
         {
             
             listaCategorias = iAtributosNegocio.listar();
-            dgvCategorias.DataSource = iAtributosNegocio.listar();
+            dgvAtributos.DataSource = iAtributosNegocio.listar();
             //Estilos del data grid view
-            dgvCategorias.EnableHeadersVisualStyles = false;
-            dgvCategorias.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvAtributos.EnableHeadersVisualStyles = false;
+            dgvAtributos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
         }
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
-            txbxFiltrar.Text = "Ingrese búsqueda";
+            txbxFiltrarAtributos.Text = "Ingrese búsqueda";
             listarCategorias();
         }
 
@@ -67,13 +67,13 @@ namespace Presentacion
         private void btnModificar_Click(object sender, EventArgs e)
         {
             
-            if (dgvCategorias == null || dgvCategorias.Rows.Count == 0)
+            if (dgvAtributos == null || dgvAtributos.Rows.Count == 0)
             {
                 MessageBox.Show("SIN REGISTROS");
             }
             else
             {
-                IAtributos iAtributos = null;
+                IAtributo iAtributos = null;
 				
 				if (this.atributo == "Marca")
 				{
@@ -84,10 +84,10 @@ namespace Presentacion
 					iAtributos = new Categoria();
 				}
 				
-                iAtributos.Id = (int)dgvCategorias.CurrentRow.Cells[0].Value;
-                iAtributos.Descripcion = (string)dgvCategorias.CurrentRow.Cells[1].Value;
+                iAtributos.Id = (int)dgvAtributos.CurrentRow.Cells[0].Value;
+                iAtributos.Descripcion = (string)dgvAtributos.CurrentRow.Cells[1].Value;
 
-				ModificarCategoria modificarCategoria = new ModificarCategoria(iAtributos, iAtributosNegocio);
+				ModificarAtributos modificarCategoria = new ModificarAtributos(iAtributos, iAtributosNegocio);
                 //modificarCategoria.setIdCategoria((int)dgvCategorias.CurrentRow.Cells[0].Value);
                 //modificarCategoria.setDescripcionCategoria((string)dgvCategorias.CurrentRow.Cells[1].Value);
                 modificarCategoria.Show();
@@ -100,7 +100,7 @@ namespace Presentacion
 
         private void btnEliminar_Click(object sender, EventArgs e)
         {
-            IAtributos eliminar = null;
+            IAtributo eliminar = null;
 
 			if (this.atributo == "Marca")
 			{
@@ -113,7 +113,7 @@ namespace Presentacion
 
             MessageBoxDefaultButton DefaultButton = MessageBoxDefaultButton.Button1;
              {          
-                if (dgvCategorias == null || dgvCategorias.Rows.Count == 0)
+                if (dgvAtributos == null || dgvAtributos.Rows.Count == 0)
                     {
                     MessageBox.Show("SIN REGISTROS");
                     }
@@ -121,8 +121,8 @@ namespace Presentacion
                 {
                     try
                     {
-                        if (MessageBox.Show("¿ELIMINAR REGISTRO?", "¡ATENCIÓN!", MessageBoxButtons.YesNo, MessageBoxIcon.Question, DefaultButton) == DialogResult.Yes)
-                            eliminar = (IAtributos)dgvCategorias.CurrentRow.DataBoundItem;
+                        if (MessageBox.Show("¿ELIMINAR "+ atributo.ToUpper() + "?", "¡ATENCIÓN!", MessageBoxButtons.YesNo, MessageBoxIcon.Question, DefaultButton) == DialogResult.Yes)
+                            eliminar = (IAtributo)dgvAtributos.CurrentRow.DataBoundItem;
 						iAtributosNegocio.eliminar(eliminar);
                         listarCategorias();
 
@@ -137,36 +137,35 @@ namespace Presentacion
         }
 
 
-        // AGREGAR NUEVA CATEGORIA
+        // AGREGAR NUEVO ATRIBUTO
 
-        // validaciones sobre textbox nueva categoria
-        private void txtbxNuevaCategoria_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (e.KeyChar == 32)
-                e.Handled = true;
-        }
+        // validaciones sobre textbox nuevo atributo
+
         private void agregarTextoDefault()
         {
-            txtbxNuevaCategoria.Text = "Ingrese su nueva categoria";
+            txtbxNuevoAtributo.Text = "Ingrese un valor";
         }
-        private void txtbxNuevaCategoria_MouseDoubleClick(object sender, MouseEventArgs e)
+        private void txtbxNuevoAtributo_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            if (txtbxNuevaCategoria.Text != "")
-                txtbxNuevaCategoria.Text = "";
+            if (txtbxNuevoAtributo.Text != "")
+                txtbxNuevoAtributo.Text = "";
         }
-        private void txtbxNuevaCategoria_MouseLeave(object sender, EventArgs e)
+
+        private void txtbxNuevoAtributo_MouseLeave(object sender, EventArgs e)
         {
-            if (txtbxNuevaCategoria.Text == "")
+            if (txtbxNuevoAtributo.Text == "")
             {
                 agregarTextoDefault();
             }
         }
-        // verificar textxbox, guardar categoria
+
+
+        // verificar textxbox, guardar atributo
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            if (!(txtbxNuevaCategoria.Text == "" || txtbxNuevaCategoria.Text == "Ingrese su nueva categoria"))
+            if (!(txtbxNuevoAtributo.Text == "" || txtbxNuevoAtributo.Text == "Ingrese un valor"))
             {
-				IAtributos iatributo = null;
+				IAtributo iatributo = null;
 
 				if (this.atributo == "Marca")
 				{
@@ -177,13 +176,13 @@ namespace Presentacion
 					iatributo = new Categoria();
 				}
 
-				iatributo.Descripcion = txtbxNuevaCategoria.Text;
+				iatributo.Descripcion = txtbxNuevoAtributo.Text;
 
                 
                 if (iAtributosNegocio.agregar(iatributo))
-                    MessageBox.Show("CATEGORIA AGREGADA CORRECTAMENTE");
+                    MessageBox.Show(atributo.ToUpper() + " AGREGADA CORRECTAMENTE");
                 else
-                    MessageBox.Show("ERROR AL GUARDAR CATEGORIA");
+                    MessageBox.Show("ERROR AL GUARDAR" + atributo.ToUpper());
                 agregarTextoDefault();
                 listarCategorias();
             }
@@ -212,14 +211,14 @@ namespace Presentacion
 
         private void filtrar()
         {
-            List<IAtributos> listaFiltrada;
-            string filtro = txbxFiltrar.Text;
+            List<IAtributo> listaFiltrada;
+            string filtro = txbxFiltrarAtributos.Text;
             if (!(filtro == "") && !(filtro == "Ingrese búsqueda"))
             {
                 listaFiltrada = listaCategorias.FindAll(categoriaBuscada => categoriaBuscada.Descripcion.ToLower().Contains(filtro.ToLower())
                                                                          || categoriaBuscada.Id.ToString().ToLower() == filtro.ToLower());
-                dgvCategorias.DataSource = null;
-                dgvCategorias.DataSource = listaFiltrada;
+                dgvAtributos.DataSource = null;
+                dgvAtributos.DataSource = listaFiltrada;
             }
         }
 
@@ -230,20 +229,27 @@ namespace Presentacion
 
         private void txbxFiltrar_DoubleClick(object sender, EventArgs e)
         {
-            if (!(txbxFiltrar.Text == "") || !(txbxFiltrar.Text == "Ingrese búsqueda"))
+            if (!(txbxFiltrarAtributos.Text == "") || !(txbxFiltrarAtributos.Text == "Ingrese búsqueda"))
             {
-                txbxFiltrar.Text = "";
+                txbxFiltrarAtributos.Text = "";
                 listarCategorias();
             }
         }
 
         private void txbxFiltrar_MouseLeave(object sender, EventArgs e)
         {
-            if ((txbxFiltrar.Text == "") || !(txbxFiltrar.Text != "Ingrese búsqueda"))
+            if ((txbxFiltrarAtributos.Text == "") || !(txbxFiltrarAtributos.Text != "Ingrese búsqueda"))
             {
-                txbxFiltrar.Text = "Ingrese búsqueda";
+                txbxFiltrarAtributos.Text = "Ingrese búsqueda";
             }
             listarCategorias();
         }
+
+        private void txtbxNuevaCategoria_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+
     }
 }

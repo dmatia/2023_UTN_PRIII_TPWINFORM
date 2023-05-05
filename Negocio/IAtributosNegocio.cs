@@ -9,9 +9,9 @@ namespace Negocio
 {
 	public interface IAtributosNegocio
 	{
-		List<IAtributos> listar();
-		bool agregar(IAtributos atributo);
-		bool modificar(IAtributos atributos);
-		bool eliminar(IAtributos atributos);
+		List<IAtributo> listar();
+		bool agregar(IAtributo atributo);
+		bool modificar(IAtributo atributos);
+		bool eliminar(IAtributo atributos);
 	}
 }

@@ -23,7 +23,7 @@ namespace Presentacion
             //        return;
             //}
             ocultarVentanas();
-            Categorias categorias = new Categorias("Categoria");
+            IAtributos categorias = new IAtributos("Categoria");
 			categorias.MdiParent = this;
 			categorias.Show();
             categorias.WindowState = FormWindowState.Maximized;
@@ -38,7 +38,7 @@ namespace Presentacion
 			//		return;
 			//}
 			ocultarVentanas();
-			Categorias categorias = new Categorias("Marca");
+			IAtributos categorias = new IAtributos("Marca");
 			categorias.MdiParent = this;
 			categorias.Show();
 			categorias.WindowState = FormWindowState.Maximized;
