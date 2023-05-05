@@ -193,35 +193,33 @@ namespace Negocio
                     while ((datos.Reader.Read())) 
                     {
                         Articulo aux = new Articulo(); // Crea una instancia de variable Articulo
-                        aux.Id = (int)datos.Reader["Id"]; // Carga la Variable Articulo con los datos de la base de datos
-                        aux.Codigo = (string)datos.Reader["Codigo"];                 //aux.= lector.GetInt32();
+                    if (!(datos.Reader["id"] is DBNull))
+                        aux.Id = (int)datos.Reader["Id"];
+                    if (!(datos.Reader["id"] is DBNull))
+                        aux.Codigo = (string)datos.Reader["Codigo"];
+                    if (!(datos.Reader["Nombre"] is DBNull))
                         aux.Nombre = (string)datos.Reader["Nombre"];
-                        aux.Descripcion = (string)datos.Reader["Descripcion"]; // validaciones sobre descripcion y otros
-                        aux.Precio = (double)(decimal)datos.Reader["Precio"]; /// Ver tema del float y el casteo de money
-                        aux.Marca = new Marca();
-                        aux.Marca.Id = (int)datos.Reader["MarcasId"];
-                        aux.Marca.Descripcion = (string)datos.Reader["MarcasDescripcion"];
-                        /// POR QUE EL OVERRIDE DE TOSTRING PRODUCE ESTO?
-                        aux.Categoria = new Categoria();
-                        if (!(datos.Reader["CategoriasDescripcion"] is DBNull))
-                        {
-                            aux.Categoria.Descripcion = (string)datos.Reader["CategoriasDescripcion"];
-                        }
-                        else
-                        {
-                            aux.Categoria.Descripcion = string.Empty;
-                        }
-                        if (!(datos.Reader["CategoriasId"] is DBNull))
-                        {
-                            aux.Categoria.Id = (int)datos.Reader["Categoriasid"];
-                        }
-                        else
-                        {
-                            aux.Categoria.Id = 0;
-                        }
-                        //Cargar Imágenes
+                    if (!(datos.Reader["Descripcion"] is DBNull))
+                        aux.Descripcion = (string)datos.Reader["Descripcion"];
+                    if (!(datos.Reader["Precio"] is DBNull))
+                        aux.Precio = (double)(decimal)datos.Reader["Precio"];
 
-                        lista.Add(aux);// Agrega cada variable a la lista
+                    aux.Marca = new Marca();
+                    if (!(datos.Reader["MarcasId"] is DBNull))
+                        aux.Marca.Id = (int)datos.Reader["MarcasId"];
+                    if (!(datos.Reader["MarcasDescripcion"] is DBNull))
+                        aux.Marca.Descripcion = (string)datos.Reader["MarcasDescripcion"];
+                    aux.Categoria = new Categoria();
+                    if (!(datos.Reader["CategoriasDescripcion"] is DBNull))
+                        aux.Categoria.Descripcion = (string)datos.Reader["CategoriasDescripcion"];
+
+                    if (!(datos.Reader["CategoriasId"] is DBNull))
+                        aux.Categoria.Id = (int)datos.Reader["Categoriasid"];
+                    //Cargar Imágenes
+                    ImagenNegocio imagenNegocio = new ImagenNegocio();
+                    aux.Imagenes = imagenNegocio.listar(aux.Id.ToString());
+
+                    lista.Add(aux);// Agrega cada variable a la lista
                     }
 
                     return lista;// devuelve la lista
@@ -331,75 +329,3 @@ namespace Negocio
 
 }
 
-
-/*
-             if (Filtroprimario == "Nombre")
-             {
-                 switch (criterio)
-                 {
-                     case "Mayor a":
-                         consulta += "Numero > " + filtro;
-                         break;
-                     case "Menor a":
-                         consulta += "Numero < " + filtro;
-                         break;
-                     default:
-                         consulta += "Numero = " + filtro;
-                         break;
-                 }
-             }
-             else if (campo == "Nombre")
-             {
-                 switch (criterio)
-                 {
-                     case "Comienza con":
-                         consulta += "Nombre like '" + filtro + "%' ";
-                         break;
-                     case "Termina con":
-                         consulta += "Nombre like '%" + filtro + "'";
-                         break;
-                     default:
-                         consulta += "Nombre like '%" + filtro + "%'";
-                         break;
-                 }
-             }
-             else
-             {
-                 switch (criterio)
-                 {
-                     case "Comienza con":
-                         consulta += "P.Descripcion like '" + filtro + "%' ";
-                         break;
-                     case "Termina con":
-                         consulta += "P.Descripcion like '%" + filtro + "'";
-                         break;
-                     default:
-                         consulta += "P.Descripcion like '%" + filtro + "%'";
-                         break;
-                 }
-             }
-
-
-           datos.setQuery(
-           datos.setearConsulta(consulta);
-             datos.ejecutarLectura();
-             while (datos.Lector.Read())
-             {
-                 Pokemon aux = new Pokemon();
-                 aux.Id = (int)datos.Lector["Id"];
-                 aux.Numero = datos.Lector.GetInt32(0);
-                 aux.Nombre = (string)datos.Lector["Nombre"];
-                 aux.Descripcion = (string)datos.Lector["Descripcion"];
-                 if (!(datos.Lector["UrlImagen"] is DBNull))
-                     aux.UrlImagen = (string)datos.Lector["UrlImagen"];
-
-                 aux.Tipo = new Elemento();
-                 aux.Tipo.Id = (int)datos.Lector["IdTipo"];
-                 aux.Tipo.Descripcion = (string)datos.Lector["Tipo"];
-                 aux.Debilidad = new Elemento();
-                 aux.Debilidad.Id = (int)datos.Lector["IdDebilidad"];
-                 aux.Debilidad.Descripcion = (string)datos.Lector["Debilidad"];
-
-                 lista.Add(aux);
-             }
-           */
