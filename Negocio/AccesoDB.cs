@@ -11,8 +11,8 @@ namespace Negocio
 
 		// Datos de la Base
 		//string serverName = "localhost\\";
-		string serverName = "localhost\\SQLLAB";
-		//string serverName = "localhost\\SQLEXPRESS";
+		//string serverName = "localhost\\SQLLAB";
+		string serverName = "localhost\\SQLEXPRESS";
 		string dataBase = "CATALOGO_P3_DB";
 
 		public AccesoDB()

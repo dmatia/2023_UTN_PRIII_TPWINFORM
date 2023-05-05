@@ -7,13 +7,13 @@ using Dominio;
 
 namespace Negocio
 {
-    public class CategoriaNegocio
+    public class CategoriaNegocio : IAtributosNegocio
     {
 
         // METODO LISTAR TODAS LAS CATEGORIAS EN DB
-        public List<Categoria> listar()
+        public List<IAtributos> listar()
         {
-            List<Categoria> lista = new List<Categoria>();
+            List<IAtributos> lista = new List<IAtributos>();
             AccesoDB datos = new AccesoDB();
 
             try
@@ -45,9 +45,8 @@ namespace Negocio
             }
         }
 
-
         //  METODO AGREGAR CATEGORIA
-        public bool agregar(Categoria nueva)
+        public bool agregar(IAtributos nueva)
         {
             AccesoDB datos = new AccesoDB();
 
@@ -69,7 +68,7 @@ namespace Negocio
         }
 
         // METODO MODIFICAR CATEGORIA
-        public bool modificar(Categoria modificar)
+        public bool modificar(IAtributos modificar)
         {
             AccesoDB datos = new AccesoDB();
 
@@ -94,10 +93,8 @@ namespace Negocio
 
         }
 
-
         // METODO ELIMINAR CATEGORIA
-
-        public bool eliminar(Categoria registro) { 
+        public bool eliminar(IAtributos registro) { 
             AccesoDB datos = new AccesoDB();
 
             try
@@ -116,7 +113,6 @@ namespace Negocio
             }
             return false;
         }
-
 
     }
 }
