@@ -32,35 +32,25 @@ namespace Negocio
                     aux.Descripcion = (string)datos.Reader["Descripcion"]; // validaciones sobre descripcion y otros
                     aux.Precio = Math.Round(Convert.ToDecimal(datos.Reader["Precio"]), 2); /// Ver tema del float y el casteo de money
                     aux.Marca = new Marca();
+                    if (!(datos.Reader["MarcasId"] is DBNull))
                     aux.Marca.Id = (int)datos.Reader["MarcasId"];
+                    if (!(datos.Reader["MarcasDescripcion"] is DBNull))
                     aux.Marca.Descripcion = (string)datos.Reader["MarcasDescripcion"];
-                    /// POR QUE EL OVERRIDE DE TOSTRING PRODUCE ESTO?
                     aux.Categoria = new Categoria();
                     if (!(datos.Reader["CategoriasDescripcion"] is DBNull))
-                    {
-                        aux.Categoria.Descripcion = (string)datos.Reader["CategoriasDescripcion"];
-                    }
-                    else
-                    {
-                        aux.Categoria.Descripcion = string.Empty;
-                    }
+                    aux.Categoria.Descripcion = (string)datos.Reader["CategoriasDescripcion"];
+                                    
                     if (!(datos.Reader["CategoriasId"] is DBNull))
-                    {
-                        aux.Categoria.Id = (int)datos.Reader["Categoriasid"];
-                    }
-                    else
-                    {
-                        aux.Categoria.Id = 0;
-                    }
-
+                    aux.Categoria.Id = (int)datos.Reader["Categoriasid"];
+                
 					//Cargar Imágenes
 					ImagenNegocio imagenNegocio = new ImagenNegocio();
 					aux.Imagenes = imagenNegocio.listar(aux.Id.ToString());
 
-					lista.Add(aux);// Agrega cada variable a la lista
+					lista.Add(aux);
                 }
 
-                return lista;// devuelve la lista
+                return lista;
             }
             catch (Exception ex)
             {
@@ -193,7 +183,7 @@ namespace Negocio
 
                     datos.setQuery(select + Restriccion);
                     datos.executeReader();
-                    while ((datos.Reader.Read())) // Devuelve valor booleano y va cambiando el cursor
+                    while ((datos.Reader.Read())) 
                     {
                         Articulo aux = new Articulo(); // Crea una instancia de variable Articulo
                         aux.Id = (int)datos.Reader["Id"]; // Carga la Variable Articulo con los datos de la base de datos
