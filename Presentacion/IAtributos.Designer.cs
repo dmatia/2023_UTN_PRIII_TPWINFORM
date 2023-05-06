@@ -137,7 +137,7 @@
             this.gbNuevaCategoria.Size = new System.Drawing.Size(864, 92);
             this.gbNuevaCategoria.TabIndex = 7;
             this.gbNuevaCategoria.TabStop = false;
-            this.gbNuevaCategoria.Text = "AGREGAR NUEVO";
+            this.gbNuevaCategoria.Text = "NUEVO REGISTRO";
             // 
             // txtbxNuevoAtributo
             // 
@@ -149,8 +149,7 @@
             this.txtbxNuevoAtributo.Name = "txtbxNuevoAtributo";
             this.txtbxNuevoAtributo.Size = new System.Drawing.Size(505, 22);
             this.txtbxNuevoAtributo.TabIndex = 7;
-            this.txtbxNuevoAtributo.Text = " ";
-            this.txtbxNuevoAtributo.TextChanged += new System.EventHandler(this.txtbxNuevaCategoria_TextChanged);
+            this.txtbxNuevoAtributo.Text = "Ingrese un valor";
             this.txtbxNuevoAtributo.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.txtbxNuevoAtributo_MouseDoubleClick);
             this.txtbxNuevoAtributo.MouseLeave += new System.EventHandler(this.txtbxNuevoAtributo_MouseLeave);
             // 
