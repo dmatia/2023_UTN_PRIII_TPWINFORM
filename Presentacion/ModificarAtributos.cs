@@ -12,29 +12,31 @@ using Negocio;
 
 namespace Presentacion
 {
-    public partial class ModificarCategoria : Form
+    public partial class ModificarAtributos : Form
     {
+        private IAtributo iAtributo;
+		private IAtributosNegocio iAtributoNegocio;
 
-        private Categoria categoriaModificar = new Categoria();
-        
-        public void setIdCategoria(int id)
-        {
-            categoriaModificar.Id = id;
-        }
-        public void setDescripcionCategoria(string descripcion)
-        {
-            categoriaModificar.Descripcion = descripcion;
-        }
+		//public void setIdCategoria(int id)
+		//{
+		//    categoriaModificar.Id = id;
+		//}
+		//public void setDescripcionCategoria(string descripcion)
+		//{
+		//    categoriaModificar.Descripcion = descripcion;
+		//}
 
-        public ModificarCategoria()
+		public ModificarAtributos(IAtributo iAtributo, IAtributosNegocio iAtributoNegocio)
         {
             InitializeComponent();
-        }
+            this.iAtributo = iAtributo;
+			this.iAtributoNegocio = iAtributoNegocio;
+		}
 
         private void cargarDatos()
         {
-            lblId.Text = categoriaModificar.Id.ToString();
-            lblDescripcion.Text = categoriaModificar.Descripcion.ToString();
+            lblId.Text = iAtributo.Id.ToString();
+            lblDescripcion.Text = iAtributo.Descripcion.ToString();
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
@@ -51,10 +53,9 @@ namespace Presentacion
         {
             if(!(txbxNuevaDescripcion.Text == "doble click aquí" || txbxNuevaDescripcion.Text == ""))
             {
-                categoriaModificar.Descripcion = txbxNuevaDescripcion.Text;
+				iAtributo.Descripcion = txbxNuevaDescripcion.Text;
 
-                CategoriaNegocio categoriaNegocio = new CategoriaNegocio();
-                if (categoriaNegocio.modificar(categoriaModificar))
+                if (iAtributoNegocio.modificar(iAtributo))
                 {
                     MessageBox.Show("CATEGORIA MODIFICADA");
                     this.Close();

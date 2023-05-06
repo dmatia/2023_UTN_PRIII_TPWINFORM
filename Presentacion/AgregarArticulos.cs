@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -14,10 +15,7 @@ using Negocio;
 namespace Presentacion
 {
 	//TODO: Validaciones
-	//TODO: Guardar imagen nueva por Archivo y url. Validar cual es cual.
 	//TODO: Al guardar imagen, copiar en una nueva carpeta para guardar ruta en base de datos
-	//TODO: Estilos de la ventana
-	//TODO: Eliminar Articulo
 
 	public partial class AgregarArticulos : Form
 	{
@@ -27,7 +25,7 @@ namespace Presentacion
 		private OpenFileDialog file = null;
 		private int imagenActual;
 		private int imagenActualCarrusel = 0;
-		private string rutaImagen = Path.GetDirectoryName(Directory.GetCurrentDirectory().Replace(@"\bin", "")) ;
+		private string rutaImagen = Path.GetDirectoryName(Directory.GetCurrentDirectory().Replace(@"\bin", ""));
 
 		//Banderas de vistas
 		private bool esModificar;
@@ -71,12 +69,6 @@ namespace Presentacion
 		{
 			//Carga los combo box de categorías y marcas
 			CargarComboBox();
-
-			//Control de guardado de imagen
-			ControlGuardarImagen();
-
-			//Cargar estilos de la ventana
-			CargarEstilos();
 		}
 
 		private void ModoModificar(bool esModificar)
@@ -89,6 +81,15 @@ namespace Presentacion
 			cbCategoria.Enabled = esModificar;
 			cbMarca.Enabled = esModificar;
 			btnCancelar.Visible = esModificar;
+
+			//Control de guardado de imagen
+			ControlGuardarImagen();
+
+			//Cargar estilos de la ventana
+			CargarEstilos();
+
+			//Seteamos controles de las imagenes
+			ImagenControl();
 
 			//Cambiar texto al botón
 			if (esModificar)
@@ -104,6 +105,15 @@ namespace Presentacion
 				btnCancelar.Visible = true;
 				btnModificar.Text = "Guardar";
 			}
+
+			//Control de guardado de imagen
+			ControlGuardarImagen();
+
+			//Cargar estilos de la ventana
+			CargarEstilos();
+
+			//Seteamos controles de las imagenes
+			ImagenControl();
 		}
 
 		private void CargarArticulo()
@@ -118,9 +128,6 @@ namespace Presentacion
 
 			//Si contiene imagenes, cargarlas
 			CargarImagenes();
-
-			//Seteamos controles de las imagenes
-			ImagenControl();
 		}
 
 		//Metodo para cargar las imagenes
@@ -128,13 +135,13 @@ namespace Presentacion
 		{
 			if(articulo.Imagenes?.Count > 0)
 			{
-				CargarPictureBox(pbImagenArticulo, articulo.Imagenes[0].UrlImagen);
-				
 				//Guardamos id de la imagen actual por si necesita ser eliminada
 				imagenActual = articulo.Imagenes[0].Id;
 
 				//Guardamos el indice de la imagen para poder utilizarla en el carrusel
 				imagenActualCarrusel = 0;
+				
+				CargarPictureBox(pbImagenArticulo, articulo.Imagenes[0].UrlImagen);
 			}
 			else
 			{
@@ -149,44 +156,73 @@ namespace Presentacion
 			try
 			{
 				pb.Load(url);
+				btnGuardarImagen.Enabled = true;
+				
 			}
-			catch(Exception ex)
+			catch (Exception ex)
 			{
 				//Si hay un error carga una imagen placeholder
 				pb.Load(rutaImagen + "/img/placeholder.png");
+				btnGuardarImagen.Enabled = false;
 			}
 		}
 
 		private void CargarEstilos()
 		{
+			//Cargar imágenes
 			CargarPictureBox(pbFlechaIzquierda, rutaImagen + "/img/flecha_izquierda.png");
 			CargarPictureBox(pbFlechaDerecha, rutaImagen + "/img/flecha_derecha.png");
+
+			//Si no hay producto, no se carga el grupo imágenes
+			if (articulo == null)
+			{
+				gbImagen.Visible = false;
+			}
+			else
+			{
+				gbImagen.Visible = true;
+			}
 		}
 
 		private void ImagenControl()
 		{
-			//Si hay imagenes, habilita los botones de carrusel
-			if (articulo.Imagenes?.Count > 0)
+
+			if(articulo == null)
 			{
-				btnImagenBorrarActual.Visible = true;
+				pbFlechaIzquierda.Visible = false;
+				pbFlechaDerecha.Visible = false;
+				btnImagenBorrarActual.Visible = false;
 
-				//Si hay mas de una imagen, habilita los botones de carrusel
-				if (articulo.Imagenes.Count > 1)
+				return;
+			}
+
+			if (articulo.Imagenes != null)
+			{
+				//Si hay imagen
+				if (articulo.Imagenes.Count > 0)
 				{
-					pbFlechaIzquierda.Visible = true;
-					pbFlechaDerecha.Visible = true;
+					//... habilitar boton de borrar si hay al menos una imagen
+					btnImagenBorrarActual.Visible = true;
 
-					return;
+					//Si hay mas de una imagen, habilita los botones de carrusel
+					if (articulo.Imagenes.Count > 1)
+					{
+						pbFlechaIzquierda.Visible = true;
+						pbFlechaDerecha.Visible = true;
+					}
+					else
+					{
+						pbFlechaIzquierda.Visible = false;
+						pbFlechaDerecha.Visible = false;
+					}
+				}
+				else
+				{
+					pbFlechaIzquierda.Visible = false;
+					pbFlechaDerecha.Visible = false;
+					btnImagenBorrarActual.Visible = false;
 				}
 			}
-			else
-			{
-				//Si no hay imagenes, deshabilita los botones de carrusel
-				btnImagenBorrarActual.Visible = false;
-			}
-
-			pbFlechaIzquierda.Visible = false;
-			pbFlechaDerecha.Visible = false;
 		}
 
 		private void CargarComboBox()
@@ -209,7 +245,7 @@ namespace Presentacion
 			try
 			{
 				MarcaNegocio marcaNegocio = new MarcaNegocio();
-				List<Marca> listaMarca = marcaNegocio.listar();
+				List<IAtributo> listaMarca = marcaNegocio.listar();
 
 				combo.DataSource = listaMarca;
 				combo.SelectedIndex = 0;
@@ -226,7 +262,7 @@ namespace Presentacion
 			try
 			{
 				CategoriaNegocio categoriaNegocio = new CategoriaNegocio();
-				List<Categoria> listaCategoria = categoriaNegocio.listar();
+				List<IAtributo> listaCategoria = categoriaNegocio.listar();
 
 				combo.DataSource = listaCategoria;
 				combo.SelectedIndex = 0;
@@ -256,22 +292,47 @@ namespace Presentacion
 			{
 				if(btnModificar.Text == "Guardar")
 				{
-					// Guardar articulo
-					if (articuloNegocio.agregar(articulo))
+					try
 					{
-						MessageBox.Show("Se Guardó correctamente");
+						// Guardar articulo
+						articulo.Id = articuloNegocio.agregar(articulo);
 
-						List<Articulo> listaAux = articuloNegocio.listar();
-						articulo.Id = listaAux.FindAll(x => x.Codigo == articulo.Codigo)[0].Id;
+						MessageBox.Show("Se Guardó correctamente");
 
 						// Validar si guardó y pasar a modo vista
 						this.hayCambios = true;
 						this.esAgregar = false;
 						this.esModificar = false;
+
+						//Pasar a modo vista
 						ModoModificar(this.esAgregar);
 
 						return;
 					}
+					catch (Exception err)
+					{
+						MessageBox.Show("Error al guardar el articulo", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+					}
+
+					//if (articuloNegocio.agregar(articulo))
+					//{
+					//	MessageBox.Show("Se Guardó correctamente");
+
+					//	//Buscamos articulo guardado y lo ponemos en la ventana
+					//	//Utilizar Scalar para solamente traer el ID al insertar
+					//	List<Articulo> listaAux = articuloNegocio.listar();
+					//	articulo = listaAux.FindAll(x => x.Codigo == articulo.Codigo)[0];
+
+					//	// Validar si guardó y pasar a modo vista
+					//	this.hayCambios = true;
+					//	this.esAgregar = false;
+					//	this.esModificar = false;
+
+					//	//Pasar a modo vista
+					//	ModoModificar(this.esAgregar);
+
+					//	return;
+					//}
 				}
 			}
 			else //Modificar Articulo en la base de datos
@@ -299,7 +360,7 @@ namespace Presentacion
 						}
 						else
 						{
-							MessageBox.Show("Error al modificar");
+							MessageBox.Show("Error al modificar el articulo", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 						}
 					}
 				}
@@ -323,7 +384,7 @@ namespace Presentacion
 			Marca marca = new Marca();
 			marca.Descripcion = cbMarca.Text;
 			marca.Id = (int)cbMarca.SelectedValue;
-
+			
 			//Categoria
 			Categoria categoria = new Categoria();
 			categoria.Descripcion = cbCategoria.Text;
@@ -331,7 +392,7 @@ namespace Presentacion
 
 			//Guardar datos de la ventana en el articulo
 			articulo.Codigo = codigo;
-			articulo.Precio = Convert.ToDouble(precio.Replace(".", ","));
+			articulo.Precio = Convert.ToDecimal(precio.Replace(".", ","));
 			articulo.Nombre = nombre;
 			articulo.Descripcion = descripcion;
 			articulo.Marca = marca;
@@ -343,7 +404,7 @@ namespace Presentacion
 			if (this.esModificar)
 			{
 				//En Modo Modificar verificamos que se quiera cancelar
-				DialogResult result = MessageBox.Show("¿Está seguro que quiere cancelar", "Cancelar", MessageBoxButtons.OKCancel);
+				DialogResult result = MessageBox.Show("¿Está seguro que quiere cancelar?", "Cancelar", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
 
 				//Si se cancela, vuelve a Modo Vista
 				if (result == DialogResult.OK)
@@ -364,7 +425,7 @@ namespace Presentacion
 			ImagenNegocio imagenNegocio = new ImagenNegocio();
 
 			//Verificar si se quiere cancelar
-			DialogResult result = MessageBox.Show("¿Está seguro que quiere borrar la imagen actual?", "Cancelar", MessageBoxButtons.OKCancel);
+			DialogResult result = MessageBox.Show("¿Está seguro que quiere borrar la imagen actual?", "Cancelar", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
 
 			if (result == DialogResult.OK)
 				if (imagenNegocio.borrar(imagenActual))
@@ -422,13 +483,15 @@ namespace Presentacion
 
 				if(rbArchivo.Checked)
 				{
+					btnGuardarImagen.Enabled = true;
 					txtImagenUrl.Enabled = false;
 					btnGuardarImagen.Text = "Cargar";
-
+					
 				}
 
 				if (rbUrl.Checked)
 				{
+					btnGuardarImagen.Enabled = false;
 					txtImagenUrl.Enabled = true;
 					btnGuardarImagen.Text = "Guardar";
 				}
@@ -458,7 +521,7 @@ namespace Presentacion
 					}
 					catch (Exception)
 					{
-						MessageBox.Show("La iamgen no pudo ser cargada");
+						MessageBox.Show("La iamgen no pudo ser cargada", "Cargada");
 					}
 				}
 			}
@@ -474,31 +537,33 @@ namespace Presentacion
 				}
 				else // ARCHIVO
 				{
-					aux.UrlImagen = file.FileName;
+					//Copiar imagen en carpeta del proyecto
+					copiarImagen(aux, file);
 				}
 
 				ImagenNegocio imagenNegocio = new ImagenNegocio();
-				
-				if (imagenNegocio.agregar(aux))
+
+				try
 				{
-					if(articulo.Imagenes == null)
+					//Guardamos Imagen en la base de datos y luego su Id en el objeto de la imagen
+					aux.Id = imagenNegocio.agregar(aux);
+					
+					if (articulo.Imagenes == null)
 					{
-						//Buscamos la imagen y se la agregamos al arituclo
-						List<Imagen> auxImagen = imagenNegocio.listar(articulo.Id.ToString());
-						articulo.Imagenes = auxImagen;
+						//Buscamos el listado de imágenes de la base de datos y se la agregamos al arituclo
+						articulo.Imagenes = imagenNegocio.listar(articulo.Id.ToString());
 					}
 					else
 					{
-						//Cargamos imagenes
+						//Cargamos imagenes en la lista de imágenes
 						articulo.Imagenes.Add(aux);
 					}
 
 					MessageBox.Show("La imagen se guardó exitosamente!");
-
 				}
-				else
+				catch(Exception err)
 				{
-					MessageBox.Show("La imagen no pudo ser cargada");
+					MessageBox.Show("La imagen no pudo ser cargada", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 				}
 
 				//Regresamos checked a false y vaciamos textbox
@@ -522,14 +587,12 @@ namespace Presentacion
 			ArticuloNegocio articuloNegocio = new ArticuloNegocio();
 
 			//Verificar si se quiere cancelar
-			DialogResult result = MessageBox.Show("¿Está seguro que quiere Eliminar el artículo?", "Cancelar", MessageBoxButtons.OKCancel);
+			DialogResult result = MessageBox.Show("¿Está seguro que quiere Eliminar el artículo?", "Cancelar", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
 
+			//Borrar imagen
 			if (result == DialogResult.OK)
 				if (articuloNegocio.eliminar(articulo.Id))
 				{
-					//Borrar sus imágenes
-
-
 					//Ponemos los cambios en true para que la ventana de listado se actualice
 					this.hayCambios = true;
 
@@ -540,9 +603,49 @@ namespace Presentacion
 
 		private void txtImagenUrl_TextChanged(object sender, EventArgs e)
 		{
-			if(txtImagenUrl.Text.Contains("http"))
+			//Cargamos en el picturebox la imagen del link
+			if (txtImagenUrl.Text.Contains("http"))
 			{
 				CargarPictureBox(pbImagenArticulo, txtImagenUrl.Text);
+			}
+		}
+
+		 private void copiarImagen(Imagen imagen, OpenFileDialog file)
+		{
+			string imgFolder = rutaImagen + "\\img_articulos\\";
+			
+			if (!Directory.Exists(imgFolder))
+			{
+				Directory.CreateDirectory(imgFolder);
+			}
+
+			try
+			{
+				if (File.Exists(imgFolder + file.SafeFileName))
+				{
+					DialogResult result = MessageBox.Show("El archivo ya existe. ¿Desea Remplazarlo?", "Ya existe", MessageBoxButtons.OKCancel);
+
+					if (result == DialogResult.OK)
+					{
+						File.Delete(imgFolder + file.SafeFileName);
+						File.Copy(file.FileName, imgFolder + file.SafeFileName);
+
+						//Guardar imagen en listado de imagenes dentro del artículo
+						imagen.UrlImagen = imgFolder + file.SafeFileName;
+					}
+				}
+				else
+				{
+					File.Copy(file.FileName, imgFolder + file.SafeFileName);
+
+					//Guardar imagen en listado de imagenes dentro del artículo
+					imagen.UrlImagen = imgFolder + file.SafeFileName;
+					
+				}
+			}
+			catch (Exception ex)
+			{
+				throw ex;
 			}
 		}
 	}

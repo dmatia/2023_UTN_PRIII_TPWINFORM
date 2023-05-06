@@ -58,11 +58,11 @@
     <Compile Include="Articulos.Designer.cs">
       <DependentUpon>Articulos.cs</DependentUpon>
     </Compile>
-    <Compile Include="Categorias.cs">
+    <Compile Include="IAtributos.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Categorias.Designer.cs">
-      <DependentUpon>Categorias.cs</DependentUpon>
+    <Compile Include="IAtributos.Designer.cs">
+      <DependentUpon>IAtributos.cs</DependentUpon>
     </Compile>
     <Compile Include="Main.cs">
       <SubType>Form</SubType>
@@ -70,11 +70,11 @@
     <Compile Include="Main.Designer.cs">
       <DependentUpon>Main.cs</DependentUpon>
     </Compile>
-    <Compile Include="ModificarCategoria.cs">
+    <Compile Include="ModificarAtributos.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ModificarCategoria.Designer.cs">
-      <DependentUpon>ModificarCategoria.cs</DependentUpon>
+    <Compile Include="ModificarAtributos.Designer.cs">
+      <DependentUpon>ModificarAtributos.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -84,14 +84,14 @@
     <EmbeddedResource Include="Articulos.resx">
       <DependentUpon>Articulos.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Categorias.resx">
-      <DependentUpon>Categorias.cs</DependentUpon>
+    <EmbeddedResource Include="IAtributos.resx">
+      <DependentUpon>IAtributos.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ModificarCategoria.resx">
-      <DependentUpon>ModificarCategoria.cs</DependentUpon>
+    <EmbeddedResource Include="ModificarAtributos.resx">
+      <DependentUpon>ModificarAtributos.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

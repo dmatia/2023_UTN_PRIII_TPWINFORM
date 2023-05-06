@@ -1,6 +1,6 @@
 ﻿namespace Presentacion
 {
-    partial class ModificarCategoria
+    partial class ModificarAtributos
     {
         /// <summary>
         /// Required designer variable.
@@ -60,7 +60,7 @@
             this.grbxModificarCategoria.Size = new System.Drawing.Size(624, 340);
             this.grbxModificarCategoria.TabIndex = 5;
             this.grbxModificarCategoria.TabStop = false;
-            this.grbxModificarCategoria.Text = "MODIFICAR CATEGORIA";
+            this.grbxModificarCategoria.Text = "MODIFICAR REGISTRO";
             // 
             // lblDatosActuales
             // 
@@ -152,7 +152,7 @@
             this.lblIdActual.TabIndex = 0;
             this.lblIdActual.Text = "ID:";
             // 
-            // ModificarCategoria
+            // ModificarAtributos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -162,7 +162,7 @@
             this.MaximumSize = new System.Drawing.Size(665, 409);
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(665, 409);
-            this.Name = "ModificarCategoria";
+            this.Name = "ModificarAtributos";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "¡ATENCIÓN!";
             this.Load += new System.EventHandler(this.ModificarCategoria_Load);
