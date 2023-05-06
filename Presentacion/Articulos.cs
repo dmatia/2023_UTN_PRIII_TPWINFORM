@@ -83,8 +83,9 @@ namespace Presentacion
             dgvListaArticulos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
             //No mostrar columnas
-            ///dgvListaArticulos.Columns["Id"].Visible = false;
-        }
+            dgvListaArticulos.Columns["Id"].Visible = false;
+            dgvListaArticulos.Columns["Descripcion"].Visible = false;
+		}
 
         private void ListarArticulos()
         {
