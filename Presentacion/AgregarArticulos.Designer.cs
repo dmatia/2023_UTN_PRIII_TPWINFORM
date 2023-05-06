@@ -68,7 +68,7 @@
 			this.btnModificar.Location = new System.Drawing.Point(133, 245);
 			this.btnModificar.Name = "btnModificar";
 			this.btnModificar.Size = new System.Drawing.Size(75, 43);
-			this.btnModificar.TabIndex = 20;
+			this.btnModificar.TabIndex = 7;
 			this.btnModificar.Text = "Modificar";
 			this.btnModificar.UseVisualStyleBackColor = true;
 			this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
@@ -78,7 +78,7 @@
 			this.btnCancelar.Location = new System.Drawing.Point(214, 245);
 			this.btnCancelar.Name = "btnCancelar";
 			this.btnCancelar.Size = new System.Drawing.Size(75, 43);
-			this.btnCancelar.TabIndex = 20;
+			this.btnCancelar.TabIndex = 8;
 			this.btnCancelar.Text = "Cancelar";
 			this.btnCancelar.UseVisualStyleBackColor = true;
 			this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
@@ -88,7 +88,7 @@
 			this.btnEliminar.Location = new System.Drawing.Point(295, 245);
 			this.btnEliminar.Name = "btnEliminar";
 			this.btnEliminar.Size = new System.Drawing.Size(75, 43);
-			this.btnEliminar.TabIndex = 20;
+			this.btnEliminar.TabIndex = 9;
 			this.btnEliminar.Text = "Eliminar";
 			this.btnEliminar.UseVisualStyleBackColor = true;
 			this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
@@ -100,7 +100,7 @@
 			this.gbGuardarImagenes.Location = new System.Drawing.Point(126, 19);
 			this.gbGuardarImagenes.Name = "gbGuardarImagenes";
 			this.gbGuardarImagenes.Size = new System.Drawing.Size(200, 67);
-			this.gbGuardarImagenes.TabIndex = 22;
+			this.gbGuardarImagenes.TabIndex = 0;
 			this.gbGuardarImagenes.TabStop = false;
 			this.gbGuardarImagenes.Text = "Guardar";
 			// 
@@ -137,7 +137,7 @@
 			this.lbImagen.Location = new System.Drawing.Point(53, 48);
 			this.lbImagen.Name = "lbImagen";
 			this.lbImagen.Size = new System.Drawing.Size(50, 16);
-			this.lbImagen.TabIndex = 23;
+			this.lbImagen.TabIndex = 3;
 			this.lbImagen.Text = "Imagen";
 			// 
 			// txtImagenUrl
@@ -145,7 +145,7 @@
 			this.txtImagenUrl.Location = new System.Drawing.Point(347, 48);
 			this.txtImagenUrl.Name = "txtImagenUrl";
 			this.txtImagenUrl.Size = new System.Drawing.Size(254, 20);
-			this.txtImagenUrl.TabIndex = 24;
+			this.txtImagenUrl.TabIndex = 1;
 			this.txtImagenUrl.TextChanged += new System.EventHandler(this.txtImagenUrl_TextChanged);
 			// 
 			// btnGuardarImagen
@@ -153,7 +153,7 @@
 			this.btnGuardarImagen.Location = new System.Drawing.Point(621, 36);
 			this.btnGuardarImagen.Name = "btnGuardarImagen";
 			this.btnGuardarImagen.Size = new System.Drawing.Size(75, 43);
-			this.btnGuardarImagen.TabIndex = 21;
+			this.btnGuardarImagen.TabIndex = 2;
 			this.btnGuardarImagen.Text = "Guardar";
 			this.btnGuardarImagen.UseVisualStyleBackColor = true;
 			this.btnGuardarImagen.Click += new System.EventHandler(this.btnGuardarImagen_Click);
@@ -182,7 +182,7 @@
 			this.gbArticulo.Location = new System.Drawing.Point(37, 12);
 			this.gbArticulo.Name = "gbArticulo";
 			this.gbArticulo.Size = new System.Drawing.Size(735, 307);
-			this.gbArticulo.TabIndex = 25;
+			this.gbArticulo.TabIndex = 0;
 			this.gbArticulo.TabStop = false;
 			this.gbArticulo.Text = "ARTICULO";
 			// 
@@ -217,7 +217,7 @@
 			this.btnImagenBorrarActual.Location = new System.Drawing.Point(508, 245);
 			this.btnImagenBorrarActual.Name = "btnImagenBorrarActual";
 			this.btnImagenBorrarActual.Size = new System.Drawing.Size(118, 43);
-			this.btnImagenBorrarActual.TabIndex = 32;
+			this.btnImagenBorrarActual.TabIndex = 10;
 			this.btnImagenBorrarActual.Text = "Borrar Actual";
 			this.btnImagenBorrarActual.UseVisualStyleBackColor = true;
 			this.btnImagenBorrarActual.Click += new System.EventHandler(this.btnImagenBorrarActual_Click);
@@ -238,7 +238,7 @@
 			this.cbCategoria.Location = new System.Drawing.Point(149, 187);
 			this.cbCategoria.Name = "cbCategoria";
 			this.cbCategoria.Size = new System.Drawing.Size(205, 21);
-			this.cbCategoria.TabIndex = 28;
+			this.cbCategoria.TabIndex = 6;
 			// 
 			// cbMarca
 			// 
@@ -247,35 +247,35 @@
 			this.cbMarca.Location = new System.Drawing.Point(149, 157);
 			this.cbMarca.Name = "cbMarca";
 			this.cbMarca.Size = new System.Drawing.Size(205, 21);
-			this.cbMarca.TabIndex = 27;
+			this.cbMarca.TabIndex = 5;
 			// 
 			// txtPrecio
 			// 
 			this.txtPrecio.Location = new System.Drawing.Point(149, 128);
 			this.txtPrecio.Name = "txtPrecio";
 			this.txtPrecio.Size = new System.Drawing.Size(205, 20);
-			this.txtPrecio.TabIndex = 25;
+			this.txtPrecio.TabIndex = 4;
 			// 
 			// txtDescripcion
 			// 
 			this.txtDescripcion.Location = new System.Drawing.Point(149, 99);
 			this.txtDescripcion.Name = "txtDescripcion";
 			this.txtDescripcion.Size = new System.Drawing.Size(205, 20);
-			this.txtDescripcion.TabIndex = 23;
+			this.txtDescripcion.TabIndex = 3;
 			// 
 			// txtArticulo
 			// 
 			this.txtArticulo.Location = new System.Drawing.Point(149, 70);
 			this.txtArticulo.Name = "txtArticulo";
 			this.txtArticulo.Size = new System.Drawing.Size(205, 20);
-			this.txtArticulo.TabIndex = 21;
+			this.txtArticulo.TabIndex = 2;
 			// 
 			// txtCodigo
 			// 
 			this.txtCodigo.Location = new System.Drawing.Point(149, 40);
 			this.txtCodigo.Name = "txtCodigo";
 			this.txtCodigo.Size = new System.Drawing.Size(205, 20);
-			this.txtCodigo.TabIndex = 19;
+			this.txtCodigo.TabIndex = 1;
 			// 
 			// lbCategoria
 			// 
@@ -286,7 +286,7 @@
 			this.lbCategoria.Location = new System.Drawing.Point(41, 192);
 			this.lbCategoria.Name = "lbCategoria";
 			this.lbCategoria.Size = new System.Drawing.Size(62, 16);
-			this.lbCategoria.TabIndex = 30;
+			this.lbCategoria.TabIndex = 1;
 			this.lbCategoria.Text = "Categoria";
 			// 
 			// lbMarca
@@ -298,7 +298,7 @@
 			this.lbMarca.Location = new System.Drawing.Point(61, 162);
 			this.lbMarca.Name = "lbMarca";
 			this.lbMarca.Size = new System.Drawing.Size(42, 16);
-			this.lbMarca.TabIndex = 29;
+			this.lbMarca.TabIndex = 0;
 			this.lbMarca.Text = "Marca";
 			// 
 			// lbPrecio
@@ -310,7 +310,7 @@
 			this.lbPrecio.Location = new System.Drawing.Point(61, 132);
 			this.lbPrecio.Name = "lbPrecio";
 			this.lbPrecio.Size = new System.Drawing.Size(42, 16);
-			this.lbPrecio.TabIndex = 26;
+			this.lbPrecio.TabIndex = 15;
 			this.lbPrecio.Text = "Precio";
 			// 
 			// lbDescripcion
@@ -322,7 +322,7 @@
 			this.lbDescripcion.Location = new System.Drawing.Point(31, 103);
 			this.lbDescripcion.Name = "lbDescripcion";
 			this.lbDescripcion.Size = new System.Drawing.Size(72, 16);
-			this.lbDescripcion.TabIndex = 24;
+			this.lbDescripcion.TabIndex = 14;
 			this.lbDescripcion.Text = "Descripción";
 			// 
 			// lbArticulo
@@ -334,7 +334,7 @@
 			this.lbArticulo.Location = new System.Drawing.Point(53, 74);
 			this.lbArticulo.Name = "lbArticulo";
 			this.lbArticulo.Size = new System.Drawing.Size(50, 16);
-			this.lbArticulo.TabIndex = 22;
+			this.lbArticulo.TabIndex = 13;
 			this.lbArticulo.Text = "Articulo";
 			// 
 			// lbCodigo
@@ -346,7 +346,7 @@
 			this.lbCodigo.Location = new System.Drawing.Point(57, 44);
 			this.lbCodigo.Name = "lbCodigo";
 			this.lbCodigo.Size = new System.Drawing.Size(46, 16);
-			this.lbCodigo.TabIndex = 20;
+			this.lbCodigo.TabIndex = 12;
 			this.lbCodigo.Text = "Código";
 			// 
 			// gbImagen
@@ -358,7 +358,7 @@
 			this.gbImagen.Location = new System.Drawing.Point(37, 325);
 			this.gbImagen.Name = "gbImagen";
 			this.gbImagen.Size = new System.Drawing.Size(735, 103);
-			this.gbImagen.TabIndex = 26;
+			this.gbImagen.TabIndex = 1;
 			this.gbImagen.TabStop = false;
 			this.gbImagen.Text = "IMAGEN";
 			// 

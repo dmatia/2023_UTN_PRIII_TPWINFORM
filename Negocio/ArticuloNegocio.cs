@@ -30,7 +30,7 @@ namespace Negocio
                     aux.Codigo = (string)datos.Reader["Codigo"];                 //aux.= lector.GetInt32();
                     aux.Nombre = (string)datos.Reader["Nombre"];
                     aux.Descripcion = (string)datos.Reader["Descripcion"]; // validaciones sobre descripcion y otros
-                    aux.Precio = (double)(decimal)datos.Reader["Precio"]; /// Ver tema del float y el casteo de money
+                    aux.Precio = Math.Round(Convert.ToDecimal(datos.Reader["Precio"]), 2); /// Ver tema del float y el casteo de money
                     aux.Marca = new Marca();
                     aux.Marca.Id = (int)datos.Reader["MarcasId"];
                     aux.Marca.Descripcion = (string)datos.Reader["MarcasDescripcion"];
@@ -200,7 +200,7 @@ namespace Negocio
                         aux.Codigo = (string)datos.Reader["Codigo"];                 //aux.= lector.GetInt32();
                         aux.Nombre = (string)datos.Reader["Nombre"];
                         aux.Descripcion = (string)datos.Reader["Descripcion"]; // validaciones sobre descripcion y otros
-                        aux.Precio = (double)(decimal)datos.Reader["Precio"]; /// Ver tema del float y el casteo de money
+                        aux.Precio = Math.Round(Convert.ToDecimal(datos.Reader["Precio"]), 2); /// Ver tema del float y el casteo de money
                         aux.Marca = new Marca();
                         aux.Marca.Id = (int)datos.Reader["MarcasId"];
                         aux.Marca.Descripcion = (string)datos.Reader["MarcasDescripcion"];
@@ -222,9 +222,12 @@ namespace Negocio
                         {
                             aux.Categoria.Id = 0;
                         }
-                        //Cargar Imágenes
 
-                        lista.Add(aux);// Agrega cada variable a la lista
+					    //Cargar Imágenes
+					    ImagenNegocio imagenNegocio = new ImagenNegocio();
+					    aux.Imagenes = imagenNegocio.listar(aux.Id.ToString());
+
+					    lista.Add(aux);// Agrega cada variable a la lista
                     }
 
                     return lista;// devuelve la lista
