@@ -82,5 +82,13 @@ namespace Presentacion
             
         }
 
-	}
+        private void lblAboutUs_MouseClick(object sender, MouseEventArgs e)
+        {
+            MessageBox.Show("PROGRAMACIÓN III - GRUPO 25" + Environment.NewLine +
+                            "Alumnos: " + Environment.NewLine +
+                            "Merayo, Federico" + Environment.NewLine +
+                            "Nieto, Alejandro" + Environment.NewLine +
+                            "Villalba, Diego" + Environment.NewLine);
+           } 
+    }
 }
