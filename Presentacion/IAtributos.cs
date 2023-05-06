@@ -30,7 +30,7 @@ namespace Presentacion
         }
         private void Categorias_Load(object sender, EventArgs e)
         {
-			//Deterinar carga de negocio
+			//Determinar carga de negocio
 
 		    if(this.atributo == "Marca")
             {
@@ -45,7 +45,7 @@ namespace Presentacion
         }
 
 
-        // Lista completa de categorias 
+        // Lista completa de atributos
         private void listarAtributos()
         {
             
@@ -165,42 +165,66 @@ namespace Presentacion
         {
             if (!(txtbxNuevoAtributo.Text == "" || txtbxNuevoAtributo.Text == "Ingrese un valor"))
             {
-				IAtributo iatributo = null;
+                if (!(chequearAtributo()))
+                {
 
-				if (this.atributo == "Marca")
-				{
-					iatributo = new Marca();
-				}
-				else if (this.atributo == "Categoria")
-				{
-					iatributo = new Categoria();
-				}
+                    IAtributo iatributo = null;
 
-				iatributo.Descripcion = txtbxNuevoAtributo.Text;
+                    if (this.atributo == "Marca")
+                    {
+                        iatributo = new Marca();
+                    }
+                    else if (this.atributo == "Categoria")
+                    {
+                        iatributo = new Categoria();
+                    }
 
-                
-                if (iAtributosNegocio.agregar(iatributo))
-                    MessageBox.Show(atributo.ToUpper() + " AGREGADA CORRECTAMENTE");
+                    iatributo.Descripcion = txtbxNuevoAtributo.Text;
+
+
+                    if (iAtributosNegocio.agregar(iatributo))
+                        MessageBox.Show(atributo.ToUpper() + " AGREGADA CORRECTAMENTE");
+                    else
+                        MessageBox.Show("ERROR AL GUARDAR" + atributo.ToUpper());
+                    agregarTextoDefault();
+                    listarAtributos();
+                }
                 else
-                    MessageBox.Show("ERROR AL GUARDAR" + atributo.ToUpper());
-                agregarTextoDefault();
-                listarAtributos();
+                {
+                    MessageBox.Show("'" + txtbxNuevoAtributo.Text.ToUpper() + "' YA EXISTE COMO REGISTRO");
+                }
             }
+               
             else
                 MessageBox.Show("Ingrese un valor");
         }
-        // cancelar nueva categoria, resetear textbox
+        // cancelar nuevo atributo, resetear textbox
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             agregarTextoDefault();
         }
 
 
-        // CERRAR VENTANA CATEGORIAS
-        private void btnClose_Click(object sender, EventArgs e)
+        // verificar si ya exite un atributo tal
+        private bool chequearAtributo()
         {
-            Close();
+           return listaAtributos.Any(x => x.Descripcion.ToUpper() == txtbxNuevoAtributo.Text.ToUpper());
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
         // FILTRO
