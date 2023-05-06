@@ -244,7 +244,7 @@ namespace Negocio
            
               
        
-        public bool agregar(Articulo articulo)
+        public int agregar(Articulo articulo)
         {
             AccesoDB datoSQL = new AccesoDB();
 
@@ -254,14 +254,17 @@ namespace Negocio
                  (
                     $"INSERT INTO ARTICULOS " +
                     $"(Codigo, Nombre, Descripcion, IdMarca, IdCategoria, Precio) " +
-                    $"VALUES('{articulo.Codigo}', '{articulo.Nombre}', '{articulo.Descripcion}', {articulo.Marca.Id}, {articulo.Categoria.Id}, {articulo.Precio.ToString(new CultureInfo("en-US"))})"
+                    $"VALUES('{articulo.Codigo}', '{articulo.Nombre}', '{articulo.Descripcion}', {articulo.Marca.Id}, {articulo.Categoria.Id}, {articulo.Precio.ToString(new CultureInfo("en-US"))}) " +
+					"SELECT SCOPE_IDENTITY()"
                 );
 
-                if (datoSQL.executeNonQuery())
-                {
-                    datoSQL.closeConnection();
-                    return true;
-                }
+                return datoSQL.executeScalar();
+
+                //if (datoSQL.executeNonQuery())
+                //{
+                //    datoSQL.closeConnection();
+                //    return true;
+                //}
             }
             catch (Exception ex)
             {
@@ -273,7 +276,7 @@ namespace Negocio
                 datoSQL.closeConnection();
             }
 
-            return false;
+            //return false;
         }
 
 
@@ -331,6 +334,7 @@ namespace Negocio
         }
 
     }
+	
 
 }
 

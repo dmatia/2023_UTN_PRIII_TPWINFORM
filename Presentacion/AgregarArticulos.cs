@@ -283,25 +283,47 @@ namespace Presentacion
 			{
 				if(btnModificar.Text == "Guardar")
 				{
-					// Guardar articulo
-					if (articuloNegocio.agregar(articulo))
+					try
 					{
-						MessageBox.Show("Se Guardó correctamente");
+						// Guardar articulo
+						articulo.Id = articuloNegocio.agregar(articulo);
 
-						//Buscamos articulo guardado y lo ponemos en la ventana
-						List<Articulo> listaAux = articuloNegocio.listar();
-						articulo = listaAux.FindAll(x => x.Codigo == articulo.Codigo)[0];
+						MessageBox.Show("Se Guardó correctamente");
 
 						// Validar si guardó y pasar a modo vista
 						this.hayCambios = true;
 						this.esAgregar = false;
 						this.esModificar = false;
-						
+
 						//Pasar a modo vista
 						ModoModificar(this.esAgregar);
-						
+
 						return;
 					}
+					catch (Exception err)
+					{
+						MessageBox.Show("Error al guardar el articulo", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+					}
+
+					//if (articuloNegocio.agregar(articulo))
+					//{
+					//	MessageBox.Show("Se Guardó correctamente");
+
+					//	//Buscamos articulo guardado y lo ponemos en la ventana
+					//	//Utilizar Scalar para solamente traer el ID al insertar
+					//	List<Articulo> listaAux = articuloNegocio.listar();
+					//	articulo = listaAux.FindAll(x => x.Codigo == articulo.Codigo)[0];
+
+					//	// Validar si guardó y pasar a modo vista
+					//	this.hayCambios = true;
+					//	this.esAgregar = false;
+					//	this.esModificar = false;
+
+					//	//Pasar a modo vista
+					//	ModoModificar(this.esAgregar);
+
+					//	return;
+					//}
 				}
 			}
 			else //Modificar Articulo en la base de datos
@@ -329,7 +351,7 @@ namespace Presentacion
 						}
 						else
 						{
-							MessageBox.Show("Error al modificar");
+							MessageBox.Show("Error al modificar el articulo", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 						}
 					}
 				}
@@ -373,7 +395,7 @@ namespace Presentacion
 			if (this.esModificar)
 			{
 				//En Modo Modificar verificamos que se quiera cancelar
-				DialogResult result = MessageBox.Show("¿Está seguro que quiere cancelar", "Cancelar", MessageBoxButtons.OKCancel);
+				DialogResult result = MessageBox.Show("¿Está seguro que quiere cancelar?", "Cancelar", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
 
 				//Si se cancela, vuelve a Modo Vista
 				if (result == DialogResult.OK)
@@ -394,7 +416,7 @@ namespace Presentacion
 			ImagenNegocio imagenNegocio = new ImagenNegocio();
 
 			//Verificar si se quiere cancelar
-			DialogResult result = MessageBox.Show("¿Está seguro que quiere borrar la imagen actual?", "Cancelar", MessageBoxButtons.OKCancel);
+			DialogResult result = MessageBox.Show("¿Está seguro que quiere borrar la imagen actual?", "Cancelar", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
 
 			if (result == DialogResult.OK)
 				if (imagenNegocio.borrar(imagenActual))
@@ -488,7 +510,7 @@ namespace Presentacion
 					}
 					catch (Exception)
 					{
-						MessageBox.Show("La iamgen no pudo ser cargada");
+						MessageBox.Show("La iamgen no pudo ser cargada", "Cargada");
 					}
 				}
 			}
@@ -528,7 +550,7 @@ namespace Presentacion
 				}
 				else
 				{
-					MessageBox.Show("La imagen no pudo ser cargada");
+					MessageBox.Show("La imagen no pudo ser cargada", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 				}
 
 				//Regresamos checked a false y vaciamos textbox
@@ -552,7 +574,7 @@ namespace Presentacion
 			ArticuloNegocio articuloNegocio = new ArticuloNegocio();
 
 			//Verificar si se quiere cancelar
-			DialogResult result = MessageBox.Show("¿Está seguro que quiere Eliminar el artículo?", "Cancelar", MessageBoxButtons.OKCancel);
+			DialogResult result = MessageBox.Show("¿Está seguro que quiere Eliminar el artículo?", "Cancelar", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
 
 			if (result == DialogResult.OK)
 				if (articuloNegocio.eliminar(articulo.Id))

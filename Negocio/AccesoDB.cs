@@ -11,8 +11,8 @@ namespace Negocio
 
 		// Datos de la Base
 		//string serverName = "localhost\\";
-		string serverName = "localhost\\SQLLAB";
-		//string serverName = "localhost\\SQLEXPRESS";
+		//string serverName = "localhost\\SQLLAB";
+		string serverName = "localhost\\SQLEXPRESS";
 		string dataBase = "CATALOGO_P3_DB";
 
 		public AccesoDB()
@@ -61,6 +61,20 @@ namespace Negocio
 			}
 
 			return false;
+		}
+
+		public int executeScalar()
+		{
+			command.Connection = connection;
+			try
+			{
+				connection.Open();
+				return Convert.ToInt32(command.ExecuteScalar());
+			}
+			catch (Exception ex)
+			{
+				throw ex;
+			}
 		}
 
 		public void closeConnection()
