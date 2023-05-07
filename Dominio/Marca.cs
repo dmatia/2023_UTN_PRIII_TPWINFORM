@@ -15,5 +15,11 @@ namespace Dominio
         {
             return Descripcion;
         }
-    }
+
+		public Marca()
+		{
+			this.Id = -1;
+			this.Descripcion = string.Empty;
+		}
+	}
 }
