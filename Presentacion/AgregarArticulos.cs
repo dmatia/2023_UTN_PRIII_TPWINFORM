@@ -74,15 +74,14 @@ namespace Presentacion
 			// Lista los articulos para ejecutar valicaciones
 			Listararticulos();
 
-            LblAvisoCodigo.ForeColor = Color.DarkRed;
-            LblAvisoNombre.Visible = false;
-            LblAvisoNombre.ForeColor = Color.DarkRed;
-            LblAvisoCodigo.Visible = false;
-			LblAvisoPrecio.ForeColor = Color.DarkRed;
-            LblAvisoPrecio.Visible = false;
+			//Esconde las Label de notificaciones en caso de error en la carga de articulos
+			InvisibilizarAvisos();
+       
             //Carga los combo box de categorías y marcas
             CargarComboBox();
 		}
+
+
 
 		private void ModoModificar(bool esModificar)
 		{
@@ -751,6 +750,16 @@ namespace Presentacion
         private void txtPrecio_TextChanged(object sender, EventArgs e)
         {
 			Validarprecio();
+        }
+        private void InvisibilizarAvisos()
+        {
+            LblAvisoCodigo.ForeColor = Color.DarkRed;
+            LblAvisoNombre.Visible = false;
+            LblAvisoNombre.ForeColor = Color.DarkRed;
+            LblAvisoCodigo.Visible = false;
+            LblAvisoPrecio.ForeColor = Color.DarkRed;
+            LblAvisoPrecio.Visible = false;
+
         }
     }
 }

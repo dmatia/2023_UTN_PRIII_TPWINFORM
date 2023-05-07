@@ -55,9 +55,11 @@
             this.grbxModificarCategoria.Controls.Add(this.lblDescripcionActual);
             this.grbxModificarCategoria.Controls.Add(this.lblNuevaDescripcion);
             this.grbxModificarCategoria.Controls.Add(this.lblIdActual);
-            this.grbxModificarCategoria.Location = new System.Drawing.Point(11, 10);
+            this.grbxModificarCategoria.Location = new System.Drawing.Point(8, 8);
+            this.grbxModificarCategoria.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.grbxModificarCategoria.Name = "grbxModificarCategoria";
-            this.grbxModificarCategoria.Size = new System.Drawing.Size(624, 340);
+            this.grbxModificarCategoria.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.grbxModificarCategoria.Size = new System.Drawing.Size(468, 276);
             this.grbxModificarCategoria.TabIndex = 5;
             this.grbxModificarCategoria.TabStop = false;
             this.grbxModificarCategoria.Text = "MODIFICAR REGISTRO";
@@ -65,19 +67,21 @@
             // lblDatosActuales
             // 
             this.lblDatosActuales.AutoSize = true;
-            this.lblDatosActuales.Location = new System.Drawing.Point(40, 44);
+            this.lblDatosActuales.Location = new System.Drawing.Point(30, 36);
+            this.lblDatosActuales.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblDatosActuales.Name = "lblDatosActuales";
-            this.lblDatosActuales.Size = new System.Drawing.Size(159, 16);
+            this.lblDatosActuales.Size = new System.Drawing.Size(130, 13);
             this.lblDatosActuales.TabIndex = 9;
             this.lblDatosActuales.Text = "DATOS DEL REGISTRO:";
             // 
             // btnAceptar
             // 
             this.btnAceptar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAceptar.Location = new System.Drawing.Point(300, 244);
+            this.btnAceptar.Location = new System.Drawing.Point(225, 198);
+            this.btnAceptar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnAceptar.Name = "btnAceptar";
-            this.btnAceptar.Size = new System.Drawing.Size(155, 49);
-            this.btnAceptar.TabIndex = 8;
+            this.btnAceptar.Size = new System.Drawing.Size(116, 40);
+            this.btnAceptar.TabIndex = 2;
             this.btnAceptar.Text = "GUARDAR";
             this.btnAceptar.UseVisualStyleBackColor = true;
             this.btnAceptar.Click += new System.EventHandler(this.btnAceptar_Click);
@@ -85,18 +89,20 @@
             // lblDescripcion
             // 
             this.lblDescripcion.AutoSize = true;
-            this.lblDescripcion.Location = new System.Drawing.Point(299, 129);
-            this.lblDescripcion.MinimumSize = new System.Drawing.Size(10, 10);
+            this.lblDescripcion.Location = new System.Drawing.Point(224, 105);
+            this.lblDescripcion.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblDescripcion.MinimumSize = new System.Drawing.Size(8, 8);
             this.lblDescripcion.Name = "lblDescripcion";
-            this.lblDescripcion.Size = new System.Drawing.Size(10, 16);
+            this.lblDescripcion.Size = new System.Drawing.Size(8, 13);
             this.lblDescripcion.TabIndex = 3;
             // 
             // btnCancelar
             // 
-            this.btnCancelar.Location = new System.Drawing.Point(139, 244);
+            this.btnCancelar.Location = new System.Drawing.Point(104, 198);
+            this.btnCancelar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(155, 49);
-            this.btnCancelar.TabIndex = 7;
+            this.btnCancelar.Size = new System.Drawing.Size(116, 40);
+            this.btnCancelar.TabIndex = 1;
             this.btnCancelar.Text = "CANCELAR";
             this.btnCancelar.UseVisualStyleBackColor = true;
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
@@ -104,19 +110,21 @@
             // lblId
             // 
             this.lblId.AutoSize = true;
-            this.lblId.Location = new System.Drawing.Point(299, 107);
-            this.lblId.MinimumSize = new System.Drawing.Size(16, 16);
+            this.lblId.Location = new System.Drawing.Point(224, 87);
+            this.lblId.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblId.MinimumSize = new System.Drawing.Size(12, 13);
             this.lblId.Name = "lblId";
-            this.lblId.Size = new System.Drawing.Size(16, 16);
+            this.lblId.Size = new System.Drawing.Size(12, 13);
             this.lblId.TabIndex = 2;
             // 
             // txbxNuevaDescripcion
             // 
-            this.txbxNuevaDescripcion.Location = new System.Drawing.Point(300, 199);
+            this.txbxNuevaDescripcion.Location = new System.Drawing.Point(225, 162);
+            this.txbxNuevaDescripcion.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txbxNuevaDescripcion.MaxLength = 50;
             this.txbxNuevaDescripcion.Name = "txbxNuevaDescripcion";
-            this.txbxNuevaDescripcion.Size = new System.Drawing.Size(219, 22);
-            this.txbxNuevaDescripcion.TabIndex = 6;
+            this.txbxNuevaDescripcion.Size = new System.Drawing.Size(165, 20);
+            this.txbxNuevaDescripcion.TabIndex = 0;
             this.txbxNuevaDescripcion.Text = "doble click aquí";
             this.txbxNuevaDescripcion.DoubleClick += new System.EventHandler(this.txbxNuevaDescripcion_DoubleClick);
             // 
@@ -124,9 +132,10 @@
             // 
             this.lblDescripcionActual.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblDescripcionActual.AutoSize = true;
-            this.lblDescripcionActual.Location = new System.Drawing.Point(193, 129);
+            this.lblDescripcionActual.Location = new System.Drawing.Point(145, 105);
+            this.lblDescripcionActual.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblDescripcionActual.Name = "lblDescripcionActual";
-            this.lblDescripcionActual.Size = new System.Drawing.Size(101, 16);
+            this.lblDescripcionActual.Size = new System.Drawing.Size(83, 13);
             this.lblDescripcionActual.TabIndex = 1;
             this.lblDescripcionActual.Text = "DESCRIPCIÓN:";
             // 
@@ -134,10 +143,10 @@
             // 
             this.lblNuevaDescripcion.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblNuevaDescripcion.AutoSize = true;
-            this.lblNuevaDescripcion.Location = new System.Drawing.Point(71, 202);
+            this.lblNuevaDescripcion.Location = new System.Drawing.Point(53, 164);
             this.lblNuevaDescripcion.Margin = new System.Windows.Forms.Padding(0);
             this.lblNuevaDescripcion.Name = "lblNuevaDescripcion";
-            this.lblNuevaDescripcion.Size = new System.Drawing.Size(223, 16);
+            this.lblNuevaDescripcion.Size = new System.Drawing.Size(183, 13);
             this.lblNuevaDescripcion.TabIndex = 5;
             this.lblNuevaDescripcion.Text = "INGRESE NUEVA DESCRIPCIÓN:   ";
             this.lblNuevaDescripcion.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -146,22 +155,24 @@
             // 
             this.lblIdActual.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblIdActual.AutoSize = true;
-            this.lblIdActual.Location = new System.Drawing.Point(193, 107);
+            this.lblIdActual.Location = new System.Drawing.Point(145, 87);
+            this.lblIdActual.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblIdActual.Name = "lblIdActual";
-            this.lblIdActual.Size = new System.Drawing.Size(23, 16);
+            this.lblIdActual.Size = new System.Drawing.Size(21, 13);
             this.lblIdActual.TabIndex = 0;
             this.lblIdActual.Text = "ID:";
             // 
             // ModificarAtributos
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(647, 362);
+            this.ClientSize = new System.Drawing.Size(487, 301);
             this.Controls.Add(this.grbxModificarCategoria);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(665, 409);
+            this.MaximumSize = new System.Drawing.Size(503, 340);
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(665, 409);
+            this.MinimumSize = new System.Drawing.Size(503, 340);
             this.Name = "ModificarAtributos";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "¡ATENCIÓN!";

@@ -71,7 +71,7 @@
             this.btnModificar.Location = new System.Drawing.Point(65, 227);
             this.btnModificar.Name = "btnModificar";
             this.btnModificar.Size = new System.Drawing.Size(75, 43);
-            this.btnModificar.TabIndex = 7;
+            this.btnModificar.TabIndex = 6;
             this.btnModificar.Text = "Modificar";
             this.btnModificar.UseVisualStyleBackColor = true;
             this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
@@ -81,7 +81,7 @@
             this.btnCancelar.Location = new System.Drawing.Point(146, 227);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(75, 43);
-            this.btnCancelar.TabIndex = 8;
+            this.btnCancelar.TabIndex = 7;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = true;
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
@@ -91,7 +91,7 @@
             this.btnEliminar.Location = new System.Drawing.Point(227, 227);
             this.btnEliminar.Name = "btnEliminar";
             this.btnEliminar.Size = new System.Drawing.Size(75, 43);
-            this.btnEliminar.TabIndex = 9;
+            this.btnEliminar.TabIndex = 8;
             this.btnEliminar.Text = "Eliminar";
             this.btnEliminar.UseVisualStyleBackColor = true;
             this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
@@ -148,7 +148,7 @@
             this.txtImagenUrl.Location = new System.Drawing.Point(347, 48);
             this.txtImagenUrl.Name = "txtImagenUrl";
             this.txtImagenUrl.Size = new System.Drawing.Size(254, 20);
-            this.txtImagenUrl.TabIndex = 1;
+            this.txtImagenUrl.TabIndex = 0;
             this.txtImagenUrl.TextChanged += new System.EventHandler(this.txtImagenUrl_TextChanged);
             // 
             // btnGuardarImagen
@@ -156,7 +156,7 @@
             this.btnGuardarImagen.Location = new System.Drawing.Point(621, 36);
             this.btnGuardarImagen.Name = "btnGuardarImagen";
             this.btnGuardarImagen.Size = new System.Drawing.Size(75, 43);
-            this.btnGuardarImagen.TabIndex = 2;
+            this.btnGuardarImagen.TabIndex = 1;
             this.btnGuardarImagen.Text = "Guardar";
             this.btnGuardarImagen.UseVisualStyleBackColor = true;
             this.btnGuardarImagen.Click += new System.EventHandler(this.btnGuardarImagen_Click);
@@ -195,7 +195,7 @@
             // LblAvisoPrecio
             // 
             this.LblAvisoPrecio.AutoSize = true;
-            this.LblAvisoPrecio.Location = new System.Drawing.Point(299, 134);
+            this.LblAvisoPrecio.Location = new System.Drawing.Point(312, 131);
             this.LblAvisoPrecio.Name = "LblAvisoPrecio";
             this.LblAvisoPrecio.Size = new System.Drawing.Size(93, 13);
             this.LblAvisoPrecio.TabIndex = 38;
@@ -204,7 +204,7 @@
             // LblAvisoNombre
             // 
             this.LblAvisoNombre.AutoSize = true;
-            this.LblAvisoNombre.Location = new System.Drawing.Point(296, 73);
+            this.LblAvisoNombre.Location = new System.Drawing.Point(309, 70);
             this.LblAvisoNombre.Name = "LblAvisoNombre";
             this.LblAvisoNombre.Size = new System.Drawing.Size(100, 13);
             this.LblAvisoNombre.TabIndex = 37;
@@ -213,7 +213,7 @@
             // LblAvisoCodigo
             // 
             this.LblAvisoCodigo.AutoSize = true;
-            this.LblAvisoCodigo.Location = new System.Drawing.Point(295, 45);
+            this.LblAvisoCodigo.Location = new System.Drawing.Point(308, 42);
             this.LblAvisoCodigo.Name = "LblAvisoCodigo";
             this.LblAvisoCodigo.Size = new System.Drawing.Size(96, 13);
             this.LblAvisoCodigo.TabIndex = 36;
@@ -250,7 +250,7 @@
             this.btnImagenBorrarActual.Location = new System.Drawing.Point(508, 245);
             this.btnImagenBorrarActual.Name = "btnImagenBorrarActual";
             this.btnImagenBorrarActual.Size = new System.Drawing.Size(118, 43);
-            this.btnImagenBorrarActual.TabIndex = 10;
+            this.btnImagenBorrarActual.TabIndex = 9;
             this.btnImagenBorrarActual.Text = "Borrar Actual";
             this.btnImagenBorrarActual.UseVisualStyleBackColor = true;
             this.btnImagenBorrarActual.Click += new System.EventHandler(this.btnImagenBorrarActual_Click);
@@ -268,49 +268,49 @@
             // 
             this.cbCategoria.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbCategoria.FormattingEnabled = true;
-            this.cbCategoria.Location = new System.Drawing.Point(84, 186);
+            this.cbCategoria.Location = new System.Drawing.Point(97, 183);
             this.cbCategoria.Name = "cbCategoria";
             this.cbCategoria.Size = new System.Drawing.Size(205, 21);
-            this.cbCategoria.TabIndex = 6;
+            this.cbCategoria.TabIndex = 5;
             // 
             // cbMarca
             // 
             this.cbMarca.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbMarca.FormattingEnabled = true;
-            this.cbMarca.Location = new System.Drawing.Point(84, 156);
+            this.cbMarca.Location = new System.Drawing.Point(97, 153);
             this.cbMarca.Name = "cbMarca";
             this.cbMarca.Size = new System.Drawing.Size(205, 21);
-            this.cbMarca.TabIndex = 5;
+            this.cbMarca.TabIndex = 4;
             // 
             // txtPrecio
             // 
-            this.txtPrecio.Location = new System.Drawing.Point(84, 127);
+            this.txtPrecio.Location = new System.Drawing.Point(97, 124);
             this.txtPrecio.Name = "txtPrecio";
             this.txtPrecio.Size = new System.Drawing.Size(205, 20);
-            this.txtPrecio.TabIndex = 4;
+            this.txtPrecio.TabIndex = 3;
             this.txtPrecio.TextChanged += new System.EventHandler(this.txtPrecio_TextChanged);
             // 
             // txtDescripcion
             // 
-            this.txtDescripcion.Location = new System.Drawing.Point(84, 98);
+            this.txtDescripcion.Location = new System.Drawing.Point(97, 95);
             this.txtDescripcion.Name = "txtDescripcion";
             this.txtDescripcion.Size = new System.Drawing.Size(205, 20);
-            this.txtDescripcion.TabIndex = 3;
+            this.txtDescripcion.TabIndex = 2;
             // 
             // txtArticulo
             // 
-            this.txtArticulo.Location = new System.Drawing.Point(84, 69);
+            this.txtArticulo.Location = new System.Drawing.Point(97, 66);
             this.txtArticulo.Name = "txtArticulo";
             this.txtArticulo.Size = new System.Drawing.Size(205, 20);
-            this.txtArticulo.TabIndex = 2;
+            this.txtArticulo.TabIndex = 1;
             this.txtArticulo.TextChanged += new System.EventHandler(this.txtArticulo_TextChanged);
             // 
             // txtCodigo
             // 
-            this.txtCodigo.Location = new System.Drawing.Point(84, 39);
+            this.txtCodigo.Location = new System.Drawing.Point(97, 36);
             this.txtCodigo.Name = "txtCodigo";
             this.txtCodigo.Size = new System.Drawing.Size(205, 20);
-            this.txtCodigo.TabIndex = 1;
+            this.txtCodigo.TabIndex = 0;
             this.txtCodigo.TextChanged += new System.EventHandler(this.txtCodigo_TextChanged);
             // 
             // lbCategoria
@@ -319,7 +319,7 @@
             this.lbCategoria.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lbCategoria.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbCategoria.ForeColor = System.Drawing.Color.Black;
-            this.lbCategoria.Location = new System.Drawing.Point(16, 191);
+            this.lbCategoria.Location = new System.Drawing.Point(29, 188);
             this.lbCategoria.Name = "lbCategoria";
             this.lbCategoria.Size = new System.Drawing.Size(62, 16);
             this.lbCategoria.TabIndex = 1;
@@ -331,7 +331,7 @@
             this.lbMarca.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lbMarca.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbMarca.ForeColor = System.Drawing.Color.Black;
-            this.lbMarca.Location = new System.Drawing.Point(36, 161);
+            this.lbMarca.Location = new System.Drawing.Point(49, 158);
             this.lbMarca.Name = "lbMarca";
             this.lbMarca.Size = new System.Drawing.Size(42, 16);
             this.lbMarca.TabIndex = 0;
@@ -343,7 +343,7 @@
             this.lbPrecio.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lbPrecio.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbPrecio.ForeColor = System.Drawing.Color.Black;
-            this.lbPrecio.Location = new System.Drawing.Point(36, 131);
+            this.lbPrecio.Location = new System.Drawing.Point(49, 128);
             this.lbPrecio.Name = "lbPrecio";
             this.lbPrecio.Size = new System.Drawing.Size(42, 16);
             this.lbPrecio.TabIndex = 15;
@@ -355,7 +355,7 @@
             this.lbDescripcion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lbDescripcion.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbDescripcion.ForeColor = System.Drawing.Color.Black;
-            this.lbDescripcion.Location = new System.Drawing.Point(6, 102);
+            this.lbDescripcion.Location = new System.Drawing.Point(19, 99);
             this.lbDescripcion.Name = "lbDescripcion";
             this.lbDescripcion.Size = new System.Drawing.Size(72, 16);
             this.lbDescripcion.TabIndex = 14;
@@ -367,7 +367,7 @@
             this.lbArticulo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lbArticulo.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbArticulo.ForeColor = System.Drawing.Color.Black;
-            this.lbArticulo.Location = new System.Drawing.Point(28, 73);
+            this.lbArticulo.Location = new System.Drawing.Point(41, 70);
             this.lbArticulo.Name = "lbArticulo";
             this.lbArticulo.Size = new System.Drawing.Size(50, 16);
             this.lbArticulo.TabIndex = 13;
@@ -379,7 +379,7 @@
             this.lbCodigo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lbCodigo.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbCodigo.ForeColor = System.Drawing.Color.Black;
-            this.lbCodigo.Location = new System.Drawing.Point(32, 43);
+            this.lbCodigo.Location = new System.Drawing.Point(45, 40);
             this.lbCodigo.Name = "lbCodigo";
             this.lbCodigo.Size = new System.Drawing.Size(46, 16);
             this.lbCodigo.TabIndex = 12;
