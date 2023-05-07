@@ -178,16 +178,6 @@ namespace Presentacion
             dgvListaArticulos.DataSource = listaArticulos;
         }
 
-        private void CbxCategoria_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void CbxCategoria_Click(object sender, EventArgs e)
-        {
-
-        }
-
         // ELIMINAR ARTICULOS
         private void btnEliminar_Click(object sender, EventArgs e)
         {
@@ -228,11 +218,6 @@ namespace Presentacion
             if (!(dgvListaArticulos == null) && !(dgvListaArticulos.Rows.Count == 0))
                 return true;
             else return false;
-        }
-
-            private void CbxFiltroprimario_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
         }
 
         // Cargar el combox de "ordenar por" con el listado de opciones
@@ -284,11 +269,11 @@ namespace Presentacion
 				{
 					listaFiltrada = listaFiltrada.OrderBy(x => x.Precio).ToList();
 				}
-                else if (cbxOrdenarListaArticulos.SelectedItem.ToString() == "Precio Descendente")
+                else if (cbxOrdenarListaArticulos.SelectedItem.ToString() == "Precio Descendiente")
                 {
-                    listaFiltrada = listaFiltrada.OrderByDescending(x => x.Precio).ToList();
-                }
-                else if (cbxOrdenarListaArticulos.SelectedItem.ToString() == "Código")
+					listaFiltrada = listaFiltrada.OrderByDescending(x => x.Precio).ToList();
+				}
+				else if (cbxOrdenarListaArticulos.SelectedItem.ToString() == "Código")
 				{
 					listaFiltrada = listaFiltrada.OrderBy(x => x.Codigo).ToList();
 				}
