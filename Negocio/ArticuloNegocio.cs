@@ -185,54 +185,34 @@ namespace Negocio
                     datos.executeReader();
                     while ((datos.Reader.Read())) 
                     {
-                        Articulo aux = new Articulo(); // Crea una instancia de variable Articulo
+                        Articulo aux = new Articulo(); 
                     if (!(datos.Reader["id"] is DBNull))
                         aux.Id = (int)datos.Reader["Id"];
                     if (!(datos.Reader["id"] is DBNull))
                         aux.Codigo = (string)datos.Reader["Codigo"];
                     if (!(datos.Reader["Nombre"] is DBNull))
                         aux.Nombre = (string)datos.Reader["Nombre"];
-                        aux.Descripcion = (string)datos.Reader["Descripcion"]; // validaciones sobre descripcion y otros
-                        aux.Precio = Math.Round(Convert.ToDecimal(datos.Reader["Precio"]), 2); /// Ver tema del float y el casteo de money
-                        aux.Marca = new Marca();
                     if (!(datos.Reader["Descripcion"] is DBNull))
                         aux.Descripcion = (string)datos.Reader["Descripcion"];
                     if (!(datos.Reader["Precio"] is DBNull))
-                        aux.Precio = (double)(decimal)datos.Reader["Precio"];
+                        aux.Precio = Math.Round(Convert.ToDecimal(datos.Reader["Precio"]), 2);
 
                     aux.Marca = new Marca();
                     if (!(datos.Reader["MarcasId"] is DBNull))
                         aux.Marca.Id = (int)datos.Reader["MarcasId"];
                     if (!(datos.Reader["MarcasDescripcion"] is DBNull))
                         aux.Marca.Descripcion = (string)datos.Reader["MarcasDescripcion"];
-                        /// POR QUE EL OVERRIDE DE TOSTRING PRODUCE ESTO?
-                        aux.Categoria = new Categoria();
-                        if (!(datos.Reader["CategoriasDescripcion"] is DBNull))
-                        {
-                            aux.Categoria.Descripcion = (string)datos.Reader["CategoriasDescripcion"];
-                        }
-                        else
-                        {
-                            aux.Categoria.Descripcion = string.Empty;
-                        }
-                        if (!(datos.Reader["CategoriasId"] is DBNull))
-                        {
-                            aux.Categoria.Id = (int)datos.Reader["Categoriasid"];
-                        }
-                        else
-                        {
-                            aux.Categoria.Id = 0;
-                        }
 
-					    //Cargar Imágenes
-					    ImagenNegocio imagenNegocio = new ImagenNegocio();
-					    aux.Imagenes = imagenNegocio.listar(aux.Id.ToString());
                     aux.Categoria = new Categoria();
-                    if (!(datos.Reader["CategoriasDescripcion"] is DBNull))
+                        if (!(datos.Reader["CategoriasDescripcion"] is DBNull))
                         aux.Categoria.Descripcion = (string)datos.Reader["CategoriasDescripcion"];
 
                     if (!(datos.Reader["CategoriasId"] is DBNull))
-                        aux.Categoria.Id = (int)datos.Reader["Categoriasid"];
+                  
+                      aux.Categoria.Id = (int)datos.Reader["Categoriasid"];
+                                             
+					 
+                    
                     //Cargar Imágenes
                     ImagenNegocio imagenNegocio = new ImagenNegocio();
                     aux.Imagenes = imagenNegocio.listar(aux.Id.ToString());
@@ -351,5 +331,5 @@ namespace Negocio
 
 }
 
-}
+
 

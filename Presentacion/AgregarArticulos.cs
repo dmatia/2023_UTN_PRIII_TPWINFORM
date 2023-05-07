@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection.Emit;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Dominio;
@@ -648,5 +649,10 @@ namespace Presentacion
 				throw ex;
 			}
 		}
-	}
+        
+        private void txtCodigo_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+    }
 }
