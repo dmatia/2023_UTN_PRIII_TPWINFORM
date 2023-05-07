@@ -38,6 +38,9 @@
             this.txtImagenUrl = new System.Windows.Forms.TextBox();
             this.btnGuardarImagen = new System.Windows.Forms.Button();
             this.gbArticulo = new System.Windows.Forms.GroupBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.LblAvisoNombre = new System.Windows.Forms.Label();
+            this.LblAvisoCodigo = new System.Windows.Forms.Label();
             this.pbFlechaDerecha = new System.Windows.Forms.PictureBox();
             this.pbFlechaIzquierda = new System.Windows.Forms.PictureBox();
             this.btnImagenBorrarActual = new System.Windows.Forms.Button();
@@ -55,9 +58,6 @@
             this.lbArticulo = new System.Windows.Forms.Label();
             this.lbCodigo = new System.Windows.Forms.Label();
             this.gbImagen = new System.Windows.Forms.GroupBox();
-            this.LblAvisoCodigo = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
             this.gbGuardarImagenes.SuspendLayout();
             this.gbArticulo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbFlechaDerecha)).BeginInit();
@@ -164,7 +164,7 @@
             // gbArticulo
             // 
             this.gbArticulo.Controls.Add(this.label3);
-            this.gbArticulo.Controls.Add(this.label2);
+            this.gbArticulo.Controls.Add(this.LblAvisoNombre);
             this.gbArticulo.Controls.Add(this.LblAvisoCodigo);
             this.gbArticulo.Controls.Add(this.pbFlechaDerecha);
             this.gbArticulo.Controls.Add(this.pbFlechaIzquierda);
@@ -191,6 +191,33 @@
             this.gbArticulo.TabIndex = 0;
             this.gbArticulo.TabStop = false;
             this.gbArticulo.Text = "ARTICULO";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(299, 134);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(35, 13);
+            this.label3.TabIndex = 38;
+            this.label3.Text = "label3";
+            // 
+            // LblAvisoNombre
+            // 
+            this.LblAvisoNombre.AutoSize = true;
+            this.LblAvisoNombre.Location = new System.Drawing.Point(296, 73);
+            this.LblAvisoNombre.Name = "LblAvisoNombre";
+            this.LblAvisoNombre.Size = new System.Drawing.Size(100, 13);
+            this.LblAvisoNombre.TabIndex = 37;
+            this.LblAvisoNombre.Text = "NotificacionNombre";
+            // 
+            // LblAvisoCodigo
+            // 
+            this.LblAvisoCodigo.AutoSize = true;
+            this.LblAvisoCodigo.Location = new System.Drawing.Point(295, 45);
+            this.LblAvisoCodigo.Name = "LblAvisoCodigo";
+            this.LblAvisoCodigo.Size = new System.Drawing.Size(96, 13);
+            this.LblAvisoCodigo.TabIndex = 36;
+            this.LblAvisoCodigo.Text = "NotificacionCodigo";
             // 
             // pbFlechaDerecha
             // 
@@ -369,33 +396,6 @@
             this.gbImagen.TabStop = false;
             this.gbImagen.Text = "IMAGEN";
             // 
-            // LblAvisoCodigo
-            // 
-            this.LblAvisoCodigo.AutoSize = true;
-            this.LblAvisoCodigo.Location = new System.Drawing.Point(295, 45);
-            this.LblAvisoCodigo.Name = "LblAvisoCodigo";
-            this.LblAvisoCodigo.Size = new System.Drawing.Size(96, 13);
-            this.LblAvisoCodigo.TabIndex = 36;
-            this.LblAvisoCodigo.Text = "NotificacionCodigo";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(296, 73);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(35, 13);
-            this.label2.TabIndex = 37;
-            this.label2.Text = "label2";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(299, 134);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(35, 13);
-            this.label3.TabIndex = 38;
-            this.label3.Text = "label3";
-            // 
             // AgregarArticulos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -453,7 +453,7 @@
 		private System.Windows.Forms.PictureBox pbFlechaDerecha;
 		private System.Windows.Forms.PictureBox pbFlechaIzquierda;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label LblAvisoNombre;
         private System.Windows.Forms.Label LblAvisoCodigo;
     }
 }

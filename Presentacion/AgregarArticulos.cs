@@ -21,9 +21,10 @@ namespace Presentacion
 	public partial class AgregarArticulos : Form
 	{
 		private Articulo articulo = null;
+        private List<Articulo> listaArticulos = null;
 
-		//Control de Imagenes
-		private OpenFileDialog file = null;
+        //Control de Imagenes
+        private OpenFileDialog file = null;
 		private int imagenActual;
 		private int imagenActualCarrusel = 0;
 		private string rutaImagen = Path.GetDirectoryName(Directory.GetCurrentDirectory().Replace(@"\bin", ""));
@@ -68,6 +69,11 @@ namespace Presentacion
 		//Evento de carga inicial de la ventana
 		private void Articulos_Load(object sender, EventArgs e)
 		{
+
+			// Lista los articulos para ejecutar valicaciones
+			Listararticulos();
+
+
 
             LblAvisoCodigo.Visible = false;
             //Carga los combo box de categorías y marcas
@@ -613,6 +619,12 @@ namespace Presentacion
 			}
 		}
 
+		private void Listararticulos() // Para validaciones
+		{
+			ArticuloNegocio articulosNegocio = new ArticuloNegocio();
+            listaArticulos = articulosNegocio.listar();
+        }
+
 		 private void copiarImagen(Imagen imagen, OpenFileDialog file)
 		{
 			string imgFolder = rutaImagen + "\\img_articulos\\";
@@ -654,6 +666,8 @@ namespace Presentacion
 		
         private void Validarformatocodigo()
         {
+
+
             bool formatocodigo = Regex.IsMatch(txtCodigo.Text.Trim(), @"^[A-Za-z]\d{2}$");
 
             if (!formatocodigo)
@@ -663,13 +677,23 @@ namespace Presentacion
                 btnModificar.Enabled = false;
                 LblAvisoCodigo.Visible = true;
             }
-            else
+            else if (Validarexistenciacodigo())
             {
+                LblAvisoCodigo.Text ="*El codigo de articulo ya existe";
+                
+            }
+			else
+			{
                 btnModificar.Enabled = true;
                 LblAvisoCodigo.Visible = false;
             }
 
         }
+        private bool Validarexistenciacodigo()
+        {
+
+			return listaArticulos.Any(x => x.Codigo.ToUpper() == txtCodigo.Text);
+		}
 		/*
       private void Validarformatoprecio()
         {
@@ -691,6 +715,7 @@ namespace Presentacion
 		*/
         private void txtCodigo_TextChanged(object sender, EventArgs e)
         {
+			txtCodigo.Text.ToUpper();
 			Validarformatocodigo();
         }
 		
