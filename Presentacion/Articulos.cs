@@ -156,9 +156,12 @@ namespace Presentacion
 				ArticuloNegocio articulosNegocio = new ArticuloNegocio();
                 listaFiltrada = articulosNegocio.Filtrar(TxtBuqueda.Text, CbxFiltroprimario.Text, CbxCategoria.Text, CbxMarca.Text);
                 dgvListaArticulos.DataSource = listaFiltrada;
+				
+                //Ordenar lista según opción elegida
+				OrdenarListaArticulo();
 
 
-            }
+			}
             catch (Exception)
             {
 
@@ -259,6 +262,7 @@ namespace Presentacion
             return columnaArticulo;
 		}
 
+        // Ordenar lista de articulo según la opción elegida
 		private void OrdenarListaArticulo()
 		{
 			try
