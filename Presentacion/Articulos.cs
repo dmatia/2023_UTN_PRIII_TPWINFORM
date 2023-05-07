@@ -42,7 +42,7 @@ namespace Presentacion
         {
 
             CategoriaNegocio CategoriaNegocio = new CategoriaNegocio();
-            List<Categoria> Listacategorias = new List<Categoria>();
+            List<IAtributo> Listacategorias = new List<IAtributo>();
             Listacategorias = CategoriaNegocio.listar();
             foreach (Categoria aux in Listacategorias)
             {
@@ -53,7 +53,7 @@ namespace Presentacion
             CbxCategoria.Text = "Categorias"; // Ver como hacer para que esto lo haga el framework
 
             MarcaNegocio MarcaNegocio = new MarcaNegocio();
-            List<Marca> Listamarcas = new List<Marca>();
+            List<IAtributo> Listamarcas = new List<IAtributo>();
             Listamarcas = MarcaNegocio.listar();
             foreach (Marca aux in Listamarcas)
             {
@@ -83,8 +83,9 @@ namespace Presentacion
             dgvListaArticulos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
             //No mostrar columnas
-            ///dgvListaArticulos.Columns["Id"].Visible = false;
-        }
+            dgvListaArticulos.Columns["Id"].Visible = false;
+            dgvListaArticulos.Columns["Descripcion"].Visible = false;
+		}
 
         private void ListarArticulos()
         {

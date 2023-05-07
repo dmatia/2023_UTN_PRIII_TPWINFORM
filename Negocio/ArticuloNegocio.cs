@@ -25,19 +25,12 @@ namespace Negocio
                 // la seleccion esta en Lector
                 while ((datos.Reader.Read())) // Devuelve valor booleano y va cambiando el cursor
                 {
-                    Articulo aux = new Articulo(); 
-                    
-                    if (!(datos.Reader["id"] is DBNull)) 
-                    aux.Id = (int)datos.Reader["Id"];
-                    if (!(datos.Reader["id"] is DBNull))
-                    aux.Codigo = (string)datos.Reader["Codigo"];   
-                    if (!(datos.Reader["Nombre"] is DBNull))
+                    Articulo aux = new Articulo(); // Crea una instancia de variable Articulo
+                    aux.Id = (int)datos.Reader["Id"]; // Carga la Variable Articulo con los datos de la base de datos
+                    aux.Codigo = (string)datos.Reader["Codigo"];                 //aux.= lector.GetInt32();
                     aux.Nombre = (string)datos.Reader["Nombre"];
-                    if (!(datos.Reader["Descripcion"] is DBNull))
-                    aux.Descripcion = (string)datos.Reader["Descripcion"]; 
-                    if(!(datos.Reader["Precio"] is DBNull))
-                    aux.Precio = (double)(decimal)datos.Reader["Precio"]; 
-                    
+                    aux.Descripcion = (string)datos.Reader["Descripcion"]; // validaciones sobre descripcion y otros
+                    aux.Precio = Math.Round(Convert.ToDecimal(datos.Reader["Precio"]), 2); /// Ver tema del float y el casteo de money
                     aux.Marca = new Marca();
                     if (!(datos.Reader["MarcasId"] is DBNull))
                     aux.Marca.Id = (int)datos.Reader["MarcasId"];
@@ -199,6 +192,9 @@ namespace Negocio
                         aux.Codigo = (string)datos.Reader["Codigo"];
                     if (!(datos.Reader["Nombre"] is DBNull))
                         aux.Nombre = (string)datos.Reader["Nombre"];
+                        aux.Descripcion = (string)datos.Reader["Descripcion"]; // validaciones sobre descripcion y otros
+                        aux.Precio = Math.Round(Convert.ToDecimal(datos.Reader["Precio"]), 2); /// Ver tema del float y el casteo de money
+                        aux.Marca = new Marca();
                     if (!(datos.Reader["Descripcion"] is DBNull))
                         aux.Descripcion = (string)datos.Reader["Descripcion"];
                     if (!(datos.Reader["Precio"] is DBNull))
@@ -209,6 +205,28 @@ namespace Negocio
                         aux.Marca.Id = (int)datos.Reader["MarcasId"];
                     if (!(datos.Reader["MarcasDescripcion"] is DBNull))
                         aux.Marca.Descripcion = (string)datos.Reader["MarcasDescripcion"];
+                        /// POR QUE EL OVERRIDE DE TOSTRING PRODUCE ESTO?
+                        aux.Categoria = new Categoria();
+                        if (!(datos.Reader["CategoriasDescripcion"] is DBNull))
+                        {
+                            aux.Categoria.Descripcion = (string)datos.Reader["CategoriasDescripcion"];
+                        }
+                        else
+                        {
+                            aux.Categoria.Descripcion = string.Empty;
+                        }
+                        if (!(datos.Reader["CategoriasId"] is DBNull))
+                        {
+                            aux.Categoria.Id = (int)datos.Reader["Categoriasid"];
+                        }
+                        else
+                        {
+                            aux.Categoria.Id = 0;
+                        }
+
+					    //Cargar Imágenes
+					    ImagenNegocio imagenNegocio = new ImagenNegocio();
+					    aux.Imagenes = imagenNegocio.listar(aux.Id.ToString());
                     aux.Categoria = new Categoria();
                     if (!(datos.Reader["CategoriasDescripcion"] is DBNull))
                         aux.Categoria.Descripcion = (string)datos.Reader["CategoriasDescripcion"];
@@ -219,7 +237,7 @@ namespace Negocio
                     ImagenNegocio imagenNegocio = new ImagenNegocio();
                     aux.Imagenes = imagenNegocio.listar(aux.Id.ToString());
 
-                    lista.Add(aux);// Agrega cada variable a la lista
+					    lista.Add(aux);// Agrega cada variable a la lista
                     }
 
                     return lista;// devuelve la lista
@@ -239,7 +257,7 @@ namespace Negocio
            
               
        
-        public bool agregar(Articulo articulo)
+        public int agregar(Articulo articulo)
         {
             AccesoDB datoSQL = new AccesoDB();
 
@@ -249,14 +267,17 @@ namespace Negocio
                  (
                     $"INSERT INTO ARTICULOS " +
                     $"(Codigo, Nombre, Descripcion, IdMarca, IdCategoria, Precio) " +
-                    $"VALUES('{articulo.Codigo}', '{articulo.Nombre}', '{articulo.Descripcion}', {articulo.Marca.Id}, {articulo.Categoria.Id}, {articulo.Precio.ToString(new CultureInfo("en-US"))})"
+                    $"VALUES('{articulo.Codigo}', '{articulo.Nombre}', '{articulo.Descripcion}', {articulo.Marca.Id}, {articulo.Categoria.Id}, {articulo.Precio.ToString(new CultureInfo("en-US"))}) " +
+					"SELECT SCOPE_IDENTITY()"
                 );
 
-                if (datoSQL.executeNonQuery())
-                {
-                    datoSQL.closeConnection();
-                    return true;
-                }
+                return datoSQL.executeScalar();
+
+                //if (datoSQL.executeNonQuery())
+                //{
+                //    datoSQL.closeConnection();
+                //    return true;
+                //}
             }
             catch (Exception ex)
             {
@@ -268,7 +289,7 @@ namespace Negocio
                 datoSQL.closeConnection();
             }
 
-            return false;
+            //return false;
         }
 
 
@@ -326,6 +347,9 @@ namespace Negocio
         }
 
     }
+	
+
+}
 
 }
 

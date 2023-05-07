@@ -44,7 +44,7 @@ namespace Negocio
 
 
 		//AGREGAR IMAGEN
-		public bool agregar(Imagen imagen)
+		public int agregar(Imagen imagen)
 		{
 			AccesoDB datoSQL = new AccesoDB();
 
@@ -54,14 +54,17 @@ namespace Negocio
 				 (
 					$"INSERT INTO IMAGENES " +
 					$"(IdArticulo,ImagenUrl) " +
-					$"VALUES('{imagen.IdArticulo}', '{imagen.UrlImagen}')"
+					$"VALUES('{imagen.IdArticulo}', '{imagen.UrlImagen}')" +
+					"SELECT SCOPE_IDENTITY()"
 				);
 
-				if (datoSQL.executeNonQuery())
-				{
-					datoSQL.closeConnection();
-					return true;
-				}
+				return datoSQL.executeScalar();
+
+				//if (datoSQL.executeNonQuery())
+				//{
+				//	datoSQL.closeConnection();
+				//	return true;
+				//}
 			}
 			catch (Exception ex)
 			{
@@ -73,7 +76,7 @@ namespace Negocio
 				datoSQL.closeConnection();
 			}
 
-			return false;
+			//return false;
 		}
 
 
