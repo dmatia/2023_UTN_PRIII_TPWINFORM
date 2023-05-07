@@ -7,6 +7,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Net.NetworkInformation;
+using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -16,7 +17,9 @@ namespace Presentacion
     public partial class Articulos : Form
     {
         private List<Articulo> listaArticulos = null;
-        public Articulos()
+		List<Articulo> listaFiltrada = null;
+		
+		public Articulos()
         {
             InitializeComponent();
         }
@@ -36,7 +39,9 @@ namespace Presentacion
             Cargarcombobox();
             ListarArticulos();
             CargarGridView();
-        }
+            CargarOrdenarPor();
+
+		}
 
         public void Cargarcombobox()
         {
@@ -55,9 +60,9 @@ namespace Presentacion
             MarcaNegocio MarcaNegocio = new MarcaNegocio();
             List<IAtributo> Listamarcas = new List<IAtributo>();
             Listamarcas = MarcaNegocio.listar();
+			
             foreach (Marca aux in Listamarcas)
             {
-
                 CbxMarca.Items.Add(aux.Descripcion);
             }
             CbxMarca.Text = "Marcas"; // Ver como hacer para que esto lo haga el framework
@@ -93,7 +98,8 @@ namespace Presentacion
             {
                 ArticuloNegocio articulosNegocio = new ArticuloNegocio();
                 listaArticulos = articulosNegocio.listar();
-            }
+                listaFiltrada = listaArticulos;
+			}
             catch (Exception)
             {
                 MessageBox.Show("Error al cargar listado de articulos");
@@ -147,9 +153,7 @@ namespace Presentacion
         {
             try
             {
-
-                List<Articulo> listaFiltrada = new List<Articulo>();
-                ArticuloNegocio articulosNegocio = new ArticuloNegocio();
+				ArticuloNegocio articulosNegocio = new ArticuloNegocio();
                 listaFiltrada = articulosNegocio.Filtrar(TxtBuqueda.Text, CbxFiltroprimario.Text, CbxCategoria.Text, CbxMarca.Text);
                 dgvListaArticulos.DataSource = listaFiltrada;
 
@@ -227,5 +231,65 @@ namespace Presentacion
         {
 
         }
-    }
+
+        // Cargar el combox de "ordenar por" con el listado de opciones
+		private void CargarOrdenarPor()
+        {
+            cbxOrdenarListaArticulos.DataSource = ListaOrdenarPor();
+        }
+
+        // Cambiar opcion de orden
+		private void cbxOrdenarListaArticulos_SelectedIndexChanged(object sender, EventArgs e)
+		{
+            OrdenarListaArticulo();
+		}
+
+		// Lsitado de combobox "ordenar por"
+		private List<string> ListaOrdenarPor()
+        {
+			List<string> columnaArticulo = new List<string>()
+			{
+				"Nombre",
+				"Código",
+				"Precio",
+				"Marca",
+				"Categoria"
+			};
+
+            return columnaArticulo;
+		}
+
+		private void OrdenarListaArticulo()
+		{
+			try
+			{
+				if (cbxOrdenarListaArticulos.SelectedItem.ToString() == "Nombre")
+				{
+					listaFiltrada = listaFiltrada.OrderBy(x => x.Nombre).ToList();
+				}
+				else if (cbxOrdenarListaArticulos.SelectedItem.ToString() == "Marca")
+				{
+					listaFiltrada = listaFiltrada.OrderBy(x => x.Marca.Descripcion).ToList();
+				}
+				else if (cbxOrdenarListaArticulos.SelectedItem.ToString() == "Categoria")
+				{
+					listaFiltrada = listaFiltrada.OrderBy(x => x.Categoria.Descripcion).ToList();
+				}
+				else if (cbxOrdenarListaArticulos.SelectedItem.ToString() == "Precio")
+				{
+					listaFiltrada = listaFiltrada.OrderBy(x => x.Precio).ToList();
+				}
+				else if (cbxOrdenarListaArticulos.SelectedItem.ToString() == "Código")
+				{
+					listaFiltrada = listaFiltrada.OrderBy(x => x.Codigo).ToList();
+				}
+
+                dgvListaArticulos.DataSource = listaFiltrada;
+			}
+			catch (Exception)
+			{
+				MessageBox.Show("Error al ordenar lista de articulos");
+			}
+		}
+	}
 }
