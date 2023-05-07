@@ -28,6 +28,7 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
+            this.components = new System.ComponentModel.Container();
             this.btnModificar = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.btnEliminar = new System.Windows.Forms.Button();
@@ -58,6 +59,7 @@
             this.lbArticulo = new System.Windows.Forms.Label();
             this.lbCodigo = new System.Windows.Forms.Label();
             this.gbImagen = new System.Windows.Forms.GroupBox();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.gbGuardarImagenes.SuspendLayout();
             this.gbArticulo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbFlechaDerecha)).BeginInit();
@@ -185,9 +187,9 @@
             this.gbArticulo.Controls.Add(this.lbDescripcion);
             this.gbArticulo.Controls.Add(this.lbArticulo);
             this.gbArticulo.Controls.Add(this.lbCodigo);
-            this.gbArticulo.Location = new System.Drawing.Point(37, 12);
+            this.gbArticulo.Location = new System.Drawing.Point(12, 12);
             this.gbArticulo.Name = "gbArticulo";
-            this.gbArticulo.Size = new System.Drawing.Size(735, 307);
+            this.gbArticulo.Size = new System.Drawing.Size(776, 307);
             this.gbArticulo.TabIndex = 0;
             this.gbArticulo.TabStop = false;
             this.gbArticulo.Text = "ARTICULO";
@@ -224,9 +226,9 @@
             this.pbFlechaDerecha.BackColor = System.Drawing.Color.Transparent;
             this.pbFlechaDerecha.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pbFlechaDerecha.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pbFlechaDerecha.Location = new System.Drawing.Point(681, 123);
+            this.pbFlechaDerecha.Location = new System.Drawing.Point(744, 131);
             this.pbFlechaDerecha.Name = "pbFlechaDerecha";
-            this.pbFlechaDerecha.Size = new System.Drawing.Size(25, 25);
+            this.pbFlechaDerecha.Size = new System.Drawing.Size(26, 25);
             this.pbFlechaDerecha.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbFlechaDerecha.TabIndex = 35;
             this.pbFlechaDerecha.TabStop = false;
@@ -237,9 +239,9 @@
             this.pbFlechaIzquierda.BackColor = System.Drawing.Color.Transparent;
             this.pbFlechaIzquierda.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pbFlechaIzquierda.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pbFlechaIzquierda.Location = new System.Drawing.Point(419, 123);
+            this.pbFlechaIzquierda.Location = new System.Drawing.Point(474, 131);
             this.pbFlechaIzquierda.Name = "pbFlechaIzquierda";
-            this.pbFlechaIzquierda.Size = new System.Drawing.Size(25, 25);
+            this.pbFlechaIzquierda.Size = new System.Drawing.Size(26, 25);
             this.pbFlechaIzquierda.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbFlechaIzquierda.TabIndex = 35;
             this.pbFlechaIzquierda.TabStop = false;
@@ -247,9 +249,9 @@
             // 
             // btnImagenBorrarActual
             // 
-            this.btnImagenBorrarActual.Location = new System.Drawing.Point(508, 245);
+            this.btnImagenBorrarActual.Location = new System.Drawing.Point(564, 253);
             this.btnImagenBorrarActual.Name = "btnImagenBorrarActual";
-            this.btnImagenBorrarActual.Size = new System.Drawing.Size(118, 43);
+            this.btnImagenBorrarActual.Size = new System.Drawing.Size(119, 43);
             this.btnImagenBorrarActual.TabIndex = 9;
             this.btnImagenBorrarActual.Text = "Borrar Actual";
             this.btnImagenBorrarActual.UseVisualStyleBackColor = true;
@@ -257,9 +259,9 @@
             // 
             // pbImagenArticulo
             // 
-            this.pbImagenArticulo.Location = new System.Drawing.Point(445, 28);
+            this.pbImagenArticulo.Location = new System.Drawing.Point(506, 36);
             this.pbImagenArticulo.Name = "pbImagenArticulo";
-            this.pbImagenArticulo.Size = new System.Drawing.Size(235, 211);
+            this.pbImagenArticulo.Size = new System.Drawing.Size(236, 211);
             this.pbImagenArticulo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbImagenArticulo.TabIndex = 31;
             this.pbImagenArticulo.TabStop = false;
@@ -398,6 +400,10 @@
             this.gbImagen.TabStop = false;
             this.gbImagen.Text = "IMAGEN";
             // 
+            // timer1
+            // 
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
             // AgregarArticulos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -457,5 +463,6 @@
         private System.Windows.Forms.Label LblAvisoPrecio;
         private System.Windows.Forms.Label LblAvisoNombre;
         private System.Windows.Forms.Label LblAvisoCodigo;
+        private System.Windows.Forms.Timer timer1;
     }
 }

@@ -34,8 +34,11 @@ namespace Presentacion
 		private bool esModificar;
 		private bool esAgregar;
 
+
 		//Bandera de cambios en la ventana para cargar lista en el form principal
 		public bool hayCambios;
+
+	
 
 		//Constructor para los casos de vista y modificación de artículo
 		public AgregarArticulos(Articulo articulo, bool esModificar = false)
@@ -56,6 +59,17 @@ namespace Presentacion
 			CargarArticulo();
 		}
 
+		private bool Completotodosloscampos(){
+			if (txtCodigo.Text!=string.Empty && txtArticulo.Text!=string.Empty && txtDescripcion.Text != string.Empty && txtPrecio.Text !=string.Empty)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+
 		//Constructor para el caso de agregar artículo
         public AgregarArticulos(bool esAgregar = true)
 		{
@@ -70,6 +84,7 @@ namespace Presentacion
 		//Evento de carga inicial de la ventana
 		private void Articulos_Load(object sender, EventArgs e)
 		{
+			timer1.Enabled = true;
 
 			// Lista los articulos para ejecutar valicaciones
 			Listararticulos();
@@ -114,10 +129,15 @@ namespace Presentacion
 		{
 			if (esAgregar)
 			{
-				btnCancelar.Visible = true;
+               
+                btnCancelar.Visible = true;
 				btnModificar.Text = "Guardar";
 			}
+			if (Completotodosloscampos())
+			{
+                btnModificar.Enabled = true;
 
+            }
 			//Control de guardado de imagen
 			ControlGuardarImagen();
 
@@ -302,7 +322,9 @@ namespace Presentacion
 
 			if(this.esAgregar) //Agregar Articulo a la base de datos
 			{
-				if(btnModificar.Text == "Guardar")
+                
+               
+				if (btnModificar.Text == "Guardar")
 				{
 					try
 					{
@@ -351,10 +373,11 @@ namespace Presentacion
 			{
 				if (btnModificar.Text == "Guardar")
 				{
+                   
 					// Validaciones
 
-					//Verificar si se quiere cancelar
-					DialogResult result = MessageBox.Show("¿Está seguro que quiere modificar el detalle", "Cancelar", MessageBoxButtons.OKCancel);
+                    //Verificar si se quiere cancelar
+                    DialogResult result = MessageBox.Show("¿Está seguro que quiere modificar el detalle", "Cancelar", MessageBoxButtons.OKCancel);
 
 					if (result == DialogResult.OK)
 					{
@@ -667,7 +690,7 @@ namespace Presentacion
 			}
 		}
 		
-        private void Validarcodigo()
+        private bool Validarcodigo()
         {
 
             bool formatocodigo = Regex.IsMatch(txtCodigo.Text.Trim(), @"^[A-Za-z]\d{2}$");
@@ -677,32 +700,38 @@ namespace Presentacion
 				LblAvisoCodigo.Text = "*El formato debe ser de tipo \"A00\"";
 				btnModificar.Enabled = false;
                 LblAvisoCodigo.Visible = true;
+				return false;
             }
             else if (Validarexistenciacodigo())
             {
                 LblAvisoCodigo.Text ="*El codigo de articulo ya existe";
-                
+				return false;
             }
 			else
 			{
                 btnModificar.Enabled = true;
                 LblAvisoCodigo.Visible = false;
+				return true;
             }
 
         }
 
-		private void Validarnombre()
+
+		private bool Validarnombre()
 		{
 			if (Validarexistencianombre())
 			{
+				
                 LblAvisoNombre.Text = "*El Nombre de articulo ya existe";
                 btnModificar.Enabled = false;
                 LblAvisoNombre.Visible = true;
+				return false;
 			}
 			else
 			{
                 btnModificar.Enabled = true;
                 LblAvisoNombre.Visible = false;
+				return true;
             }
 
 
@@ -718,38 +747,47 @@ namespace Presentacion
 
         }
 		
-      private void Validarprecio()
+      private bool ValidarPrecio()
         {
 
             bool formatoprecio = Regex.IsMatch(txtPrecio.Text.Trim(), @"^\d+(,\d{1,2})?$");
 
             if (!formatoprecio)
             {
-				LblAvisoPrecio.Text = "*Ingrese numeros de hasta 2 decimales separados por ,(coma)";
+				LblAvisoPrecio.Text = "*Ingrese numeros de hasta 2 decimales \n separados por ,(coma)";
                 btnModificar.Enabled = false;
                 LblAvisoPrecio.Visible = true;
+				return false;
             }
             else
             {
                 btnModificar.Enabled = true;
                 LblAvisoPrecio.Visible = false;
+				return true;
             }
 
         }
 		
         private void txtCodigo_TextChanged(object sender, EventArgs e)
         {
-			Validarcodigo();
+            if (esAgregar || esModificar)
+
+                Validarcodigo();
+			
         }
 
         private void txtArticulo_TextChanged(object sender, EventArgs e)
         {
+			if (esAgregar||esModificar)
 			Validarnombre();
         }
 
         private void txtPrecio_TextChanged(object sender, EventArgs e)
         {
-			Validarprecio();
+			
+				if (esAgregar || esModificar)
+					ValidarPrecio();
+			
         }
         private void InvisibilizarAvisos()
         {
@@ -760,6 +798,22 @@ namespace Presentacion
             LblAvisoPrecio.ForeColor = Color.DarkRed;
             LblAvisoPrecio.Visible = false;
 
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+			if (esAgregar||esModificar)
+			{
+				if (!Completotodosloscampos())
+				{
+
+					btnModificar.Enabled = false;
+				}
+				else
+				{
+					btnModificar.Enabled = true;
+				}
+			}
         }
     }
 }
