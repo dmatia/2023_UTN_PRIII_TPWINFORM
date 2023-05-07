@@ -1,9 +1,9 @@
 # TP Winform - Grupo 25
 ## **Materia**: Programación III
 ### **Universidad Tecnológica Nacional - Facultad Regional Pacheco**
-### **Carrera:** Tecnicatura Universitaria en Programación
-### **Profesor:** Maximiliano Sar Fernandez
-### **Profesora adjunta:** Regina Laurentino Goncalves
+#### **Carrera:** Tecnicatura Universitaria en Programación
+#### **Profesor:** Maximiliano Sar Fernandez
+#### **Profesora adjunta:** Regina Laurentino Goncalves
 ### **Integrantes**
 - [x]  1.  **Diego Matías Villalba** -  [Github](https://github.com/dmatia)
 - [x]  2.  **Alejandro Martín Gomez Nieto** -  [Github](https://github.com/alefigure8)
@@ -160,7 +160,7 @@ INSERT INTO imagenes VALUES
 (5, 'https://cnnespanol2.files.wordpress.com/2015/12/gadgets-mc3a1s-populares-apple-tv-2015-18.jpg?quality=100&strip=info&w=460&h=260&crop=1')
 GO
 ```	
-## Diagrama de la base de datos
+## Diagrama UML
 
 ![Diagrama de la base de datos](https://i.imgur.com/Qv7luKm.jpg)
 

@@ -181,6 +181,9 @@ namespace Presentacion
 
 		private void CargarEstilos()
 		{
+			//Icono de la ventana
+			this.Icon = new System.Drawing.Icon(rutaImagen + "/img/icono.ico");
+			
 			//Cargar imágenes
 			CargarPictureBox(pbFlechaIzquierda, rutaImagen + "/img/flecha_izquierda.png");
 			CargarPictureBox(pbFlechaDerecha, rutaImagen + "/img/flecha_derecha.png");
