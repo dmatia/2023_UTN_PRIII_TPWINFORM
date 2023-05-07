@@ -119,23 +119,55 @@ namespace Presentacion
                     }
                 else
                 {
-                    try
+                    if (!(validarEliminacion()))
                     {
-                        if (MessageBox.Show("¿ELIMINAR "+ atributo.ToUpper() + "?", "¡ATENCIÓN!", MessageBoxButtons.YesNo, MessageBoxIcon.Question, DefaultButton) == DialogResult.Yes)
-                            eliminar = (IAtributo)dgvAtributos.CurrentRow.DataBoundItem;
-						iAtributosNegocio.eliminar(eliminar);
-                        listarAtributos();
+                        try
+                        {
+                            if (MessageBox.Show("¿ELIMINAR " + atributo.ToUpper() + "?", "¡ATENCIÓN!", MessageBoxButtons.YesNo, MessageBoxIcon.Question, DefaultButton) == DialogResult.Yes)
+                                eliminar = (IAtributo)dgvAtributos.CurrentRow.DataBoundItem;
+                            iAtributosNegocio.eliminar(eliminar);
+                            listarAtributos();
 
+                        }
+                        catch (Exception)
+                        {
+
+                            MessageBox.Show("SIN REGISTROS");
+                        }
                     }
-                    catch (Exception)
+                    else
                     {
-
-                        MessageBox.Show("SIN REGISTROS");
+                        MessageBox.Show(atributo.ToUpper()  + " EN USO POR UNO O MÁS ARTÍCULOS. IMPOSIBLE ELIMINAR.");
                     }
                 }               
             }
         }
 
+
+        // VALIDA SI EL ATRIBUTO ESTA EN USO EN BD
+
+        private bool validarEliminacion()
+        {
+            IAtributo eliminar;
+            ArticuloNegocio articulosNegocio = new ArticuloNegocio();
+
+            string vacio = string.Empty;
+
+            eliminar = (IAtributo)dgvAtributos.CurrentRow.DataBoundItem;
+            if (atributo.ToUpper() == "CATEGORIA")
+            {
+                if ((articulosNegocio.Filtrar("", "Filtros disponibles", eliminar.Descripcion.ToString(), "Marcas")).Any())
+                return true;
+
+            }
+            else if (atributo.ToUpper() == "MARCA")
+            {
+                if ((articulosNegocio.Filtrar("", "Filtros disponibles", "Categorias", eliminar.Descripcion.ToString()).Any())) 
+                return true;
+            }
+            
+                return false;
+        }
 
         // AGREGAR NUEVO ATRIBUTO
 
