@@ -16,31 +16,25 @@ using Negocio;
 
 namespace Presentacion
 {
-	//TODO: Validaciones
-	//TODO: Al guardar imagen, copiar en una nueva carpeta para guardar ruta en base de datos
-
 	public partial class AgregarArticulos : Form
 	{
 		private Articulo articulo = null;
         private List<Articulo> listaArticulos = null;
 
-        //Control de Imagenes
+        // Control de Imagenes
         private OpenFileDialog file = null;
 		private int imagenActual;
 		private int imagenActualCarrusel = 0;
 		private string rutaImagen = Path.GetDirectoryName(Directory.GetCurrentDirectory().Replace(@"\bin", ""));
 
-		//Banderas de vistas
+		// Banderas de vistas
 		private bool esModificar;
 		private bool esAgregar;
 
-
-		//Bandera de cambios en la ventana para cargar lista en el form principal
+		// Bandera de cambios en la ventana para cargar lista en el form principal
 		public bool hayCambios;
 
-	
-
-		//Constructor para los casos de vista y modificación de artículo
+		// Constructor para los casos de vista y modificación de artículo
 		public AgregarArticulos(Articulo articulo, bool esModificar = false)
 		{
 			InitializeComponent();
@@ -52,25 +46,11 @@ namespace Presentacion
 
 			this.esModificar = esModificar;
 
-			//Sete la ventana en modo modificar
+			// Setea la ventana en modo modificar
 			ModoModificar(this.esModificar);
-
-			//Carga los datos del artículo en la ventana
-			CargarArticulo();
 		}
 
-		private bool Completotodosloscampos(){
-			if (txtCodigo.Text!=string.Empty && txtArticulo.Text!=string.Empty && txtDescripcion.Text != string.Empty && txtPrecio.Text !=string.Empty)
-			{
-				return true;
-			}
-			else
-			{
-				return false;
-			}
-		}
-
-		//Constructor para el caso de agregar artículo
+		// Constructor para el caso de agregar artículo
         public AgregarArticulos(bool esAgregar = true)
 		{
 			InitializeComponent();
@@ -78,10 +58,9 @@ namespace Presentacion
 			this.esAgregar = esAgregar;
 
 			ModoAgregar(this.esAgregar);
-
 		}
 
-		//Evento de carga inicial de la ventana
+		// Evento de carga inicial de la ventana
 		private void Articulos_Load(object sender, EventArgs e)
 		{
 			timer1.Enabled = true;
@@ -89,18 +68,20 @@ namespace Presentacion
 			// Lista los articulos para ejecutar valicaciones
 			Listararticulos();
 
-			//Esconde las Label de notificaciones en caso de error en la carga de articulos
+			// Esconde las Label de notificaciones en caso de error en la carga de articulos
 			InvisibilizarAvisos();
        
-            //Carga los combo box de categorías y marcas
+            // Carga los combo box de categorías y marcas
             CargarComboBox();
+
+			// Carga los datos del artículo en la ventana si es detalle o modificacion
+			if (!this.esAgregar)
+				CargarArticulo();
 		}
-
-
 
 		private void ModoModificar(bool esModificar)
 		{
-			//Habilitar o deshabilitar cada uno de los campos de texto
+			// Habilitar o deshabilitar cada uno de los campos de texto
 			txtCodigo.Enabled = esModificar;
 			txtArticulo.Enabled = esModificar;
 			txtDescripcion.Enabled = esModificar;
@@ -109,13 +90,13 @@ namespace Presentacion
 			cbMarca.Enabled = esModificar;
 			btnCancelar.Visible = esModificar;
 
-			//Control de guardado de imagen
+			// Control de guardado de imagen
 			ControlGuardarImagen();
 
-			//Cargar estilos de la ventana
+			// Cargar estilos de la ventana
 			CargarEstilos();
 
-			//Seteamos controles de las imagenes
+			// Seteamos controles de las imagenes
 			ImagenControl();
 
 			//Cambiar texto al botón
@@ -136,7 +117,6 @@ namespace Presentacion
 			if (Completotodosloscampos())
 			{
                 btnModificar.Enabled = true;
-
             }
 			//Control de guardado de imagen
 			ControlGuardarImagen();
@@ -247,6 +227,12 @@ namespace Presentacion
 						pbFlechaIzquierda.Visible = false;
 						pbFlechaDerecha.Visible = false;
 					}
+
+					// No mostrar primer boton del carrusel
+					if (imagenActualCarrusel == 0)
+					{
+						pbFlechaIzquierda.Visible = false;
+					}
 				}
 				else
 				{
@@ -259,16 +245,15 @@ namespace Presentacion
 
 		private void CargarComboBox()
 		{
-			//Cargar combo box de categoria y marca
-			comboBoxMarca(cbMarca);
-			comboBoxCategoria(cbCategoria);
-
 			//Formatear los datos de los combo box
 			cbMarca.ValueMember = "Id";
 			cbMarca.DisplayMember = "Descripcion";
 			cbCategoria.ValueMember = "Id";
 			cbCategoria.DisplayMember = "Descripcion";
-
+			
+			//Cargar combo box de categoria y marca
+			comboBoxMarca(cbMarca);
+			comboBoxCategoria(cbCategoria);
 		}
 
 		//Cargar en el combo box las marcas desde la base de datos
@@ -276,9 +261,16 @@ namespace Presentacion
 		{
 			try
 			{
-				MarcaNegocio marcaNegocio = new MarcaNegocio();
+				IAtributosNegocio marcaNegocio = new MarcaNegocio();
 				List<IAtributo> listaMarca = marcaNegocio.listar();
 
+				//Crear opcion vacía
+				IAtributo marcaVacia = new Marca();
+				marcaVacia.Id = -1;
+				marcaVacia.Descripcion = "Seleccione una marca";
+				listaMarca.Insert(0, marcaVacia);
+
+				//Cargar ComboBox
 				combo.DataSource = listaMarca;
 				combo.SelectedIndex = 0;
 			}
@@ -293,9 +285,16 @@ namespace Presentacion
 		{
 			try
 			{
-				CategoriaNegocio categoriaNegocio = new CategoriaNegocio();
+				IAtributosNegocio categoriaNegocio = new CategoriaNegocio();
 				List<IAtributo> listaCategoria = categoriaNegocio.listar();
 
+				//Crear opcion vacía
+				IAtributo marcaVacia = new Categoria();
+				marcaVacia.Id = -1;
+				marcaVacia.Descripcion = "Seleccione una categoria";
+				listaCategoria.Insert(0, marcaVacia);
+
+				//Cargar ComboBox
 				combo.DataSource = listaCategoria;
 				combo.SelectedIndex = 0;
 			}
@@ -347,26 +346,6 @@ namespace Presentacion
 					{
 						MessageBox.Show("Error al guardar el articulo", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 					}
-
-					//if (articuloNegocio.agregar(articulo))
-					//{
-					//	MessageBox.Show("Se Guardó correctamente");
-
-					//	//Buscamos articulo guardado y lo ponemos en la ventana
-					//	//Utilizar Scalar para solamente traer el ID al insertar
-					//	List<Articulo> listaAux = articuloNegocio.listar();
-					//	articulo = listaAux.FindAll(x => x.Codigo == articulo.Codigo)[0];
-
-					//	// Validar si guardó y pasar a modo vista
-					//	this.hayCambios = true;
-					//	this.esAgregar = false;
-					//	this.esModificar = false;
-
-					//	//Pasar a modo vista
-					//	ModoModificar(this.esAgregar);
-
-					//	return;
-					//}
 				}
 			}
 			else //Modificar Articulo en la base de datos
@@ -406,12 +385,10 @@ namespace Presentacion
 		}
 
 		private void cargarDatosDeFormulario(Articulo articulo)
-		{
-			//TODO: Validaciones de los campos
-			
-			//Ariticulo
+		{	
+			// Ariticulo
 			string precio = txtPrecio.Text.Trim();
-			string codigo = txtCodigo.Text.Trim();
+			string codigo = txtCodigo.Text.Trim().ToLower();
 			string nombre = txtArticulo.Text.Trim();
 			string descripcion = txtDescripcion.Text.Trim();
 
@@ -420,12 +397,12 @@ namespace Presentacion
 			marca.Descripcion = cbMarca.Text;
 			marca.Id = (int)cbMarca.SelectedValue;
 			
-			//Categoria
+			// Categoria
 			Categoria categoria = new Categoria();
 			categoria.Descripcion = cbCategoria.Text;
 			categoria.Id = (int)cbCategoria.SelectedValue;
 
-			//Guardar datos de la ventana en el articulo
+			// Guardar datos de la ventana en el articulo
 			articulo.Codigo = codigo;
 			articulo.Precio = Convert.ToDecimal(precio.Replace(".", ","));
 			articulo.Nombre = nombre;
@@ -438,10 +415,10 @@ namespace Presentacion
 		{
 			if (this.esModificar)
 			{
-				//En Modo Modificar verificamos que se quiera cancelar
+				// En Modo Modificar verificamos que se quiera cancelar
 				DialogResult result = MessageBox.Show("¿Está seguro que quiere cancelar?", "Cancelar", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
 
-				//Si se cancela, vuelve a Modo Vista
+				// Si se cancela, vuelve a Modo Vista
 				if (result == DialogResult.OK)
 				{
 					this.esModificar = false;
@@ -455,37 +432,48 @@ namespace Presentacion
 			}
 		}
 
+		// Borrar la imagen del carrusel actual
 		private void btnImagenBorrarActual_Click(object sender, EventArgs e)
 		{
 			ImagenNegocio imagenNegocio = new ImagenNegocio();
 
-			//Verificar si se quiere cancelar
+			// Verificar si se quiere cancelar
 			DialogResult result = MessageBox.Show("¿Está seguro que quiere borrar la imagen actual?", "Cancelar", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
 
 			if (result == DialogResult.OK)
 				if (imagenNegocio.borrar(imagenActual))
 				{
-					//Remover imagen borrada del objeto
+					// Remover imagen borrada del objeto
 					articulo.Imagenes = articulo.Imagenes.FindAll(x => x.Id != imagenActual);
 					
-					//Cargamos imagenes
+					// Cargamos imagenes
 					CargarImagenes();
 
-					//Seteamos controles de las imagenes
+					// Seteamos controles de las imagenes
 					ImagenControl();
 
-					//Ponemos los cambios en true para que la ventana de listado se actualice
+					// Ponemos los cambios en true para que la ventana de listado se actualice
 					this.hayCambios = true;
 				}
 		}
-
+		
+		// Carrusel, Boton Izquierda
 		private void btnAnteriorImagen_Click(object sender, EventArgs e)
 		{
 			if(imagenActualCarrusel > 0)
 			{
 				imagenActualCarrusel--;
+				
+				if (imagenActualCarrusel < articulo.Imagenes.Count - 1)
+					pbFlechaDerecha.Visible = true;
+				
 				imagenActual = articulo.Imagenes[imagenActualCarrusel].Id;
 				CargarPictureBox(pbImagenArticulo, articulo.Imagenes[imagenActualCarrusel].UrlImagen);
+			}
+			
+			if(imagenActualCarrusel == 0)
+			{
+				pbFlechaIzquierda.Visible = false;
 			}
 		}
 
@@ -494,8 +482,17 @@ namespace Presentacion
 			if (imagenActualCarrusel < articulo.Imagenes.Count - 1)
 			{
 				imagenActualCarrusel++;
+				
+				if (imagenActualCarrusel > 0)
+					pbFlechaIzquierda.Visible = true;
+				
 				imagenActual = articulo.Imagenes[imagenActualCarrusel].Id;
 				CargarPictureBox(pbImagenArticulo, articulo.Imagenes[imagenActualCarrusel].UrlImagen);
+			}
+			
+			if(imagenActualCarrusel == articulo.Imagenes.Count - 1)
+			{
+				pbFlechaDerecha.Visible = false;
 			}
 		}
 
@@ -566,11 +563,11 @@ namespace Presentacion
 				aux.IdArticulo = articulo.Id;
 				
 				
-				if (txtImagenUrl.Text.Contains("http")) //LINK
+				if (txtImagenUrl.Text.Contains("http")) // Cargando link
 				{
 					aux.UrlImagen = txtImagenUrl.Text;
 				}
-				else // ARCHIVO
+				else // Cargando Archivo
 				{
 					//Copiar imagen en carpeta del proyecto
 					copiarImagen(aux, file);
@@ -651,10 +648,12 @@ namespace Presentacion
             listaArticulos = articulosNegocio.listar();
         }
 
+		//Guardar la imagen que se carga en archivos en una carpeta propia del programa
 		 private void copiarImagen(Imagen imagen, OpenFileDialog file)
 		{
 			string imgFolder = rutaImagen + "\\img_articulos\\";
 			
+			// Si el directorio no existe, se crea
 			if (!Directory.Exists(imgFolder))
 			{
 				Directory.CreateDirectory(imgFolder);
@@ -662,6 +661,7 @@ namespace Presentacion
 
 			try
 			{
+				// Si el archivo ya se encuentra en la carpeta, pregunta si se quiere sobreescribir
 				if (File.Exists(imgFolder + file.SafeFileName))
 				{
 					DialogResult result = MessageBox.Show("El archivo ya existe. ¿Desea Remplazarlo?", "Ya existe", MessageBoxButtons.OKCancel);
@@ -681,7 +681,6 @@ namespace Presentacion
 
 					//Guardar imagen en listado de imagenes dentro del artículo
 					imagen.UrlImagen = imgFolder + file.SafeFileName;
-					
 				}
 			}
 			catch (Exception ex)
@@ -689,22 +688,24 @@ namespace Presentacion
 				throw ex;
 			}
 		}
-		
-        private bool Validarcodigo()
-        {
 
+		// Validación de código, si existe o si es un código válido
+		private bool Validarcodigo()
+        {
             bool formatocodigo = Regex.IsMatch(txtCodigo.Text.Trim(), @"^[A-Za-z]\d{2}$");
 
             if (!formatocodigo)
             {
-				LblAvisoCodigo.Text = "*El formato debe ser de tipo \"A00\"";
+				LblAvisoCodigo.Text = "* El formato debe ser de tipo \"A00\"";
 				btnModificar.Enabled = false;
                 LblAvisoCodigo.Visible = true;
 				return false;
             }
-            else if (Validarexistenciacodigo())
-            {
-                LblAvisoCodigo.Text ="*El codigo de articulo ya existe";
+            else if (Validarexistenciacodigo()) 
+			{
+				LblAvisoCodigo.Text = "* El codigo de articulo ya existe";
+				btnModificar.Enabled = false;
+				LblAvisoCodigo.Visible = true;
 				return false;
             }
 			else
@@ -713,16 +714,14 @@ namespace Presentacion
                 LblAvisoCodigo.Visible = false;
 				return true;
             }
-
         }
 
-
+		// Validar el nombre si existe
 		private bool Validarnombre()
 		{
 			if (Validarexistencianombre())
 			{
-				
-                LblAvisoNombre.Text = "*El Nombre de articulo ya existe";
+                LblAvisoNombre.Text = "* El Nombre de articulo ya existe";
                 btnModificar.Enabled = false;
                 LblAvisoNombre.Visible = true;
 				return false;
@@ -733,28 +732,42 @@ namespace Presentacion
                 LblAvisoNombre.Visible = false;
 				return true;
             }
-
-
+			
 		}
-        private bool Validarexistenciacodigo()
+
+		// Verifica que todos los campos estén completos
+		private bool Completotodosloscampos()
+		{
+			if (txtCodigo.Text != string.Empty && txtArticulo.Text != string.Empty && txtDescripcion.Text != string.Empty && txtPrecio.Text != string.Empty)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+
+		// Busca codigo igual en listado de articulos
+		private bool Validarexistenciacodigo()
         {
-
-			return listaArticulos.Any(x => x.Codigo.ToUpper() == txtCodigo.Text);
+			return listaArticulos.Any(x => x.Codigo.ToUpper() == txtCodigo.Text.ToUpper());
 		}
+
+		// Busca nombre igual en listado de articulos
 		private bool Validarexistencianombre()
 		{
             return listaArticulos.Any(x => x.Nombre.ToUpper() == txtArticulo.Text.ToUpper());
-
         }
 		
-      private bool ValidarPrecio()
+		//Valida formato del precio
+		private bool ValidarPrecio()
         {
-
             bool formatoprecio = Regex.IsMatch(txtPrecio.Text.Trim(), @"^\d+(,\d{1,2})?$");
 
             if (!formatoprecio)
             {
-				LblAvisoPrecio.Text = "*Ingrese numeros de hasta 2 decimales \n separados por ,(coma)";
+				LblAvisoPrecio.Text = "* Ingrese numeros de hasta 2 decimales \n separados por ,(coma)";
                 btnModificar.Enabled = false;
                 LblAvisoPrecio.Visible = true;
 				return false;
@@ -765,13 +778,11 @@ namespace Presentacion
                 LblAvisoPrecio.Visible = false;
 				return true;
             }
-
         }
 		
         private void txtCodigo_TextChanged(object sender, EventArgs e)
         {
             if (esAgregar || esModificar)
-
                 Validarcodigo();
 			
         }
@@ -779,14 +790,14 @@ namespace Presentacion
         private void txtArticulo_TextChanged(object sender, EventArgs e)
         {
 			if (esAgregar||esModificar)
-			Validarnombre();
+				Validarnombre();
         }
 
         private void txtPrecio_TextChanged(object sender, EventArgs e)
         {
 			
-				if (esAgregar || esModificar)
-					ValidarPrecio();
+			if (esAgregar || esModificar)
+				ValidarPrecio();
 			
         }
         private void InvisibilizarAvisos()
@@ -797,7 +808,6 @@ namespace Presentacion
             LblAvisoCodigo.Visible = false;
             LblAvisoPrecio.ForeColor = Color.DarkRed;
             LblAvisoPrecio.Visible = false;
-
         }
 
         private void timer1_Tick(object sender, EventArgs e)
