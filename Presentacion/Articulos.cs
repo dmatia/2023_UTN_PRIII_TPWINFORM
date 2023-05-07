@@ -254,8 +254,9 @@ namespace Presentacion
 			{
 				"Nombre",
 				"Código",
-				"Precio",
-				"Marca",
+                "Precio Ascendente",
+                "Precio Descendiente",
+                "Marca",
 				"Categoria"
 			};
 
@@ -279,11 +280,15 @@ namespace Presentacion
 				{
 					listaFiltrada = listaFiltrada.OrderBy(x => x.Categoria.Descripcion).ToList();
 				}
-				else if (cbxOrdenarListaArticulos.SelectedItem.ToString() == "Precio")
+				else if (cbxOrdenarListaArticulos.SelectedItem.ToString() == "Precio Ascendente")
 				{
 					listaFiltrada = listaFiltrada.OrderBy(x => x.Precio).ToList();
 				}
-				else if (cbxOrdenarListaArticulos.SelectedItem.ToString() == "Código")
+                else if (cbxOrdenarListaArticulos.SelectedItem.ToString() == "Precio Descendente")
+                {
+                    listaFiltrada = listaFiltrada.OrderByDescending(x => x.Precio).ToList();
+                }
+                else if (cbxOrdenarListaArticulos.SelectedItem.ToString() == "Código")
 				{
 					listaFiltrada = listaFiltrada.OrderBy(x => x.Codigo).ToList();
 				}
