@@ -68,8 +68,10 @@ namespace Presentacion
 		//Evento de carga inicial de la ventana
 		private void Articulos_Load(object sender, EventArgs e)
 		{
-			//Carga los combo box de categorías y marcas
-			CargarComboBox();
+
+            LblAvisoCodigo.Visible = false;
+            //Carga los combo box de categorías y marcas
+            CargarComboBox();
 		}
 
 		private void ModoModificar(bool esModificar)
@@ -649,10 +651,48 @@ namespace Presentacion
 				throw ex;
 			}
 		}
-        
-        private void txtCodigo_TextChanged(object sender, EventArgs e)
+		
+        private void Validarformatocodigo()
         {
+            bool formatocodigo = Regex.IsMatch(txtCodigo.Text.Trim(), @"^[A-Za-z]\d{2}$");
+
+            if (!formatocodigo)
+            {
+				LblAvisoCodigo.Text = "*El formato debe ser de tipo \"A00\"";
+				LblAvisoCodigo.ForeColor = Color.DarkRed;
+                btnModificar.Enabled = false;
+                LblAvisoCodigo.Visible = true;
+            }
+            else
+            {
+                btnModificar.Enabled = true;
+                LblAvisoCodigo.Visible = false;
+            }
 
         }
+		/*
+      private void Validarformatoprecio()
+        {
+
+            bool formatoprecio = Regex.IsMatch(txtPrecio.Text.Trim(), @"^\d+(,\d+)?$");
+
+            if (!formatoprecio)
+            {
+                btnModificar.Enabled = false;
+                LblAvisoprecio.Visible = true;
+            }
+            else
+            {
+                btnModificar.Enabled = true;
+                LblAvisoprecio.Visible = false;
+            }
+
+        }
+		*/
+        private void txtCodigo_TextChanged(object sender, EventArgs e)
+        {
+			Validarformatocodigo();
+        }
+		
     }
 }

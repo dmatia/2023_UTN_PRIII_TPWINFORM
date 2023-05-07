@@ -55,7 +55,7 @@
             this.lbArticulo = new System.Windows.Forms.Label();
             this.lbCodigo = new System.Windows.Forms.Label();
             this.gbImagen = new System.Windows.Forms.GroupBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.LblAvisoCodigo = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.gbGuardarImagenes.SuspendLayout();
@@ -165,7 +165,7 @@
             // 
             this.gbArticulo.Controls.Add(this.label3);
             this.gbArticulo.Controls.Add(this.label2);
-            this.gbArticulo.Controls.Add(this.label1);
+            this.gbArticulo.Controls.Add(this.LblAvisoCodigo);
             this.gbArticulo.Controls.Add(this.pbFlechaDerecha);
             this.gbArticulo.Controls.Add(this.pbFlechaIzquierda);
             this.gbArticulo.Controls.Add(this.btnImagenBorrarActual);
@@ -369,14 +369,14 @@
             this.gbImagen.TabStop = false;
             this.gbImagen.Text = "IMAGEN";
             // 
-            // label1
+            // LblAvisoCodigo
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(295, 45);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(63, 13);
-            this.label1.TabIndex = 36;
-            this.label1.Text = "AvisoPrecio";
+            this.LblAvisoCodigo.AutoSize = true;
+            this.LblAvisoCodigo.Location = new System.Drawing.Point(295, 45);
+            this.LblAvisoCodigo.Name = "LblAvisoCodigo";
+            this.LblAvisoCodigo.Size = new System.Drawing.Size(96, 13);
+            this.LblAvisoCodigo.TabIndex = 36;
+            this.LblAvisoCodigo.Text = "NotificacionCodigo";
             // 
             // label2
             // 
@@ -454,6 +454,6 @@
 		private System.Windows.Forms.PictureBox pbFlechaIzquierda;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label LblAvisoCodigo;
     }
 }
