@@ -38,7 +38,7 @@
             this.txtImagenUrl = new System.Windows.Forms.TextBox();
             this.btnGuardarImagen = new System.Windows.Forms.Button();
             this.gbArticulo = new System.Windows.Forms.GroupBox();
-            this.label3 = new System.Windows.Forms.Label();
+            this.LblAvisoPrecio = new System.Windows.Forms.Label();
             this.LblAvisoNombre = new System.Windows.Forms.Label();
             this.LblAvisoCodigo = new System.Windows.Forms.Label();
             this.pbFlechaDerecha = new System.Windows.Forms.PictureBox();
@@ -163,7 +163,7 @@
             // 
             // gbArticulo
             // 
-            this.gbArticulo.Controls.Add(this.label3);
+            this.gbArticulo.Controls.Add(this.LblAvisoPrecio);
             this.gbArticulo.Controls.Add(this.LblAvisoNombre);
             this.gbArticulo.Controls.Add(this.LblAvisoCodigo);
             this.gbArticulo.Controls.Add(this.pbFlechaDerecha);
@@ -192,14 +192,14 @@
             this.gbArticulo.TabStop = false;
             this.gbArticulo.Text = "ARTICULO";
             // 
-            // label3
+            // LblAvisoPrecio
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(299, 134);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(35, 13);
-            this.label3.TabIndex = 38;
-            this.label3.Text = "label3";
+            this.LblAvisoPrecio.AutoSize = true;
+            this.LblAvisoPrecio.Location = new System.Drawing.Point(299, 134);
+            this.LblAvisoPrecio.Name = "LblAvisoPrecio";
+            this.LblAvisoPrecio.Size = new System.Drawing.Size(93, 13);
+            this.LblAvisoPrecio.TabIndex = 38;
+            this.LblAvisoPrecio.Text = "NotificacionPrecio";
             // 
             // LblAvisoNombre
             // 
@@ -288,6 +288,7 @@
             this.txtPrecio.Name = "txtPrecio";
             this.txtPrecio.Size = new System.Drawing.Size(205, 20);
             this.txtPrecio.TabIndex = 4;
+            this.txtPrecio.TextChanged += new System.EventHandler(this.txtPrecio_TextChanged);
             // 
             // txtDescripcion
             // 
@@ -302,6 +303,7 @@
             this.txtArticulo.Name = "txtArticulo";
             this.txtArticulo.Size = new System.Drawing.Size(205, 20);
             this.txtArticulo.TabIndex = 2;
+            this.txtArticulo.TextChanged += new System.EventHandler(this.txtArticulo_TextChanged);
             // 
             // txtCodigo
             // 
@@ -452,7 +454,7 @@
 		private System.Windows.Forms.GroupBox gbImagen;
 		private System.Windows.Forms.PictureBox pbFlechaDerecha;
 		private System.Windows.Forms.PictureBox pbFlechaIzquierda;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label LblAvisoPrecio;
         private System.Windows.Forms.Label LblAvisoNombre;
         private System.Windows.Forms.Label LblAvisoCodigo;
     }

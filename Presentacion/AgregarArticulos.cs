@@ -6,6 +6,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Reflection.Emit;
+using System.Security.Policy;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -73,9 +74,12 @@ namespace Presentacion
 			// Lista los articulos para ejecutar valicaciones
 			Listararticulos();
 
-
-
+            LblAvisoCodigo.ForeColor = Color.DarkRed;
+            LblAvisoNombre.Visible = false;
+            LblAvisoNombre.ForeColor = Color.DarkRed;
             LblAvisoCodigo.Visible = false;
+			LblAvisoPrecio.ForeColor = Color.DarkRed;
+            LblAvisoPrecio.Visible = false;
             //Carga los combo box de categorías y marcas
             CargarComboBox();
 		}
@@ -664,17 +668,15 @@ namespace Presentacion
 			}
 		}
 		
-        private void Validarformatocodigo()
+        private void Validarcodigo()
         {
-
 
             bool formatocodigo = Regex.IsMatch(txtCodigo.Text.Trim(), @"^[A-Za-z]\d{2}$");
 
             if (!formatocodigo)
             {
 				LblAvisoCodigo.Text = "*El formato debe ser de tipo \"A00\"";
-				LblAvisoCodigo.ForeColor = Color.DarkRed;
-                btnModificar.Enabled = false;
+				btnModificar.Enabled = false;
                 LblAvisoCodigo.Visible = true;
             }
             else if (Validarexistenciacodigo())
@@ -689,35 +691,66 @@ namespace Presentacion
             }
 
         }
+
+		private void Validarnombre()
+		{
+			if (Validarexistencianombre())
+			{
+                LblAvisoNombre.Text = "*El Nombre de articulo ya existe";
+                btnModificar.Enabled = false;
+                LblAvisoNombre.Visible = true;
+			}
+			else
+			{
+                btnModificar.Enabled = true;
+                LblAvisoNombre.Visible = false;
+            }
+
+
+		}
         private bool Validarexistenciacodigo()
         {
 
 			return listaArticulos.Any(x => x.Codigo.ToUpper() == txtCodigo.Text);
 		}
-		/*
-      private void Validarformatoprecio()
+		private bool Validarexistencianombre()
+		{
+            return listaArticulos.Any(x => x.Nombre.ToUpper() == txtArticulo.Text.ToUpper());
+
+        }
+		
+      private void Validarprecio()
         {
 
-            bool formatoprecio = Regex.IsMatch(txtPrecio.Text.Trim(), @"^\d+(,\d+)?$");
+            bool formatoprecio = Regex.IsMatch(txtPrecio.Text.Trim(), @"^\d+(,\d{1,2})?$");
 
             if (!formatoprecio)
             {
+				LblAvisoPrecio.Text = "* Ingrese numeros con hasta 2 decimales separados por ,(coma)";
                 btnModificar.Enabled = false;
-                LblAvisoprecio.Visible = true;
+                LblAvisoPrecio.Visible = true;
             }
             else
             {
                 btnModificar.Enabled = true;
-                LblAvisoprecio.Visible = false;
+                LblAvisoPrecio.Visible = false;
             }
 
         }
-		*/
+		
         private void txtCodigo_TextChanged(object sender, EventArgs e)
         {
-			txtCodigo.Text.ToUpper();
-			Validarformatocodigo();
+			Validarcodigo();
         }
-		
+
+        private void txtArticulo_TextChanged(object sender, EventArgs e)
+        {
+			Validarnombre();
+        }
+
+        private void txtPrecio_TextChanged(object sender, EventArgs e)
+        {
+			Validarprecio();
+        }
     }
 }
