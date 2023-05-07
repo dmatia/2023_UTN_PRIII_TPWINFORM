@@ -107,7 +107,6 @@
 			this.CbxFiltroprimario.Size = new System.Drawing.Size(106, 21);
 			this.CbxFiltroprimario.TabIndex = 1;
 			this.CbxFiltroprimario.Text = "Filtros disponibles";
-			this.CbxFiltroprimario.SelectedIndexChanged += new System.EventHandler(this.CbxFiltroprimario_SelectedIndexChanged);
 			// 
 			// CbxCategoria
 			// 
@@ -117,8 +116,6 @@
 			this.CbxCategoria.Size = new System.Drawing.Size(106, 21);
 			this.CbxCategoria.TabIndex = 2;
 			this.CbxCategoria.Text = "Categorias";
-			this.CbxCategoria.SelectedIndexChanged += new System.EventHandler(this.CbxCategoria_SelectedIndexChanged);
-			this.CbxCategoria.Click += new System.EventHandler(this.CbxCategoria_Click);
 			// 
 			// CbxMarca
 			// 
