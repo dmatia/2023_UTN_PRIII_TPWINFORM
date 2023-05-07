@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Reflection.Emit;
 using System.Windows.Forms;
 using Dominio;
@@ -9,6 +10,7 @@ namespace Presentacion
 {
 	public partial class Main : Form
 	{
+		private string rutaImagen = Path.GetDirectoryName(Directory.GetCurrentDirectory().Replace(@"\bin", "")) + "\\img\\";
 		public Main()
 		{
 			InitializeComponent();
@@ -16,12 +18,6 @@ namespace Presentacion
 
         private void categoriasToolStripMenuItem_Click(object sender, EventArgs e)
         {
-			// verifica si ya hay una ventana de este tipo abierta para no abrir otra
-            //foreach (var item in Application.OpenForms)
-            //{
-            //    if (item.GetType() == typeof(Categorias))
-            //        return;
-            //}
             ocultarVentanas();
             IAtributos categorias = new IAtributos("Categoria");
 			categorias.MdiParent = this;
@@ -31,12 +27,6 @@ namespace Presentacion
 		
 		private void marcasToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			// verifica si ya hay una ventana de este tipo abierta para no abrir otra
-			//foreach (var item in Application.OpenForms)
-			//{
-			//	if (item.GetType() == typeof(Categorias))
-			//		return;
-			//}
 			ocultarVentanas();
 			IAtributos categorias = new IAtributos("Marca");
 			categorias.MdiParent = this;
@@ -52,7 +42,8 @@ namespace Presentacion
         private void Main_Load(object sender, EventArgs e)
         {
             ventanaArticulos();
-        }
+            cargarImagenes();
+		}
 
         private void ventanaArticulos()
         {
@@ -89,6 +80,11 @@ namespace Presentacion
                             "Merayo, Federico" + Environment.NewLine +
                             "Nieto, Alejandro" + Environment.NewLine +
                             "Villalba, Diego" + Environment.NewLine);
-           } 
+        }
+
+        private void cargarImagenes()
+        {
+            this.Icon = new System.Drawing.Icon(rutaImagen + "icono.ico");
+        }
     }
 }
