@@ -137,7 +137,10 @@ namespace Presentacion
 
         private void TxtBuqueda_Click(object sender, EventArgs e)
         {
-            TxtBuqueda.Clear();
+            if (TxtBuqueda.Text == "Ingrese busqueda...")
+            {
+                TxtBuqueda.Clear();
+            }
         }
 
         private void BtnBusqueda_Click(object sender, EventArgs e)

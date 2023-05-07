@@ -726,7 +726,7 @@ namespace Presentacion
 
             if (!formatoprecio)
             {
-				LblAvisoPrecio.Text = "* Ingrese numeros con hasta 2 decimales separados por ,(coma)";
+				LblAvisoPrecio.Text = "*Ingrese numeros de hasta 2 decimales separados por ,(coma)";
                 btnModificar.Enabled = false;
                 LblAvisoPrecio.Visible = true;
             }
